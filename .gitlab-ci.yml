@@ -1,0 +1,30 @@
+# GitLab CI/CD configuration for MkDocs Material
+# This file defines the pipeline that builds and deploys your site to GitLab Pages
+
+pages:
+  # This job runs in the deploy stage
+  stage: deploy
+  
+  # Use the official Python image
+  image: python:latest
+  
+  script:
+    # Install mkdocs-material and its dependencies
+    - pip install mkdocs-material
+    # Build the site - output goes to 'public' directory for GitLab Pages
+    - mkdocs build --site-dir public
+  
+  # Cache pip downloads to speed up subsequent builds
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - ~/.cache/pip
+  
+  # Tell GitLab Pages which directory contains the built site
+  artifacts:
+    paths:
+      - public
+  
+  # Only run this job on the main branch
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

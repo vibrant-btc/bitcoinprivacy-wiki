@@ -1,0 +1,122 @@
+site_name: BitcoinPrivacy.Wiki
+site_description: A collection of in-depth learning resources about Bitcoin privacy
+site_url: https://bitcoinprivacy.wiki
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  icon:
+    logo: simple/bitcoin
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.indexes
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+plugins:
+  - search
+  - tags
+nav:
+  - Getting Started:
+    - What is Bitcoin?: index.md
+    - What is Bitcoin Privacy?: getting-started/what-is-privacy.md
+    - Understanding UTXOs: getting-started/utxos.md
+    - How Chain Analysis Works: getting-started/chain-analysis.md
+    - Privacy Heuristics Explained: getting-started/heuristics.md
+    - Acquiring Bitcoin Privately: getting-started/acquiring.md
+    - Choosing a Wallet: getting-started/wallets.md
+    - Running Your Own Node: getting-started/node.md
+    - Your First Steps: getting-started/first-steps.md
+    - Your Privacy Checklist: getting-started/checklist.md
+  - Privacy Techniques:
+    - Address Hygiene: techniques/address-hygiene.md
+    - Coin Control: techniques/coin-control.md
+    - Understanding CoinJoin: techniques/coinjoin-intro.md
+    - Whirlpool: techniques/whirlpool.md
+    - JoinMarket: techniques/joinmarket.md
+    - Wasabi Wallet: techniques/wasabi.md
+    - PayJoin: techniques/payjoin.md
+    - Stonewall: techniques/stonewall.md
+    - Stowaway: techniques/stowaway.md
+    - Ricochet: techniques/ricochet.md
+    - Post-Mix Best Practices: techniques/post-mix.md
+    - Dust Attacks: techniques/dust-attacks.md
+    - BIP47 PayNyms: techniques/bip47.md
+    - Silent Payments: techniques/silent-payments.md
+  - Lightning Privacy:
+    - Lightning Basics: lightning/basics.md
+    - Lightning Privacy: lightning/privacy.md
+    - Routing Analysis: lightning/routing-analysis.md
+    - Channel Coinjoins: lightning/channel-coinjoins.md
+    - Blinded Paths: lightning/blinded-paths.md
+    - BOLT12 Offers: lightning/bolt12.md
+    - lnproxy: lightning/lnproxy.md
+  - Advanced Topics:
+    - The Privacy Spectrum: advanced/privacy-spectrum.md
+    - Transaction Graph Analysis: advanced/transaction-graph.md
+    - Chain Analysis Heuristics: advanced/heuristics.md
+    - Change Detection: advanced/change-detection.md
+    - Wallet Fingerprinting: advanced/wallet-fingerprinting.md
+    - Entity Detection: advanced/entity-detection.md
+    - Peel Chains: advanced/peel-chains.md
+    - Consolidation Patterns: advanced/consolidation.md
+    - Boltzmann Entropy: advanced/boltzmann.md
+    - Checking Your Privacy: advanced/check-privacy.md
+    - BIP47 vs Silent Payments: techniques/comparison.md
+  - Tools:
+    - Privacy Scanners: tools/scanners.md
+    - Block Explorers: tools/explorers.md
+    - Fee Estimation: tools/fees.md
+    - Useful Links: tools/links.md
+  - Glossary:
+    - Glossary: glossary.md
