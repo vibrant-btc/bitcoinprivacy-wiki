@@ -77,10 +77,6 @@ Whirlpool charges a coordinator fee for each Tx0. Remixes cost nothing extra - n
 | 0.05 BTC | 0.0005 BTC (1%) |
 | 0.5 BTC | 0.005 BTC (1%) |
 
-!!! tip "Fee Calculator"
-
-    You can estimate Whirlpool fees at [whirlpoolfees.com](https://whirlpoolfees.com)
-
 ---
 
 ## Spending the Doxxic Change

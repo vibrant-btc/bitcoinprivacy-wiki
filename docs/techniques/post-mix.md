@@ -118,16 +118,3 @@ A post-mix UTXO is an output from a CoinJoin transaction. It has been mixed with
 
     Never spend post-mix UTXOs alongside premix UTXOs. This links your mixed and unmixed bitcoin.
 
----
-
-## Post-Mix Checklist
-
-Before spending a post-mix UTXO:
-
-1. [ ] I am spending only ONE post-mix UTXO
-2. [ ] I am not combining it with any other post-mix UTXO
-3. [ ] I am not combining it with any premix UTXO
-4. [ ] I am using Tor
-5. [ ] I am using PayJoin if the recipient supports it
-6. [ ] I have waited since my last post-mix spend
-7. [ ] I have labeled this UTXO correctly in my wallet

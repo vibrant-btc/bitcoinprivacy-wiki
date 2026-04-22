@@ -15,8 +15,6 @@ Bitcoin privacy is not a binary state. It exists on a spectrum, ranging from com
     - No privacy tools used
     - All transactions visible on-chain
 
-    **Privacy Score:** 0-10
-
     **Risk:** Maximum exposure. Anyone can see your entire Bitcoin history.
 
 === "Level 1: Basic Hygiene"
@@ -27,8 +25,6 @@ Bitcoin privacy is not a binary state. It exists on a spectrum, ranging from com
     - No address reuse
     - Basic coin control
     - Still using KYC bitcoin
-
-    **Privacy Score:** 10-30
 
     **Risk:** Reduced but still significant. KYC anchor point remains.
 
@@ -41,8 +37,6 @@ Bitcoin privacy is not a binary state. It exists on a spectrum, ranging from com
     - Good coin control practices
     - Hardware wallet for cold storage
 
-    **Privacy Score:** 30-50
-
     **Risk:** Moderate. Good foundation but still traceable.
 
 === "Level 3: Advanced Privacy"
@@ -54,21 +48,15 @@ Bitcoin privacy is not a binary state. It exists on a spectrum, ranging from com
     - Good post-mix practices
     - Compartmentalized identities
 
-    **Privacy Score:** 50-75
-
     **Risk:** Low. Significant privacy achieved.
 
 === "Level 4: Expert Privacy"
 
     **Characteristics:**
-    - Multisig with air-gapped signing
     - Self-hosted infrastructure
     - Regular privacy auditing
     - BIP47 or Silent Payments
     - Lightning for spending
-    - Formal OPSEC plan
-
-    **Privacy Score:** 75-90
 
     **Risk:** Very low. Strong privacy against most adversaries.
 
@@ -82,8 +70,6 @@ Bitcoin privacy is not a binary state. It exists on a spectrum, ranging from com
     - Complete identity compartmentalization
     - Legal structures for holdings
     - Disaster recovery plan
-
-    **Privacy Score:** 90-100
 
     **Risk:** Minimal. Only state-level adversaries could potentially deanonymize.
 
@@ -124,13 +110,13 @@ You do not need to jump from Level 0 to Level 5 overnight. Privacy is built in l
 
     Run your own node, use Tor, acquire non-KYC bitcoin.
 
--   :material-step-forward-3:{ .lg .middle } __Add Advanced Techniques__
+-   :material-shield-lock:{ .lg .middle } __Add Advanced Techniques__
 
     ---
 
     Use CoinJoin, PayJoin, practice good post-mix hygiene.
 
--   :material-step-forward-4:{ .lg .middle } __Master OPSEC__
+-   :material-shield-check:{ .lg .middle } __Master OPSEC__
 
     ---
 
@@ -151,6 +137,3 @@ Your ideal privacy level depends on your threat model:
 | **Determined adversary** | Level 4 |
 | **State-level adversary** | Level 5 |
 
-!!! tip "Most People Need Level 2-3"
-
-    For most Bitcoin users, achieving Level 2-3 privacy provides excellent protection against casual observers and most chain analysis. You do not need Level 5 privacy unless you have a specific reason to fear a determined adversary.
