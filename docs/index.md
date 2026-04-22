@@ -64,12 +64,10 @@ BitcoinPrivacy.Wiki is a collection of in-depth learning resources about Bitcoin
 
 This site draws knowledge from the following sources:
 
-- **Mastering Bitcoin** by Andreas Antonopoulos - Bitcoin fundamentals, UTXOs, keys, addresses, wallets, nodes
-- **A Beginners Guide To Bitcoin Privacy** by Athena Alpha - Privacy fundamentals, pseudo-anonymity, KYC risks
-- **bitcoiner.guide** - Wallet guides, node guides, privacy guides, no-KYC guidance, Lightning guide
-- **am-i-exposed Privacy Engine** - Privacy heuristics, chain analysis, entropy, transaction analysis, privacy scoring. The [privacy engine documentation](https://github.com/Copexit/am-i-exposed/blob/main/docs/privacy-engine.md) is the primary reference for the advanced topics covered in this site.
-- **silentpaymentsxyz** - Silent Payments explanation, BIP47 comparison, wallet support
-- **byakugan.io** - BIP47 vs Silent Payments, Stonewall, VPS setup, AI privacy, Bitcoin Knots, am-i.exposed self-hosting
-- **bip47-website** - BIP47 protocol, Paynym API, Auth47
-- **awesome-privacy-on-blockchains** - Academic privacy research papers
-- **bitcoin-educational-content** - Bitcoin courses, node setup, security, wallet guidance
+- **[Mastering Bitcoin](https://github.com/bitcoinbook/bitcoinbook)** by Andreas Antonopoulos - Bitcoin fundamentals, UTXOs, keys, addresses, wallets, nodes
+- **[A Beginners Guide To Bitcoin Privacy](https://www.athena-alpha.com/bitcoin-privacy/)** by Athena Alpha - Privacy fundamentals, pseudo-anonymity, KYC risks
+- **[bitcoiner.guide](https://bitcoiner.guide/)** - Wallet guides, node guides, privacy guides, no-KYC guidance, Lightning guide
+- **[am-i-exposed](https://am-i.exposed/)** - Privacy heuristics, chain analysis, entropy, transaction analysis, privacy scoring. The [privacy engine documentation](https://github.com/Copexit/am-i-exposed/blob/main/docs/privacy-engine.md) is a primary reference for the advanced topics covered in this site.
+- **[silentpaymentsxyz](https://silentpayments.xyz/)** - Silent Payments explanation, BIP47 comparison, wallet support
+- **[paymentcode.io](https://paymentcode.io/)** - BIP47 protocol, Paynym API, Auth47
+- **[Planb Academy](https://planb.academy/)** - Bitcoin courses, node setup, security, wallet guidance
