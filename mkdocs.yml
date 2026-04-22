@@ -2,7 +2,7 @@ site_name: BitcoinPrivacy.Wiki
 site_description: A collection of in-depth learning resources about Bitcoin privacy
 site_url: https://bitcoinprivacy.wiki
 repo_url: https://https://gitlab.com/vibrantbtc/bitcoinprivacy-wiki
-repo_name: vibrantbtc/bitcoinprivacy-wiki
+repo_name: bitcoinprivacy-wiki
 theme:
   name: material
   palette:
