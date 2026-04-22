@@ -1,9 +1,5 @@
 # Glossary
 
-This glossary explains the concepts and terms used throughout this site.
-
----
-
 ## A
 
 <a id="address"></a>
@@ -59,10 +55,10 @@ This glossary explains the concepts and terms used throughout this site.
 
     A batch transaction is a transaction that combines multiple real-world transactions into one on-chain transaction. It has multiple inputs and multiple outputs. Different parties may control one or multiple inputs and receive one or multiple outputs.
 
-<a id="bloom-filter"></a>
-!!! info "Bloom Filter"
+<a id="bayesian-updating"></a>
+!!! info "Bayesian Updating"
 
-    A space-efficient probabilistic data structure used by some Bitcoin wallets to query transactions from full nodes without revealing the full address. Used in BIP47 version 2 payment codes for notification detection.
+    A statistical method where analysts update their probability estimates as new evidence becomes available. In chain analysis, each new heuristic or data point narrows the possibility space, making deanonymization increasingly likely over time.
 
 !!! info "Bech32"
 
@@ -77,6 +73,11 @@ This glossary explains the concepts and terms used throughout this site.
 !!! info "BIP 353"
 
     A standard for human-readable Lightning Network payment identifiers that look like email addresses (e.g., user@domain.com). Makes it easy to share payment codes without QR codes.
+
+<a id="bip69"></a>
+!!! info "BIP69"
+
+    A Bitcoin Improvement Proposal that specifies lexicographic ordering of transaction inputs and outputs. While intended to improve privacy by standardizing ordering, it has ironically become a [wallet fingerprint](#wallet-fingerprint) because not all wallets implement it.
 
 !!! info "Bisq"
 
@@ -110,26 +111,29 @@ This glossary explains the concepts and terms used throughout this site.
 
     A mobile wallet (iOS/Android) with 2-of-2 multisig by default, Tor support, and the ability to connect to your own node. No coin control.
 
-<a id="boltzmann-entropy"></a>
+<a id="bloom-filter"></a>
+!!! info "Bloom Filter"
+
+    A space-efficient probabilistic data structure used by some Bitcoin wallets to query transactions from full nodes without revealing the full address. Used in BIP47 version 2 payment codes for notification detection.
+
 <a id="boltzmann-entropy"></a>
 !!! tip "Boltzmann Entropy"
 
     A measure of the number of possible interpretations of a Bitcoin transaction's inputs and outputs. Higher entropy means more ambiguity and better privacy. Named after physicist Ludwig Boltzmann.
-
-!!! info "Breez"
-
-    A non-custodial Lightning wallet with Tor support. Mobile-focused.
 
 <a id="bluewallet"></a>
 !!! info "BlueWallet"
 
     A mobile wallet (iOS/Android) focused on simplicity. Features include Lightning support, coin control, Silent Payments, and the ability to connect to your own node. No Tor support.
 
+!!! info "Breez"
+
+    A non-custodial Lightning wallet with Tor support. Mobile-focused.
+
 ---
 
 ## C
 
-<a id="cake-wallet"></a>
 <a id="cake-wallet"></a>
 !!! info "Cake Wallet"
 
@@ -156,18 +160,15 @@ This glossary explains the concepts and terms used throughout this site.
 
     Technically speaking, change detection is trying to figure out which output of a transaction is a change output. Change detection is based on various heuristics. False positives will always exist.
 
+<a id="channel"></a>
+!!! info "Channel"
+
+    A payment link between two Lightning nodes. Each channel has a total capacity and a balance split between the two channel partners.
+
 <a id="cioh"></a>
 !!! info "CIOH"
 
     Short for [Common Input Ownership Heuristic](#common-input-ownership-heuristic).
-
-!!! info "Coldcard"
-
-    An air-gapped hardware wallet by Coinkite. Features include encrypted backups, duress attack solutions, and BIP85 support. ~$100.
-
-!!! info "Confirmation"
-
-    When a transaction is included in a block. More confirmations (additional blocks built on top) make the transaction increasingly difficult to reverse.
 
 <a id="coin-control"></a>
 !!! tip "Coin Control"
@@ -193,6 +194,14 @@ This glossary explains the concepts and terms used throughout this site.
 
     The common input ownership heuristic assumes that all inputs of a transaction are controlled by a single entity. This assumption is clearly wrong, because collaborative transactions exist. CoinJoin transactions are designed to break this heuristic.
 
+!!! info "Coldcard"
+
+    An air-gapped hardware wallet by Coinkite. Features include encrypted backups, duress attack solutions, and BIP85 support. ~$100.
+
+!!! info "Confirmation"
+
+    When a transaction is included in a block. More confirmations (additional blocks built on top) make the transaction increasingly difficult to reverse.
+
 <a id="custodial-wallet"></a>
 !!! info "Custodial Wallet"
 
@@ -202,6 +211,11 @@ This glossary explains the concepts and terms used throughout this site.
 
 ## D
 
+<a id="deterministic-link"></a>
+!!! info "Deterministic Link"
+
+    A connection between a transaction input and output that exists in ALL possible interpretations of that transaction. Even in CoinJoin transactions, some input-output links may be deterministic, meaning the CoinJoin provides zero privacy for those specific participants.
+
 <a id="doxxic-change"></a>
 !!! warning "Doxxic Change"
 
@@ -209,15 +223,15 @@ This glossary explains the concepts and terms used throughout this site.
 
     The word is a combination of "toxic" and "doxxing." Doxxing is the act of finding out the legal identity (or similar identifying information) of a pseudonymous entity. Bitcoin is a pseudonymous system and does not require the *True Names* of participants.
 
-<a id="dust-attack"></a>
-!!! danger "Dust Attack"
-
-    Sending tiny amounts of Bitcoin (dust) to target addresses. If the recipient spends the dust alongside other UTXOs, the attacker can link those addresses together, mapping the victim's wallet.
-
 <a id="double-spend"></a>
 !!! info "Double Spend"
 
     An attempt to spend the same bitcoin twice. Bitcoin's consensus mechanism prevents this by requiring network agreement on which transactions are valid.
+
+<a id="dust-attack"></a>
+!!! danger "Dust Attack"
+
+    Sending tiny amounts of Bitcoin (dust) to target addresses. If the recipient spends the dust alongside other UTXOs, the attacker can link those addresses together, mapping the victim's wallet.
 
 ---
 
@@ -255,6 +269,11 @@ This glossary explains the concepts and terms used throughout this site.
 
     The property of a good where each unit is interchangeable with any other unit. Cash is fungible - one $10 bill is worth the same as any other. Bitcoin's fungibility can be compromised when certain coins are tainted by their history.
 
+<a id="funding-transaction"></a>
+!!! info "Funding Transaction"
+
+    The on-chain Bitcoin transaction that locks bitcoin into a 2-of-2 multisig wallet to open a Lightning channel.
+
 ---
 
 ## H
@@ -263,6 +282,7 @@ This glossary explains the concepts and terms used throughout this site.
 
     An event that occurs approximately every four years where the block reward for miners is cut in half. This reduces the rate at which new bitcoin is created.
 
+<a id="hd-wallet-hierarchical-deterministic"></a>
 !!! info "HD Wallet (Hierarchical Deterministic)"
 
     A wallet that generates a new address for each transaction from a single seed phrase. Avoids address reuse by default. Defined in BIP32/BIP44.
@@ -275,6 +295,20 @@ This glossary explains the concepts and terms used throughout this site.
 !!! info "Hodl Hodl"
 
     A non-custodial P2P exchange. No KYC required. Wide range of payment methods. Global availability.
+
+<a id="htlc"></a>
+!!! info "HTLC (Hashed Time-Locked Contract)"
+
+    The mechanism that enables multi-hop routing on the Lightning Network. It ensures that either the payment completes all the way through the route, or it fails entirely and all funds are returned.
+
+---
+
+## I
+
+<a id="invoice"></a>
+!!! info "Invoice"
+
+    A Lightning Network payment request containing the recipient's node ID, payment amount, payment hash, and expiry time.
 
 ---
 
@@ -302,66 +336,30 @@ This glossary explains the concepts and terms used throughout this site.
 
     A Layer 2 payment protocol built on top of Bitcoin. It enables fast, low-cost transactions by creating payment channels between users that settle on the Bitcoin blockchain only when opened or closed.
 
+<a id="liquidity"></a>
+!!! info "Liquidity"
+
+    The amount of bitcoin available in a Lightning channel for sending. If a channel has 0.5 BTC on your side, you can send up to 0.5 BTC through that channel.
+
 <a id="lnproxy"></a>
 !!! info "lnproxy"
 
     A simple Lightning Network privacy tool that acts as a proxy between sender and receiver. Instead of paying an original invoice directly, you pay a "proxy invoice" generated by an lnproxy relay, which then pays the original invoice. This hides the sender's and receiver's node IDs from each other without requiring trust in the relay.
 
-<a id="channel"></a>
-!!! info "Channel"
+<a id="low-r-signature"></a>
+!!! info "Low-R Signature"
 
-    A payment link between two Lightning nodes. Each channel has a total capacity and a balance split between the two channel partners.
-
-<a id="funding-transaction"></a>
-!!! info "Funding Transaction"
-
-    The on-chain Bitcoin transaction that locks bitcoin into a 2-of-2 multisig wallet to open a Lightning channel.
-
-<a id="htlc"></a>
-!!! info "HTLC (Hashed Time-Locked Contract)"
-
-    The mechanism that enables multi-hop routing on the Lightning Network. It ensures that either the payment completes all the way through the route, or it fails entirely and all funds are returned.
-
-<a id="invoice"></a>
-!!! info "Invoice"
-
-    A Lightning Network payment request containing the recipient's node ID, payment amount, payment hash, and expiry time.
+    A technique where Bitcoin Core grinds the ECDSA nonce to produce signatures where the R value is in the lower half of the curve order. This produces 71-byte signatures instead of 72-byte, saving 1 byte per input. It is a distinctive [wallet fingerprint](#wallet-fingerprint).
 
 <a id="lsp"></a>
 !!! info "LSP (Lightning Service Provider)"
 
     A Lightning node that provides connectivity and routing services to other nodes, particularly mobile wallets that maintain a single connection.
 
-<a id="node-id"></a>
-!!! info "Node ID"
-
-    A public identifier for a Lightning Network node. Everyone with access to an invoice can discover the associated node ID.
-
-<a id="onion-messaging"></a>
-!!! info "Onion Messaging"
-
-    An encrypted messaging system on the Lightning Network that routes messages through nodes, similar to how payments are routed. Used by BOLT12 offers.
-
-<a id="payment-hash"></a>
-!!! info "Payment Hash"
-
-    A cryptographic hash used to route Lightning payments. The same payment hash is used across all hops in an HTLC payment.
-
-<a id="private-channel"></a>
-!!! info "Private Channel"
-
-    A Lightning channel that is not announced to the network through the gossip protocol. Only the two channel partners know about it.
-
-<a id="ptlc"></a>
-!!! info "PTLC (Point Time-Locked Contract)"
-
-    An upgrade to HTLCs that uses different payment points for each hop, preventing payment correlation by nodes that control multiple hops in a route.
-
 ---
 
 ## M
 
-<a id="maker"></a>
 <a id="maker"></a>
 !!! info "Maker"
 
@@ -381,11 +379,6 @@ This glossary explains the concepts and terms used throughout this site.
 
     A spending condition requiring M of N private keys to authorize a transaction (e.g., 2-of-3). Used for shared custody, escrow, and enhanced security.
 
-<a id="liquidity"></a>
-!!! info "Liquidity"
-
-    The amount of bitcoin available in a Lightning channel for sending. If a channel has 0.5 BTC on your side, you can send up to 0.5 BTC through that channel.
-
 !!! info "Muun"
 
     A non-custodial Lightning wallet that combines on-chain and Lightning in a single interface. No Tor support.
@@ -398,14 +391,29 @@ This glossary explains the concepts and terms used throughout this site.
 
 ## N
 
-!!! info "Non-Custodial Wallet"
+<a id="nlocktime"></a>
+!!! info "nLockTime"
 
-    A wallet where you hold your own private keys. You have full control over your funds. Examples include Sparrow, Samourai, BlueWallet, and Bitcoin Core.
+    A transaction field that specifies the earliest block height or timestamp at which a transaction can be mined. Bitcoin Core sets this to the current block height as an anti-fee-sniping measure, which becomes a [wallet fingerprint](#wallet-fingerprint).
 
 <a id="node"></a>
 !!! info "Node"
 
     A computer running Bitcoin software that validates transactions and blocks. Running your own node allows you to verify Bitcoin's rules independently without trusting anyone else.
+
+<a id="node-id"></a>
+!!! info "Node ID"
+
+    A public identifier for a Lightning Network node. Everyone with access to an invoice can discover the associated node ID.
+
+<a id="nsequence"></a>
+!!! info "nSequence"
+
+    A per-input field that encodes RBF and timelock information. Different wallets set different default nSequence values, making it a [wallet fingerprint](#wallet-fingerprint) signal.
+
+!!! info "Non-Custodial Wallet"
+
+    A wallet where you hold your own private keys. You have full control over your funds. Examples include Sparrow, Samourai, BlueWallet, and Bitcoin Core.
 
 ---
 
@@ -416,11 +424,16 @@ This glossary explains the concepts and terms used throughout this site.
     An offchain (or off-chain) transaction is any transaction that does not happen onchain. Examples include transactions on the Lightning network, the handing over of physical private keys, as well as transactions on centralized ledgers such as exchanges and other trusted third parties.
 
 <a id="onchain"></a>
-<a id="onchain"></a>
 !!! warning "Onchain"
 
     An onchain (or on-chain) transaction is a bitcoin transaction that is settled on the bitcoin timechain. The analysis of these transactions is called chain analysis, which is the spying on and de-anonymizing of bitcoin's users by trying to find patterns in the onchain data.
 
+<a id="onion-messaging"></a>
+!!! info "Onion Messaging"
+
+    An encrypted messaging system on the Lightning Network that routes messages through nodes, similar to how payments are routed. Used by BOLT12 offers.
+
+<a id="op_return"></a>
 !!! note "OP_RETURN"
 
     A Bitcoin script opcode that embeds arbitrary data in the blockchain. Can leak metadata like timestamps, protocol identifiers, or messages that fingerprint the transaction.
@@ -463,14 +476,23 @@ This glossary explains the concepts and terms used throughout this site.
     A mobile-first P2P exchange. No KYC required. Wide range of payment methods.
 
 <a id="peel-chain"></a>
-<a id="peel-chain"></a>
 !!! warning "Peel Chain"
 
     A pattern where a large UTXO is repeatedly spent, peeling off small payments and returning the remainder as change. Creates a traceable chain of decreasing outputs. Chain analysts use this to track funds across many transactions.
 
+<a id="payment-hash"></a>
+!!! info "Payment Hash"
+
+    A cryptographic hash used to route Lightning payments. The same payment hash is used across all hops in an HTLC payment.
+
 !!! info "Phoenix"
 
     A partially custodial Lightning wallet. Non-custodial for on-chain funds but uses liquidity service providers for Lightning channels.
+
+<a id="private-channel"></a>
+!!! info "Private Channel"
+
+    A Lightning channel that is not announced to the network through the gossip protocol. Only the two channel partners know about it.
 
 <a id="private-key"></a>
 !!! info "Private Key"
@@ -478,19 +500,23 @@ This glossary explains the concepts and terms used throughout this site.
     A secret number that allows you to spend bitcoin from a specific address. Anyone who knows your private key can spend your bitcoin. **Never share your private key with anyone.**
 
 <a id="privacy-score"></a>
-<a id="privacy-score"></a>
 !!! tip "Privacy Score"
 
     A 0-100 rating computed by privacy scanners based on heuristics. Starts at 70, adjusted by findings. Only CoinJoin, Taproot, and high entropy can raise it. Grades: A+ (90-100), B (75-89), C (50-74), D (25-49), F (0-24).
 
-!!! info "PSBT (Partially Signed Bitcoin Transaction)"
+<a id="ptlc"></a>
+!!! info "PTLC (Point Time-Locked Contract)"
 
-    A format for sharing unsigned or partially signed transactions between devices. Commonly used with hardware wallets where the unsigned transaction is sent to the device for signing, then returned.
+    An upgrade to HTLCs that uses different payment points for each hop, preventing payment correlation by nodes that control multiple hops in a route.
 
 <a id="public-key"></a>
 !!! info "Public Key"
 
     A cryptographic key derived from your private key, used to generate receiving addresses. It is safe to share.
+
+!!! info "PSBT (Partially Signed Bitcoin Transaction)"
+
+    A format for sharing unsigned or partially signed transactions between devices. Commonly used with hardware wallets where the unsigned transaction is sent to the device for signing, then returned.
 
 ---
 
@@ -504,7 +530,6 @@ This glossary explains the concepts and terms used throughout this site.
 
     A feature that allows you to replace an unconfirmed transaction with a new one that pays a higher fee. Useful for speeding up stuck transactions.
 
-<a id="ricochet"></a>
 <a id="ricochet"></a>
 !!! success "Ricochet"
 
@@ -528,7 +553,6 @@ This glossary explains the concepts and terms used throughout this site.
     A mobile wallet (Android only) focused on maximum privacy. Features include Whirlpool CoinJoin, PayJoin (Stowaway), Ricochet, Stonewall, and PayNyms. Runs over Tor and connects to your own Dojo node.
 
 <a id="satoshi-sat"></a>
-<a id="satoshi-sat"></a>
 !!! info "Satoshi (sat)"
 
     The smallest unit of bitcoin. There are 100,000,000 sats in 1 BTC. Named after Bitcoin's creator.
@@ -543,7 +567,6 @@ This glossary explains the concepts and terms used throughout this site.
     The 'scheduler' is a component of JoinMarket which schedules multiple collaborative transactions in a row. It will use random intervals and amounts to make timing analysis and de-anonymization via chain analysis more difficult.
 
 <a id="script-type"></a>
-<a id="script-type"></a>
 !!! warning "Script Type"
 
     The address format used in a transaction (P2PKH, P2SH, P2WPKH, P2TR). Mixing script types in inputs or outputs can fingerprint change outputs since the change usually matches the sender's address type.
@@ -557,7 +580,6 @@ This glossary explains the concepts and terms used throughout this site.
 
     A DIY air-gapped hardware wallet that can be built for ~$50-70. Minimizes supply chain attack risk. Stateless by default.
 
-<a id="self-send-self-transfer"></a>
 <a id="self-send-self-transfer"></a>
 !!! danger "Self-send (Self-transfer)"
 
@@ -576,15 +598,19 @@ This glossary explains the concepts and terms used throughout this site.
 
     A desktop wallet (Mac/Windows/Linux) focused on privacy. Features include coin control, Whirlpool integration, hardware wallet support, and detailed transaction previews. Connects to your own node via Electrum server.
 
-!!! info "Start9"
+<a id="steganographic-transaction"></a>
+!!! info "Steganographic Transaction"
 
-    A privacy-focused, self-sovereign node solution.
+    A transaction designed to look like something it is not. Examples include PayJoin (looks like a normal payment but the receiver contributes an input), Stonewall (simulated CoinJoin from a single wallet), and Ricochet (adds intermediate hops). These exploit the fact that chain analysis relies on heuristics.
 
-<a id="stonewall"></a>
 <a id="stonewall"></a>
 !!! tip "Stonewall"
 
     A steganographic transaction format from Samourai Wallet (now Ashigaru) that mimics a CoinJoin. Has 2-4 inputs and exactly 4 outputs: 2 equal-valued outputs (one real payment, one decoy) and 2 change outputs. Solo Stonewall uses only the sender's UTXOs. STONEWALLx2 involves a collaborator contributing inputs, making it indistinguishable from a genuine 2-party CoinJoin.
+
+!!! info "Start9"
+
+    A privacy-focused, self-sovereign node solution.
 
 !!! info "Stowaway"
 
@@ -613,15 +639,9 @@ This glossary explains the concepts and terms used throughout this site.
     All taint in bitcoin always is and always will be arbitrarily defined and probabilistically applied.
 
 <a id="taker"></a>
-<a id="taker"></a>
 !!! info "Taker"
 
     A market taker is someone who buys bitcoin liquidity from the market, taking up market makers on their offers.
-
-<a id="tumbler"></a>
-!!! info "Tumbler"
-
-    A JoinMarket script that performs multiple consecutive CoinJoins with random amounts and random timing between rounds. Unlike a single CoinJoin (`sendpayment`), the tumbler is designed to achieve meaningful privacy by breaking the amount-matching analysis that can partially unmix single JoinMarket transactions. It uses random amounts, random timing delays, and multiple destination addresses to make blockchain analysis significantly more difficult.
 
 <a id="taproot"></a>
 !!! success "Taproot"
@@ -631,6 +651,11 @@ This glossary explains the concepts and terms used throughout this site.
 !!! tip "Taproot Channels"
 
     Lightning Network channels that use Taproot (P2TR) outputs with MuSig2 key aggregation for the 2-of-2 funding multisig. Unlike legacy P2WSH channels, Taproot channel opens and cooperative closes are indistinguishable from regular single-signature Taproot spends on-chain.
+
+<a id="temporal-analysis"></a>
+!!! info "Temporal Analysis"
+
+    The practice of analyzing the timing of transactions to identify patterns and link addresses. This includes studying when transactions occur, how quickly funds are spent, and whether there are regular payment patterns.
 
 <a id="timechain"></a>
 !!! info "Timechain"
@@ -646,6 +671,7 @@ This glossary explains the concepts and terms used throughout this site.
 
     An anonymity network that routes internet traffic through multiple relays. Privacy tools and wallets can use Tor and route requests through .onion endpoints (hiddenservices) to hide which addresses are being queried.
 
+<a id="transaction"></a>
 !!! info "Transaction"
 
     A bitcoin transaction describes the movement of sats. It is structured data that describes inputs and outputs, among other things. A valid bitcoin transaction has at least one input and at least one output.
@@ -653,6 +679,11 @@ This glossary explains the concepts and terms used throughout this site.
 !!! info "Trezor Model T"
 
     A hardware wallet with a touchscreen. Supports multisig and Shamir backup. Not air-gapped (USB connection). ~$180.
+
+<a id="tumbler"></a>
+!!! info "Tumbler"
+
+    A JoinMarket script that performs multiple consecutive CoinJoins with random amounts and random timing between rounds. Unlike a single CoinJoin (`sendpayment`), the tumbler is designed to achieve meaningful privacy by breaking the amount-matching analysis that can partially unmix single JoinMarket transactions. It uses random amounts, random timing delays, and multiple destination addresses to make blockchain analysis significantly more difficult.
 
 !!! info "TX"
 
@@ -676,7 +707,6 @@ This glossary explains the concepts and terms used throughout this site.
 ## W
 
 <a id="wabisabi"></a>
-<a id="wabisabi"></a>
 !!! info "WabiSabi"
 
     A CoinJoin protocol used by Wasabi Wallet that allows variable-amount outputs using cryptographic credentials. Supports 20+ participants per round with flexible denomination selection.
@@ -686,17 +716,15 @@ This glossary explains the concepts and terms used throughout this site.
 
     Software or hardware that stores your private keys and allows you to send and receive bitcoin. A wallet does not actually "store" bitcoin - the bitcoin exists on the blockchain. The wallet stores the keys that prove ownership.
 
-!!! info "Wallet of Satoshi"
-
-    A custodial Lightning wallet. Simple to use but the custodian holds your keys and knows your transaction history.
-
-<a id="wallet-fingerprint"></a>
 <a id="wallet-fingerprint"></a>
 !!! warning "Wallet Fingerprint"
 
     Distinctive patterns left by wallet software - transaction version, locktime, sequence numbers, signature encoding - that reveal which wallet created a transaction.
 
-<a id="whirlpool"></a>
+!!! info "Wallet of Satoshi"
+
+    A custodial Lightning wallet. Simple to use but the custodian holds your keys and knows your transaction history.
+
 <a id="whirlpool"></a>
 !!! success "Whirlpool"
 
@@ -705,47 +733,3 @@ This glossary explains the concepts and terms used throughout this site.
 !!! info "Zeus"
 
     A non-custodial Lightning wallet that can connect to your own LND node. Supports Tor.
-
----
-
-## Additional Technical Terms
-
-<a id="bayesian-updating"></a>
-!!! info "Bayesian Updating"
-
-    A statistical method where analysts update their probability estimates as new evidence becomes available. In chain analysis, each new heuristic or data point narrows the possibility space, making deanonymization increasingly likely over time.
-
-<a id="bip69"></a>
-!!! info "BIP69"
-
-    A Bitcoin Improvement Proposal that specifies lexicographic ordering of transaction inputs and outputs. While intended to improve privacy by standardizing ordering, it has ironically become a [wallet fingerprint](#wallet-fingerprint) because not all wallets implement it.
-
-<a id="deterministic-link"></a>
-!!! info "Deterministic Link"
-
-    A connection between a transaction input and output that exists in ALL possible interpretations of that transaction. Even in CoinJoin transactions, some input-output links may be deterministic, meaning the CoinJoin provides zero privacy for those specific participants.
-
-<a id="low-r-signature"></a>
-!!! info "Low-R Signature"
-
-    A technique where Bitcoin Core grinds the ECDSA nonce to produce signatures where the R value is in the lower half of the curve order. This produces 71-byte signatures instead of 72-byte, saving 1 byte per input. It is a distinctive [wallet fingerprint](#wallet-fingerprint).
-
-<a id="nlocktime"></a>
-!!! info "nLockTime"
-
-    A transaction field that specifies the earliest block height or timestamp at which a transaction can be mined. Bitcoin Core sets this to the current block height as an anti-fee-sniping measure, which becomes a [wallet fingerprint](#wallet-fingerprint).
-
-<a id="nsequence"></a>
-!!! info "nSequence"
-
-    A per-input field that encodes RBF and timelock information. Different wallets set different default nSequence values, making it a [wallet fingerprint](#wallet-fingerprint) signal.
-
-<a id="steganographic-transaction"></a>
-!!! info "Steganographic Transaction"
-
-    A transaction designed to look like something it is not. Examples include PayJoin (looks like a normal payment but the receiver contributes an input), Stonewall (simulated CoinJoin from a single wallet), and Ricochet (adds intermediate hops). These exploit the fact that chain analysis relies on heuristics.
-
-<a id="temporal-analysis"></a>
-!!! info "Temporal Analysis"
-
-    The practice of analyzing the timing of transactions to identify patterns and link addresses. This includes studying when transactions occur, how quickly funds are spent, and whether there are regular payment patterns.
