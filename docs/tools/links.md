@@ -1,62 +1,38 @@
 ---
-description: A curated list of Bitcoin privacy resources, communities, books, and development tools
+description: A curated list of Bitcoin privacy tools and educational resources
 ---
 
 # Useful Links
 
-A curated list of Bitcoin privacy resources, communities, and tools.
+A curated list of Bitcoin privacy tools and educational resources.
 
 ---
 
-## Bitcoin-Only Resources
-
 | Resource | Description |
 |----------|-------------|
-| [Bitcoin.org](https://bitcoin.org) | Official Bitcoin website and documentation |
-| [Bitcoin Wiki](https://en.bitcoin.it/wiki/Main_Page) | Comprehensive Bitcoin wiki |
-| [Bitcoin Optech](https://bitcoinops.org) | Bitcoin technology updates and research |
-| [Bitcoin Magazine](https://bitcoinmagazine.com) | Bitcoin news and education |
-
----
-
-## Privacy Resources
-
-| Resource | Description |
-|----------|-------------|
+| [mempool.space](https://mempool.space) | Bitcoin block explorer and mempool visualizer |
 | [am-i.exposed](https://am-i.exposed) | Bitcoin privacy scanner |
-| [mempool.space](https://mempool.space) | Block explorer (has .onion endpoint) |
-| [Whirlpool Fees Calculator](https://whirlpoolfees.com) | Calculate Whirlpool CoinJoin fees |
-| [Coin ATM Radar](https://coinatmradar.com) | Find Bitcoin ATMs near you |
-
----
-
-## Communities
-
-| Community | Platform |
-|-----------|----------|
-| Bitcoin Privacy Discord | Discord |
-| Samourai Wallet Telegram | Telegram |
-| Sparrow Wallet Telegram | Telegram |
-| JoinMarket IRC | Libera Chat |
-
----
-
-## Books and Courses
-
-| Resource | Author | Description |
-|----------|--------|-------------|
-| Mastering Bitcoin | Andreas Antonopoulos | Comprehensive Bitcoin technical guide |
-| Mastering the Lightning Network | Andreas Antonopoulos | Comprehensive Lightning guide |
-| Bitcoin Educational Content | Various | Free Bitcoin courses |
-| A Beginners Guide To Bitcoin Privacy | Athena Alpha | Privacy fundamentals |
-
----
-
-## Development Resources
-
-| Resource | Description |
-|----------|-------------|
-| [BIPs Repository](https://github.com/bitcoin/bips) | Bitcoin Improvement Proposals |
-| [BIP47](https://github.com/bitcoin/bips/blob/master/bip-0047.mediawiki) | Reusable Payment Codes specification |
-| [BIP352](https://github.com/bitcoin/bips/blob/master/bip-0352.mediawiki) | Silent Payments specification |
-| [BIP78](https://github.com/bitcoin/bips/blob/master/bip-0078.mediawiki) | PayJoin specification |
+| [paymentcode.io](https://paymentcode.io) | BIP47 & PayNyms Hub |
+| [ashigaru.rs](https://ashigaru.rs) | Bitcoin privacy wallet and whirlpool coinjoin |
+| [dojo-osp.org](https://dojo-osp.org) | Samourai Dojo open-source project |
+| [sparrowwallet.com](https://sparrowwallet.com) | Bitcoin wallet with advanced privacy features |
+| [freesamourai.com](https://freesamourai.com) | Free Samourai Wallet services |
+| [Mastering Bitcoin](https://github.com/bitcoinbook/bitcoinbook) | Comprehensive Bitcoin book by Andreas Antonopoulos |
+| [bitcoiner.guide](https://bitcoiner.guide/) | Bitcoin education and guides |
+| [silentpayments.xyz](https://silentpayments.xyz/) | Silent Payments (BIP352) resources |
+| [planb.academy](https://planb.academy/) | Bitcoin education platform |
+| [lnproxy.org](https://lnproxy.org) | Lightning Network proxy for enhanced privacy |
+| [bolt12.org](https://bolt12.org) | BOLT12 offers specification and resources |
+| [bips.dev](https://bips.dev/) | Bitcoin Improvement Proposals reference |
+| [lightningprivacy.com](https://lightningprivacy.com/) | Lightning Network privacy research |
+| [kycnot.me](https://kycnot.me/) | Directory of non-KYC Bitcoin services |
+| [eigenwallet.org](https://eigenwallet.org/) | Bitcoin to Monero atomic swaps |
+| [bisq.network](https://bisq.network/) | Decentralized Bitcoin exchange |
+| [robosats.org](https://robosats.org) | Private Bitcoin exchange using Lightning |
+| [hodlhodl.com](https://hodlhodl.com/) | Non-custodial Bitcoin trading platform |
+| [boltz.exchange](https://boltz.exchange/) | Non-custodial cryptocurrency exchange |
+| [jamdocs.org](https://jamdocs.org/) | JAM (JoinMarket GUI) documentation |
+| [Wasabi CoinJoin Docs](https://docs.wasabiwallet.io/using-wasabi/CoinJoin.html) | Wasabi Wallet CoinJoin documentation |
+| [JoinMarket Repo](https://github.com/JoinMarket-Org/joinmarket-clientserver) | JoinMarket repository |
+| [joinstr.xyz](https://joinstr.xyz/) | coinjoin implementation using nostr |
+| [BitcoinTalk](https://bitcointalk.org) | Bitcoin discussions |

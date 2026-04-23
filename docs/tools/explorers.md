@@ -63,7 +63,7 @@ If you must use a public explorer:
 
     ---
 
-    From your regular IP, do not look up addresses you control.
+    From your regular IP, do not look up addresses you control, use tor or self host.
 
 -   :material-shield-check:{ .lg .middle } __Use a VPN__
 

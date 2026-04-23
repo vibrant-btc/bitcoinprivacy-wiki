@@ -1,5 +1,5 @@
 ---
-description: Comprehensive Bitcoin privacy learning resources covering fundamentals to advanced techniques
+description: Comprehensive Bitcoin privacy learning resources
 hide:
   - navigation
   - toc

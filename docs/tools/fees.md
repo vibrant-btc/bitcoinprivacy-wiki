@@ -38,7 +38,7 @@ Fees are calculated based on the size of your transaction in virtual bytes (vbyt
 
 ## Fee Market
 
-The fee market fluctuates based on demand:
+The fee market fluctuates based on demand, example:
 
 | Demand Level | Fee Rate | Confirmation Time |
 |-------------|----------|-------------------|
@@ -86,7 +86,7 @@ The fee market fluctuates based on demand:
 
     Before sending, check mempool conditions to avoid overpaying.
 
--   :material-swap-horizontal:{ .lg .middle } __Use RBF When Possible__
+-   :material-swap-horizontal:{ .lg .middle } __Use RBF If Required
 
     ---
 
