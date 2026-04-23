@@ -1,3 +1,7 @@
+---
+description: Learn about Bitcoin block explorers, their privacy risks, and how to use them safely with Tor and self-hosted options
+---
+
 # Block Explorers
 
 Block explorers are websites that allow you to look up Bitcoin addresses, transactions, and blocks. They are useful tools but come with significant privacy risks.

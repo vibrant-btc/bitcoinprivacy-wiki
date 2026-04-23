@@ -1,3 +1,7 @@
+---
+description: Learn how lnproxy hides sender and receiver node IDs on the Lightning Network without trusting a custodian
+---
+
 # lnproxy
 
 lnproxy is a simple privacy tool that makes Lightning Network invoices more private. It works like a "Poor man's rendez-vous routing" - providing privacy for users without taking custody of their funds.

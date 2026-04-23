@@ -1,0 +1,47 @@
+size: { width: 1200, height: 630 }
+layers:
+  - background:
+      color: "#000000"
+  - size: { width: 154, height: 154 }
+    offset: { x: 984, y: 40 }
+    icon:
+      value: simple/bitcoin
+      color: "#ffffff"
+  - size: { width: 400, height: 50 }
+    offset: { x: 62, y: 60 }
+    typography:
+      content: "BitcoinPrivacy.Wiki"
+      align: start
+      color: "#ffffff"
+      line:
+        amount: 1
+        height: 1.25
+      font:
+        family: Roboto
+        style: Medium
+  - size: { width: 900, height: 250 }
+    offset: { x: 62, y: 160 }
+    typography:
+      content: "{{ page.title }}"
+      align: start
+      color: "#ffffff"
+      overflow: shrink
+      line:
+        amount: 2
+        height: 1.25
+      font:
+        family: Roboto
+        style: Bold
+  - size: { width: 900, height: 120 }
+    offset: { x: 62, y: 420 }
+    typography:
+      content: "{{ page.meta.get('description', config.site_description) }}"
+      align: start
+      color: "#888888"
+      overflow: shrink
+      line:
+        amount: 3
+        height: 1.4
+      font:
+        family: Roboto
+        style: Regular

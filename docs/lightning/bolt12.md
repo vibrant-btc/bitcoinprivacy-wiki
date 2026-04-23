@@ -1,3 +1,7 @@
+---
+description: Learn about BOLT12 offers, reusable Lightning payment codes with route blinding for improved receiver privacy
+---
+
 # BOLT12 Offers
 
 BOLT12 is a new Lightning Network standard that introduces "offers" - reusable payment codes that do not require creating a new invoice for every payment. This has significant privacy implications for both senders and receivers.

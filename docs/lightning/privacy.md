@@ -1,3 +1,7 @@
+---
+description: Explore Lightning Network privacy challenges including network-level issues, cross-layer data leakage, and payment correlation
+---
+
 # Lightning Privacy
 
 The Lightning Network provides some privacy benefits over on-chain Bitcoin transactions, but it is far from perfect. This page explains how your Lightning activity can be linked to your identity and what you can do about it.

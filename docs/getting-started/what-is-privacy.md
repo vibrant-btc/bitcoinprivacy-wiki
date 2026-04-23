@@ -1,3 +1,7 @@
+---
+description: Learn why Bitcoin privacy matters, how identities get linked to addresses, and the difference between privacy and anonymity
+---
+
 # What is Bitcoin Privacy?
 
 Welcome to your journey into Bitcoin privacy. This page will explain what Bitcoin is, why privacy matters, and why Bitcoin is not as private as most people think.

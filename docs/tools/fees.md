@@ -1,3 +1,7 @@
+---
+description: Understand Bitcoin transaction fees, fee estimation tools, and privacy considerations when setting fee rates
+---
+
 # Fee Estimation
 
 Bitcoin transaction fees are paid to miners to include your transaction in a block. Getting the fee right is important - too low and your transaction may take a long time to confirm, too high and you waste money.

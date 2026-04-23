@@ -1,3 +1,7 @@
+---
+description: Discover how PayJoin poisons the Common Input Ownership Heuristic by having recipients contribute inputs to transactions
+---
+
 # PayJoin
 
 [PayJoin](../glossary.md#payjoin-p2ep) (also known as Pay-to-Endpoint or P2EP) is a privacy technique where the recipient of a Bitcoin payment contributes an input to the transaction. This breaks the [Common Input Ownership Heuristic](../glossary.md#common-input-ownership-heuristic) and makes it appear as though the sender is paying themselves.

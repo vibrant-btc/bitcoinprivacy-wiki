@@ -1,3 +1,7 @@
+---
+description: Learn how to protect your on-chain history when opening and closing Lightning channels using CoinJoin techniques
+---
+
 # Channel Coinjoins
 
 Lightning offers some privacy improvements over traditional on-chain bitcoin, however, it is still tied to the base layer of the bitcoin network. When using Lightning we should still use traditional bitcoin privacy techniques to protect our funds from observation.

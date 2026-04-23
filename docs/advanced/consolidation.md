@@ -1,3 +1,7 @@
+---
+description: Learn why UTXO consolidation is one of the most damaging patterns for Bitcoin privacy and how to avoid it
+---
+
 # Consolidation Patterns
 
 Consolidation occurs when multiple [UTXOs](../glossary.md#utxo) are combined into fewer outputs. This is one of the most damaging patterns for Bitcoin privacy because it publicly links all input addresses via the [Common Input Ownership Heuristic](../glossary.md#common-input-ownership-heuristic).

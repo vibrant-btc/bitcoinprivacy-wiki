@@ -1,3 +1,7 @@
+---
+description: Track your Bitcoin privacy journey with this checklist from beginner essentials to advanced privacy techniques
+---
+
 # Your Privacy Checklist
 
 Use this checklist to track your Bitcoin privacy journey. Start with the basics and work your way up as you gain knowledge and confidence.

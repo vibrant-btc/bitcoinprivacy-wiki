@@ -1,3 +1,7 @@
+---
+description: Learn why address reuse is the number one privacy killer and how to practice good address hygiene
+---
+
 # Address Hygiene
 
 Address hygiene is the foundation of Bitcoin privacy. It is the simplest and most effective privacy practice you can implement, and it costs nothing.

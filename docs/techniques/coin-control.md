@@ -1,3 +1,7 @@
+---
+description: Master coin control to choose which UTXOs to spend and prevent accidentally linking addresses on the blockchain
+---
+
 # Coin Control
 
 Coin control is the ability to choose exactly which [UTXOs](../glossary.md#utxo) (Unspent Transaction Outputs) your wallet spends when creating a transaction. It is one of the most powerful privacy tools available to Bitcoin users.

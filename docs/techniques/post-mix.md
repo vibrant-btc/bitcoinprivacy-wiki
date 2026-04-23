@@ -1,3 +1,7 @@
+---
+description: Essential post-mix UTXO management best practices to avoid destroying the privacy gains from CoinJoins
+---
+
 # Post-Mix Best Practices
 
 After you have completed a [CoinJoin](../glossary.md#coinjoin), your bitcoin is in a "post-mix" state. How you handle these post-mix [UTXOs](../glossary.md#utxo) is critical - careless spending can completely undo the privacy you gained from mixing.

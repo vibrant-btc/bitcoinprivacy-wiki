@@ -1,3 +1,7 @@
+---
+description: Learn how UTXOs work, why they matter for privacy, and how coin control helps prevent accidental address linking
+---
+
 # Understanding UTXOs
 
 Understanding UTXOs (Unspent Transaction Outputs) is the single most important foundation for Bitcoin privacy. If you understand UTXOs, you understand why Bitcoin privacy works the way it does.

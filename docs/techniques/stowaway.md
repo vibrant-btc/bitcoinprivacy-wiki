@@ -1,3 +1,7 @@
+---
+description: Learn about Stowaway, Ashigaru's PayJoin implementation for spending post-mix UTXOs with extra privacy
+---
+
 # Stowaway
 
 Stowaway is Samourai Wallet's implementation of PayJoin. It allows users to create PayJoin transactions using their Whirlpool post-mix UTXOs, adding an extra layer of privacy after CoinJoin.

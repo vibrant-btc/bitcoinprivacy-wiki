@@ -1,3 +1,7 @@
+---
+description: Understand Lightning routing analysis attacks including HTLC correlation, timing analysis, and probing attacks
+---
+
 # Routing Analysis
 
 Through the inherent nature of onion-routed payments, a certain degree of source and destination privacy is given as any payment flows through the network. Since Lightning payments typically go through other third parties, it is important that the source, destination, and any other metadata are concealed.

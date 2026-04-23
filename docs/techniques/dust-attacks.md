@@ -1,3 +1,7 @@
+---
+description: Understand dust attacks, how tiny UTXOs are used for surveillance, and how to defend against them with coin control
+---
+
 # Dust Attacks
 
 A [dust attack](../glossary.md#dust-attack) is when an adversary sends tiny amounts of bitcoin (dust) to your addresses. When you spend this dust alongside your other [UTXOs](../glossary.md#utxo), the [Common Input Ownership Heuristic](../glossary.md#common-input-ownership-heuristic) links the dusted address to all other inputs in the transaction.

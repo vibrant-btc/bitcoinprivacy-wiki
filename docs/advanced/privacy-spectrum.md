@@ -1,3 +1,7 @@
+---
+description: Understand the Bitcoin privacy spectrum
+---
+
 # The Privacy Spectrum
 
 Bitcoin privacy is not a binary state. It exists on a spectrum, ranging from completely public to maximally private. Understanding where you fall on this spectrum helps you assess your privacy posture and identify areas for improvement.

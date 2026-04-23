@@ -1,3 +1,7 @@
+---
+description: Learn about Silent Payments (BIP352), a protocol that eliminates notification transactions
+---
+
 # Silent Payments
 
 Silent Payments ([BIP352](https://bips.dev/352/)) is a protocol for reusable payment codes in Bitcoin that eliminates the need for a notification transaction by leveraging information already present in the transaction to signal to the recipient when funds are intended for them.

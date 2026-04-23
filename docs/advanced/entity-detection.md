@@ -1,3 +1,7 @@
+---
+description: Learn how chain analysis firms maintain databases of known entities and how to defend against entity detection
+---
+
 # Entity Detection
 
 [Chain analysis](../glossary.md#chain-analysis) firms maintain databases of known Bitcoin addresses belonging to exchanges, services, darknet markets, mixers, gambling sites, mining pools, and sanctioned entities. When your transaction interacts with any of these known addresses, it gets flagged and analyzed further.

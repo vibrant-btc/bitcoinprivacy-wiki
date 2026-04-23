@@ -1,3 +1,7 @@
+---
+description: A practical step-by-step guide to start using Bitcoin privately
+---
+
 # Your First Steps
 
 Now that you understand what Bitcoin privacy is, it is time to take your first steps toward actually using Bitcoin privately.

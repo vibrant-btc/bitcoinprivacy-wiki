@@ -1,3 +1,7 @@
+---
+description: Learn why running a Bitcoin node improves privacy and how to connect your wallet to your own node
+---
+
 # Running Your Own Node
 
 A Bitcoin [node](../glossary.md#node) is a computer that runs Bitcoin software to validate transactions and blocks. Running your own node is one of the most important privacy steps you can take.

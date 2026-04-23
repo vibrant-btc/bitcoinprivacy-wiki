@@ -1,3 +1,7 @@
+---
+description: Comprehensive Bitcoin privacy learning resources covering fundamentals to advanced techniques
+---
+
 # BitcoinPrivacy.Wiki
 
 BitcoinPrivacy.Wiki is a collection of in-depth learning resources about Bitcoin privacy. This site covers everything from fundamental concepts to advanced privacy techniques, providing detailed documentation for anyone looking to understand and improve their financial privacy on Bitcoin.

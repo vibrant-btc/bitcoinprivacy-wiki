@@ -1,3 +1,7 @@
+---
+description: Compare BIP47 PayNyms and Silent Payments for reusable payment codes, their trade-offs, and wallet support
+---
+
 # BIP47 vs Silent Payments
 
 Both BIP47 (PayNyms) and BIP352 (Silent Payments) are protocols for reusable payment codes on Bitcoin. They address the same problem - enabling users to receive payments without address reuse - but employ different technical approaches.

@@ -1,3 +1,7 @@
+---
+description: Understand BIP47 reusable payment codes, PayNyms, and how they enable receiving Bitcoin without address reuse
+---
+
 # BIP47 PayNyms
 
 BIP47 (Reusable Payment Codes) is a protocol that allows users to generate a unique payment address for each sender, without the sender needing to communicate with the recipient beforehand.

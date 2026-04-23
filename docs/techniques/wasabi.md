@@ -1,3 +1,7 @@
+---
+description: Learn about Wasabi Wallet's WabiSabi CoinJoin protocol with 50-150 participant anonymity sets and flexible denominations
+---
+
 # Wasabi Wallet
 
 Wasabi Wallet is a privacy-focused Bitcoin wallet that implements CoinJoin using the WabiSabi protocol. It was one of the most popular desktop CoinJoin wallets until regulatory pressure forced changes to its operation.

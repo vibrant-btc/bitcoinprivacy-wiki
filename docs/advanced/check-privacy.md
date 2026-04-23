@@ -1,3 +1,7 @@
+---
+description: Learn how to verify your Bitcoin privacy using am-i.exposed and other privacy scanning tools
+---
+
 # Checking Your Privacy
 
 After applying privacy techniques, it is important to verify that they actually worked. Tools like am-i.exposed help you check your on-chain privacy.

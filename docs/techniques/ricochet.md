@@ -1,3 +1,7 @@
+---
+description: Learn how Ricochet adds transactional distance between post-mix UTXOs and final destinations with 4-hop self-payments
+---
+
 # Ricochet
 
 [Ricochet](../glossary.md#ricochet) is a privacy technique that adds "transactional distance" between your post-mix [UTXOs](../glossary.md#utxo) and their final destination. It does this by routing your bitcoin through several intermediate addresses before it reaches the recipient.

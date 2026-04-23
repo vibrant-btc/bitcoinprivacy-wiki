@@ -1,3 +1,7 @@
+---
+description: Learn how Stonewall creates CoinJoin-like transactions solo to break heuristics and add plausible deniability
+---
+
 # Stonewall
 
 [Stonewall](../glossary.md#stonewall) is a privacy technique that creates a transaction indistinguishable from a [CoinJoin](../glossary.md#coinjoin), but performed by a single user. It is designed to break the [Common Input Ownership Heuristic](../glossary.md#common-input-ownership-heuristic) by creating false ambiguity.

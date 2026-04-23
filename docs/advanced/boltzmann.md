@@ -1,3 +1,7 @@
+---
+description: Understand Boltzmann entropy as the most rigorous mathematical measure of Bitcoin transaction privacy
+---
+
 # Boltzmann Entropy
 
 Boltzmann entropy is the most rigorous mathematical measure of transaction privacy on Bitcoin. Unlike heuristics that flag specific patterns, entropy quantifies the actual ambiguity an adversary faces when analyzing a transaction.

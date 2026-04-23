@@ -1,3 +1,7 @@
+---
+description: Deep dive into chain analysis heuristics including round amount detection, change detection, and wallet fingerprinting
+---
+
 # Chain Analysis Heuristics
 
 Chain analysis companies use a set of **heuristics** - rules of thumb or assumptions - to analyze Bitcoin transactions and link addresses to real identities. Understanding these heuristics is essential because it tells you exactly what you need to defend against.

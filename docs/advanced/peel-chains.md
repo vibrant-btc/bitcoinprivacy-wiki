@@ -1,3 +1,7 @@
+---
+description: Understand peel chain patterns where large UTXOs are repeatedly spent and how to defend against peel chain detection
+---
+
 # Peel Chains
 
 A [peel chain](../glossary.md#peel-chain) is a pattern where a large [UTXO](../glossary.md#utxo) is repeatedly spent, peeling off small payments and returning the remainder as [change](../glossary.md#change). This creates a traceable chain of decreasing outputs that [chain analysts](../glossary.md#chain-analysis) use to track funds across many transactions.

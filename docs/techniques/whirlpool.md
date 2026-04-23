@@ -1,3 +1,7 @@
+---
+description: Learn about Whirlpool CoinJoin, its 5-party fixed denomination model, and how to manage post-mix UTXOs safely
+---
+
 # Whirlpool
 
 [Whirlpool](../glossary.md#whirlpool) is a [CoinJoin](../glossary.md#coinjoin) implementation originally developed by [Samourai Wallet](../glossary.md#samourai-wallet). It uses a 5-party model with fixed denominations to create privacy on the Bitcoin blockchain.

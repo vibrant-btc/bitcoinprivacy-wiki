@@ -1,3 +1,7 @@
+---
+description: Learn how chain analysis companies analyze the Bitcoin transaction graph and how to break clustering algorithms
+---
+
 # Transaction Graph Analysis
 
 The Bitcoin blockchain is a giant graph where transactions are nodes and the flow of bitcoin between them creates edges. Chain analysis companies specialize in analyzing this graph to identify who owns which addresses.

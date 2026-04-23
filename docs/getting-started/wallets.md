@@ -1,3 +1,7 @@
+---
+description: Compare Bitcoin wallets by privacy features.
+---
+
 # Choosing a Wallet
 
 A Bitcoin [wallet](../glossary.md#wallet) is just like your real wallet - it is a method of storing value. The main difference with a Bitcoin wallet is that it does not actually store bitcoin inside. Bitcoins exist solely on the distributed ledger (blockchain). A Bitcoin wallet stores the keys required to sign the transactions that send bitcoin.

@@ -1,3 +1,7 @@
+---
+description: Discover where and how to buy Bitcoin without KYC to avoid identity linkage at the source
+---
+
 # Acquiring Bitcoin Privately
 
 95% of Bitcoin on-ramps today require KYC (Know Your Customer). If you purchase through one of these regulated entities, you essentially tag your bitcoin addresses to your personal identity. This makes it trivial for chain surveillance firms to track you.

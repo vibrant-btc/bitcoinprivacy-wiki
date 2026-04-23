@@ -1,3 +1,7 @@
+---
+description: Learn the heuristics chain analysis companies use to analyze Bitcoin transactions and link addresses to identities
+---
+
 # Privacy Heuristics Explained
 
 Chain analysis companies use a set of **heuristics** (rules of thumb or assumptions) to analyze Bitcoin transactions and link addresses to real identities. Understanding these heuristics is essential because it tells you exactly what you need to defend against.

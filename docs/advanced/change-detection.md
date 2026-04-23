@@ -1,3 +1,7 @@
+---
+description: Understand change detection heuristics used by chain analysts and how to defend against them
+---
+
 # Change Detection
 
 [Change detection](../glossary.md#change-detection) is one of the most consequential [heuristics](../glossary.md#heuristic) in [chain analysis](../glossary.md#chain-analysis). Correctly identifying which output in a transaction returns funds to the sender allows an adversary to follow the money through multiple hops.

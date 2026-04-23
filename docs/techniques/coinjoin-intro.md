@@ -1,3 +1,7 @@
+---
+description: Learn how CoinJoin works, why it is the most powerful onchain privacy tool, and the different implementations available
+---
+
 # Understanding CoinJoin
 
 [CoinJoin](../glossary.md#coinjoin) is the most powerful [onchain](../glossary.md#onchain) privacy tool available to Bitcoin users. It breaks the transaction graph by creating ambiguity about which input funded which output.

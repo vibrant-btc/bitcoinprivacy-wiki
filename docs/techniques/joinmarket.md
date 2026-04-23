@@ -1,3 +1,7 @@
+---
+description: Explore JoinMarket's decentralized maker-taker CoinJoin model and why using the tumbler script is essential for privacy
+---
+
 # JoinMarket
 
 JoinMarket is a peer-to-peer marketplace for CoinJoin on Bitcoin. Unlike other CoinJoin implementations that use a coordinator, JoinMarket uses a maker/taker model where participants earn fees for providing liquidity.

@@ -1,3 +1,7 @@
+---
+description: Comprehensive terminology reference for Bitcoin privacy concepts.
+---
+
 # Glossary
 
 ## A

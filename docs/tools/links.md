@@ -1,3 +1,7 @@
+---
+description: A curated list of Bitcoin privacy resources, communities, books, and development tools
+---
+
 # Useful Links
 
 A curated list of Bitcoin privacy resources, communities, and tools.

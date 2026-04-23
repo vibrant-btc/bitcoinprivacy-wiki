@@ -1,3 +1,7 @@
+---
+description: Understand how chain analysis companies track Bitcoin transactions and link addresses to real-world identities
+---
+
 # How Chain Analysis Works
 
 When you send or receive bitcoin, the transaction is recorded on the blockchain - a public ledger that anyone can view. While your name is not attached to the transaction, chain analysis companies have developed sophisticated techniques to link Bitcoin addresses to real-world identities.

@@ -1,3 +1,7 @@
+---
+description: Learn how the Lightning Network works, its payment channels, HTLCs, and the privacy implications of layer 2 Bitcoin transactions
+---
+
 # Lightning Network Basics
 
 The Lightning Network is a second-layer payment protocol built on top of Bitcoin. It enables fast, low-cost transactions by creating payment channels between users that settle on the Bitcoin blockchain only when opened or closed.

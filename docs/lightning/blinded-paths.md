@@ -1,3 +1,7 @@
+---
+description: Understand blinded paths and trampoline routing for receiver privacy on the Lightning Network
+---
+
 # Blinded Paths
 
 While senders on the Lightning Network have great anonymity guarantees thanks to onion routing, receivers currently have no anonymity as their nodes' public keys are embedded in their invoices.

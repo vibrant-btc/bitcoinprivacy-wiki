@@ -1,3 +1,7 @@
+---
+description: Discover Bitcoin privacy scanning tools like am-i.exposed for analyzing transaction privacy and getting actionable recommendations
+---
+
 # Privacy Scanners
 
 Privacy scanners analyze your Bitcoin addresses and transactions to identify privacy weaknesses and provide actionable recommendations.

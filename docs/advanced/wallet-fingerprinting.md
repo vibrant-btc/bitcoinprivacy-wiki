@@ -1,3 +1,7 @@
+---
+description: Learn how wallet software leaves distinctive patterns in transactions and how to defend against wallet fingerprinting
+---
+
 # Wallet Fingerprinting
 
 Different wallet software produces transactions with subtly different structural characteristics. By examining the raw transaction data, it is often possible to identify the wallet that created it - or at least narrow the possibilities significantly.
