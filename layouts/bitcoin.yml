@@ -10,7 +10,7 @@ layers:
   - size: { width: 400, height: 50 }
     offset: { x: 62, y: 60 }
     typography:
-      content: "BitcoinPrivacy.Wiki"
+      content: "{% if not page.is_homepage %}BitcoinPrivacy.Wiki{% endif %}"
       align: start
       color: "#ffffff"
       line:
@@ -19,15 +19,15 @@ layers:
       font:
         family: Roboto
         style: Medium
-  - size: { width: 900, height: 250 }
+  - size: { width: 900, height: 300 }
     offset: { x: 62, y: 160 }
     typography:
-      content: "{{ page.title }}"
+      content: "{% if page.is_homepage %}BitcoinPrivacy.Wiki{% else %}{{ page.title }}{% endif %}"
       align: start
       color: "#ffffff"
       overflow: shrink
       line:
-        amount: 2
+        amount: 3
         height: 1.25
       font:
         family: Roboto

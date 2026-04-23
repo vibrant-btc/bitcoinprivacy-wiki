@@ -1,5 +1,8 @@
 ---
 description: Comprehensive Bitcoin privacy learning resources covering fundamentals to advanced techniques
+hide:
+  - navigation
+  - toc
 ---
 
 # BitcoinPrivacy.Wiki

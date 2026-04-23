@@ -74,8 +74,9 @@ plugins:
       cards_layout_dir: layouts
       cards_layout: bitcoin
 nav:
+  - Home:
+    - index.md
   - Getting Started:
-    - What is Bitcoin?: index.md
     - What is Bitcoin Privacy?: getting-started/what-is-privacy.md
     - Understanding UTXOs: getting-started/utxos.md
     - How Chain Analysis Works: getting-started/chain-analysis.md
