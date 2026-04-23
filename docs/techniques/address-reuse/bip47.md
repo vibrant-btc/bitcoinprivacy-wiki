@@ -10,11 +10,11 @@ BIP47 (Reusable Payment Codes) is a protocol that allows users to generate a uni
 
 ## What Is BIP47?
 
-BIP47 introduces the concept of a **Payment Code** - a reusable identifier that can be shared publicly. When someone wants to send you bitcoin, they use your payment code to generate a unique [address](../glossary.md#address) that only you can spend from.
+BIP47 introduces the concept of a **Payment Code** - a reusable identifier that can be shared publicly. When someone wants to send you bitcoin, they use your payment code to generate a unique [address](../../glossary.md#address) that only you can spend from.
 
 !!! tip "The Key Benefit"
 
-    With BIP47, you can share a single payment code publicly. Each sender generates a unique address from that code, so no two senders ever use the same address. This prevents [address reuse](../glossary.md#address-reuse) while maintaining convenience.
+    With BIP47, you can share a single payment code publicly. Each sender generates a unique address from that code, so no two senders ever use the same address. This prevents [address reuse](../../glossary.md#address-reuse) while maintaining convenience.
 
 ---
 
@@ -22,11 +22,11 @@ BIP47 introduces the concept of a **Payment Code** - a reusable identifier that 
 
 === "Step 1: Generate a Payment Code"
 
-    Your [wallet](../glossary.md#wallet) generates a payment code from your [master public key](../glossary.md#public-key). This code can be shared publicly. The payment code is an [extended public key](../glossary.md#hd-wallet-hierarchical-deterministic) combined with metadata that identifies you.
+    Your [wallet](../../glossary.md#wallet) generates a payment code from your [master public key](../../glossary.md#public-key). This code can be shared publicly. The payment code is an [extended public key](../../glossary.md#hd-wallet-hierarchical-deterministic) combined with metadata that identifies you.
 
 === "Step 2: Share Your Payment Code"
 
-    Share your payment code (also called a [PayNym](../glossary.md#paynym)) with anyone who wants to send you bitcoin. This is like giving someone your email address - they can use it to send you payments without knowing your actual [addresses](../glossary.md#address).
+    Share your payment code (also called a [PayNym](../../glossary.md#paynym)) with anyone who wants to send you bitcoin. This is like giving someone your email address - they can use it to send you payments without knowing your actual [addresses](../../glossary.md#address).
 
 === "Step 3: Sender Generates Address"
 
@@ -34,7 +34,7 @@ BIP47 introduces the concept of a **Payment Code** - a reusable identifier that 
 
 === "Step 4: Receive Funds"
 
-    The sender sends bitcoin to the generated address. Only you can spend from it because only you have the [private key](../glossary.md#private-key) needed to unlock those funds.
+    The sender sends bitcoin to the generated address. Only you can spend from it because only you have the [private key](../../glossary.md#private-key) needed to unlock those funds.
 
 ---
 
@@ -48,16 +48,16 @@ Your wallet needs to know that someone is trying to pay you using your payment c
 
 ### How Does It Work?
 
-1. The sender creates a transaction that sends a small amount of bitcoin to your **notification address** (a special [address](../glossary.md#address) derived from your payment code)
-2. The sender includes your payment code in the transaction using an [OP_RETURN](../glossary.md#op_return) output (a way to store data on the [blockchain](../glossary.md#timechain))
+1. The sender creates a transaction that sends a small amount of bitcoin to your **notification address** (a special [address](../../glossary.md#address) derived from your payment code)
+2. The sender includes your payment code in the transaction using an [OP_RETURN](../../glossary.md#op_return) output (a way to store data on the [blockchain](../../glossary.md#timechain))
 3. Your wallet watches for transactions to your notification address and reads the payment code from the OP_RETURN output
 
 ### Privacy Considerations
 
 The notification transaction has some privacy implications:
 
-- It creates an extra [transaction](../glossary.md#transaction) on the [blockchain](../glossary.md#timechain)
-- It can potentially be observed by [chain analysis](../glossary.md#chain-analysis) companies
+- It creates an extra [transaction](../../glossary.md#transaction) on the [blockchain](../../glossary.md#timechain)
+- It can potentially be observed by [chain analysis](../../glossary.md#chain-analysis) companies
 
 ---
 
@@ -66,7 +66,7 @@ The notification transaction has some privacy implications:
 
 === "Reusable Payment Codes"
 
-    A single payment code can be used to receive unlimited payments. Each payment goes to a unique [address](../glossary.md#address).
+    A single payment code can be used to receive unlimited payments. Each payment goes to a unique [address](../../glossary.md#address).
 
 === "Notification Transactions"
 
@@ -104,7 +104,7 @@ The notification transaction has some privacy implications:
 
     If you want to keep different identities separate, use different payment codes for each.
 
--   :material-incognito:{ .lg .middle } __Use [Tor](../glossary.md#tor) for Notification Transactions__
+-   :material-incognito:{ .lg .middle } __Use [Tor](../../glossary.md#tor) for Notification Transactions__
 
     ---
 
@@ -130,7 +130,7 @@ The notification transaction has some privacy implications:
 
 === "Notification Transaction Privacy"
 
-    The first time someone sends to your payment code, they must send a notification transaction. This transaction can be observed by [chain analysis](../glossary.md#chain-analysis) and may reveal the payment code.
+    The first time someone sends to your payment code, they must send a notification transaction. This transaction can be observed by [chain analysis](../../glossary.md#chain-analysis) and may reveal the payment code.
 
 === "Wallet Support"
 

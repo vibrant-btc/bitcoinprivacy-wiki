@@ -4,11 +4,11 @@ description: Learn about Whirlpool CoinJoin, its 5-party fixed denomination mode
 
 # Whirlpool
 
-[Whirlpool](../glossary.md#whirlpool) is a [CoinJoin](../glossary.md#coinjoin) implementation originally developed by [Samourai Wallet](../glossary.md#samourai-wallet). It uses a 5-party model with fixed denominations to create privacy on the Bitcoin blockchain.
+[Whirlpool](../../glossary.md#whirlpool) is a [CoinJoin](../../glossary.md#coinjoin) implementation originally developed by [Samourai Wallet](../../glossary.md#samourai-wallet). It uses a 5-party model with fixed denominations to create privacy on the Bitcoin blockchain.
 
 !!! info "Other CoinJoin Implementations"
 
-    Whirlpool is one of several CoinJoin implementations. Others include [JoinMarket](joinmarket.md) (decentralized, [maker](../glossary.md#maker)-[taker](../glossary.md#taker) model) and [Wasabi Wallet](wasabi.md) ([WabiSabi](../glossary.md#wabisabi) protocol, 50-150 participants). Each has different trade-offs in terms of privacy, convenience, and censorship resistance.
+    Whirlpool is one of several CoinJoin implementations. Others include [JoinMarket](joinmarket.md) (decentralized, [maker](../../glossary.md#maker)-[taker](../../glossary.md#taker) model) and [Wasabi Wallet](wasabi.md) ([WabiSabi](../../glossary.md#wabisabi) protocol, 50-150 participants). Each has different trade-offs in terms of privacy, convenience, and censorship resistance.
 
 ---
 
@@ -47,13 +47,13 @@ Whirlpool wallets use 4 distinct accounts to support the coinjoin process:
 | Account | Index | Purpose |
 |---------|-------|---------|
 | **Deposit** | `0'` | Where you receive unmixed bitcoin |
-| **Premix** | `2147483645'` | [UTXOs](../glossary.md#utxo) waiting to enter a round |
+| **Premix** | `2147483645'` | [UTXOs](../../glossary.md#utxo) waiting to enter a round |
 | **Postmix** | `2147483646'` | Mixed UTXOs after completing rounds |
-| **Bad Bank** | `2147483644'` | [Doxxic change](../glossary.md#doxxic-change) from Tx0 transactions |
+| **Bad Bank** | `2147483644'` | [Doxxic change](../../glossary.md#doxxic-change) from Tx0 transactions |
 
 === "Step 1: Create the Tx0"
 
-    When you initiate a mix, your wallet creates a Tx0 transaction. This transaction takes your deposit UTXO(s) and splits them into equal-sized premix outputs. Any leftover bitcoin becomes **[doxxic change](../glossary.md#doxxic-change)**.
+    When you initiate a mix, your wallet creates a Tx0 transaction. This transaction takes your deposit UTXO(s) and splits them into equal-sized premix outputs. Any leftover bitcoin becomes **[doxxic change](../../glossary.md#doxxic-change)**.
 
 === "Step 2: Enter the Queue"
 
@@ -65,7 +65,7 @@ Whirlpool wallets use 4 distinct accounts to support the coinjoin process:
 
 === "Step 4: Remix"
 
-    Post-mix UTXOs can automatically enter additional rounds (remixes) to increase your [anonymity set](../glossary.md#anonymity-set). Each remix costs no additional service or mining fees.
+    Post-mix UTXOs can automatically enter additional rounds (remixes) to increase your [anonymity set](../../glossary.md#anonymity-set). Each remix costs no additional service or mining fees.
 
 ---
 
@@ -85,9 +85,9 @@ Whirlpool charges a coordinator fee for each Tx0. Remixes cost nothing extra - n
 
 ## Spending the Doxxic Change
 
-Remember: Whirlpool's model equalizes coins in the Tx0 before entering pools, which makes tracking harder. This is the most effective coinjoin model, but it has a drawback: a change output that does not go through the coinjoin process, we call this **[doxxic change](../glossary.md#doxxic-change)**.
+Remember: Whirlpool's model equalizes coins in the Tx0 before entering pools, which makes tracking harder. This is the most effective coinjoin model, but it has a drawback: a change output that does not go through the coinjoin process, we call this **[doxxic change](../../glossary.md#doxxic-change)**.
 
-This change output is created for each Tx0. It is isolated in a specific account named `Doxxic Change` or `Bad Bank` depending on the software to avoid using it with your other [UTXOs](../glossary.md#utxo). This point is critical: these UTXOs have not been mixed - their traceability links remain intact and can compromise your privacy by tying you to your coinjoin activity. Handle them carefully and never use them with other UTXOs, mixed or not. **Combining a toxic UTXO with a mixed UTXO destroys all privacy gains from coinjoins.**
+This change output is created for each Tx0. It is isolated in a specific account named `Doxxic Change` or `Bad Bank` depending on the software to avoid using it with your other [UTXOs](../../glossary.md#utxo). This point is critical: these UTXOs have not been mixed - their traceability links remain intact and can compromise your privacy by tying you to your coinjoin activity. Handle them carefully and never use them with other UTXOs, mixed or not. **Combining a toxic UTXO with a mixed UTXO destroys all privacy gains from coinjoins.**
 
 Currently, Ashigaru does not provide direct access to the `Doxxic Change` account, at least it wasn't found at the time of writing. This feature will likely be added in a future update. In the meantime, the only way to retrieve these funds is to import your seed into Sparrow Wallet. Sparrow usually auto-detects a Whirlpool wallet and gives access to all four accounts, including `Doxxic Change`. You can then spend those UTXOs like regular bitcoin from Sparrow.
 
@@ -141,13 +141,13 @@ Here are several possible strategies to handle coinjoin change UTXOs without com
 
 ## How to Manage Postmix
 
-After several coinjoin cycles, the best strategy is to keep [UTXOs](../glossary.md#utxo) in the `Postmix` account, letting them remix indefinitely until you actually need to spend them.
+After several coinjoin cycles, the best strategy is to keep [UTXOs](../../glossary.md#utxo) in the `Postmix` account, letting them remix indefinitely until you actually need to spend them.
 
 Some users prefer moving mixed BTC to a hardware wallet. This is possible, but it requires discipline to avoid compromising privacy gains from coinjoins.
 
 === "Never Merge Mixed and Unmixed UTXOs"
 
-    The most common mistake is merging UTXOs. Never combine mixed UTXOs with unmixed UTXOs in the same transaction, or you risk creating links via the [CIOH](../glossary.md#cioh). This means rigorous UTXO management is key - clear and precise labeling is essential. In general, UTXO merging is risky and often leads to privacy loss when done poorly.
+    The most common mistake is merging UTXOs. Never combine mixed UTXOs with unmixed UTXOs in the same transaction, or you risk creating links via the [CIOH](../../glossary.md#cioh). This means rigorous UTXO management is key - clear and precise labeling is essential. In general, UTXO merging is risky and often leads to privacy loss when done poorly.
 
 === "Be Careful with Consolidation"
 
@@ -155,7 +155,7 @@ Some users prefer moving mixed BTC to a hardware wallet. This is possible, but i
 
 === "Avoid Minority Script Types"
 
-    It is strongly discouraged to move postmix UTXOs into wallets using minority [script types](../glossary.md#script-type). For example, if you participated in Whirlpool from a multisig `P2WSH` wallet, few users share that script type. Sending postmix UTXOs back to the same script greatly reduces your [anonymity set](../glossary.md#anonymity-set). Beyond script type, other [wallet fingerprints](../glossary.md#wallet-fingerprint) can harm your privacy. The safest option is to spend from the Ashigaru app.
+    It is strongly discouraged to move postmix UTXOs into wallets using minority [script types](../../glossary.md#script-type). For example, if you participated in Whirlpool from a multisig `P2WSH` wallet, few users share that script type. Sending postmix UTXOs back to the same script greatly reduces your [anonymity set](../../glossary.md#anonymity-set). Beyond script type, other [wallet fingerprints](../../glossary.md#wallet-fingerprint) can harm your privacy. The safest option is to spend from the Ashigaru app.
 
 === "Never Reuse Addresses"
 
@@ -163,7 +163,7 @@ Some users prefer moving mixed BTC to a hardware wallet. This is possible, but i
 
 The simplest and safest method remains: keep mixed UTXOs resting in `Postmix`, let them remix naturally, and spend only when needed from Ashigaru.
 
-Ashigaru and Sparrow include additional protections against common [chain analysis](../glossary.md#chain-analysis) pitfalls, helping you preserve transaction privacy.
+Ashigaru and Sparrow include additional protections against common [chain analysis](../../glossary.md#chain-analysis) pitfalls, helping you preserve transaction privacy.
 
 !!! warning "Postmix Best Practices"
 

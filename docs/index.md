@@ -29,7 +29,7 @@ BitcoinPrivacy.Wiki is a collection of in-depth learning resources about Bitcoin
 
     Practical methods for improving privacy: address hygiene, coin control, CoinJoin implementations (Whirlpool, JoinMarket, Wasabi), PayJoin, Stonewall, Stowaway, Ricochet, post-mix best practices, dust attacks, and reusable payment codes.
 
-    [Privacy Techniques →](techniques/address-hygiene.md)
+    [Privacy Techniques →](techniques/address-reuse/index.md)
 
 -   :material-lightning-bolt:{ .lg .middle } __Lightning Privacy__
 

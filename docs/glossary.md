@@ -89,7 +89,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! info "BitBox02"
 
-    A hardware wallet with a companion desktop app. Simple setup, automatic SD card backups. Bitcoin-only edition available. ~$85.
+    A hardware wallet with a companion desktop app. Simple setup, automatic SD card backups. Bitcoin-only edition available.
 
 !!! info "Bitcoin"
 
@@ -99,21 +99,19 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
     The reference implementation of Bitcoin. Includes a full node and wallet. Most trusted and audited codebase. Requires downloading the full blockchain (600GB+).
 
-!!! info "Bitcoin Knots"
-
-    A feature-rich fork of Bitcoin Core. Adds additional features and options not in Core, including more granular control over node behavior and better mempool management.
-
 !!! info "Block"
 
     A group of confirmed transactions added to the blockchain. New blocks are created approximately every 10 minutes through mining.
 
 !!! warning "Blockchain"
 
-    A mostly meaningless marketing term used to confuse newcomers. While "block chain" is still the main term used to refer to Bitcoin's linked data structure of blocks, it has increasingly become meaningless over the years as it got co-opted by grifters, charlatans and marketers. A better, more descriptive term of said data structure is [timechain](#timechain).
+    The **blockchain** is a decentralized digital ledger that records transactions across a network of computers in a secure, transparent, and tamper-resistant way. 
+
+    Transactions are grouped into blocks, and each block is linked to the previous one using cryptographic techniques, forming a chronological chain. Once data is recorded on the blockchain, it is extremely difficult to alter, ensuring trust without the need for a central authority.
 
 !!! info "Blockstream Green"
 
-    A mobile wallet (iOS/Android) with 2-of-2 multisig by default, Tor support, and the ability to connect to your own node. No coin control.
+    A mobile wallet (iOS/Android) by blockstream, Tor support, and the ability to connect to your own node.
 
 <a id="bloom-filter"></a>
 !!! info "Bloom Filter"
@@ -128,11 +126,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="bluewallet"></a>
 !!! info "BlueWallet"
 
-    A mobile wallet (iOS/Android) focused on simplicity. Features include Lightning support, coin control, Silent Payments, and the ability to connect to your own node. No Tor support.
+    A mobile wallet (iOS/Android) focused on simplicity. Features include coin control, send to Silent Payments, and the ability to connect to your own node. No Tor support.
 
 !!! info "Breez"
 
-    A non-custodial Lightning wallet with Tor support. Mobile-focused.
+    A non-custodial Lightning wallet. Mobile-focused.
 
 ---
 
@@ -146,7 +144,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="chain-analysis"></a>
 !!! danger "Chain Analysis"
 
-    Chain analysis is the practice of applying heuristics to a timechain's public transaction graph. The goal of chain analysis is to link the pseudonymous identities created by bitcoin software with "real" identities corresponding to natural persons or entities.
+    Chain analysis is the practice of applying heuristics to a blockchain's public transaction graph. The goal of chain analysis is to link the pseudonymous identities created by bitcoin software with "real" identities corresponding to natural persons or entities.
 
     Chain analysis is based on flawed assumptions, because ownership in bitcoin is defined by secret knowledge, not possession. Identities can only be linked probabilistically, not provably. One of the main assumptions used by chain analysis companies is the [common input ownership heuristic](#common-input-ownership-heuristic). Collaborative transactions break this heuristic.
 
@@ -182,11 +180,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="coinjoin"></a>
 !!! success "CoinJoin"
 
-    A CoinJoin is a collaborative transaction that combines inputs from multiple parties. The purpose of a CoinJoin is to combine inputs and create outputs in ways that improves the financial privacy of participants, without relying on a trusted third party for custody. When done correctly, a CoinJoin breaks any deterministic links between transactions, moving the process of chain analysis from quasi-deterministic with high certainty to probabilistic with low certainty.
+    A CoinJoin is a collaborative transaction that combines inputs from multiple parties. The purpose of a CoinJoin is to combine inputs and create outputs in ways that improves the financial privacy of participants, without relying on a trusted third party. When done correctly, a CoinJoin breaks any deterministic links between transactions, moving the process of chain analysis from quasi-deterministic with high certainty to probabilistic with low certainty.
 
     CoinJoins break the common input ownership heuristic that is used by chain analysis companies to de-anonymize actors. The concept was first introduced in 2011 by Bitcointalk user hashcoin, but later popularised in 2013 by Gregory Maxwell.
 
-    All CoinJoin transactions are collaborative transactions. The two main types of CoinJoin transactions are equal-output and unequal-output CoinJoins.
+    All CoinJoin transactions are collaborative transactions. The three main implementations of coinjoin today are joinmarket, whirlpool and wabisabi (wasabi).
 
 <a id="collaborative-transaction"></a>
 !!! info "Collaborative Transaction"
@@ -200,11 +198,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! info "Coldcard"
 
-    An air-gapped hardware wallet by Coinkite. Features include encrypted backups, duress attack solutions, and BIP85 support. ~$100.
+    An air-gapped hardware wallet by Coinkite. Features include encrypted backups, duress attack solutions, and BIP85 support.
 
 !!! info "Confirmation"
 
-    When a transaction is included in a block. More confirmations (additional blocks built on top) make the transaction increasingly difficult to reverse.
+    A confirmation is when a transaction is included in a block. More confirmations (additional blocks built on top) make the transaction increasingly difficult to reverse.
 
 <a id="custodial-wallet"></a>
 !!! info "Custodial Wallet"
@@ -218,7 +216,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="deterministic-link"></a>
 !!! info "Deterministic Link"
 
-    A connection between a transaction input and output that exists in ALL possible interpretations of that transaction. Even in CoinJoin transactions, some input-output links may be deterministic, meaning the CoinJoin provides zero privacy for those specific participants.
+    A connection between a transaction input and output that exists in ALL possible interpretations of that transaction. Even in CoinJoin transactions, some input-output links can be deterministic, meaning the CoinJoin provides zero privacy for those specific participants.
 
 <a id="doxxic-change"></a>
 !!! warning "Doxxic Change"
@@ -230,7 +228,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="double-spend"></a>
 !!! info "Double Spend"
 
-    An attempt to spend the same bitcoin twice. Bitcoin's consensus mechanism prevents this by requiring network agreement on which transactions are valid.
+    An attempt to spend the same bitcoin twice. Bitcoin's consensus mechanism prevents this in various ways.
 
 <a id="dust-attack"></a>
 !!! danger "Dust Attack"
@@ -294,7 +292,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="heuristic"></a>
 !!! info "Heuristic"
 
-    A rule-of-thumb used to infer information about a Bitcoin transaction. Privacy scanners apply dozens of heuristics to estimate what surveillance firms can deduce about any transaction or address.
+    A rule-of-thumb or assumption used to infer information about a Bitcoin transaction. Privacy scanners apply dozens of heuristics to estimate what surveillance firms can deduce about any transaction or address.
 
 !!! info "Hodl Hodl"
 
@@ -320,7 +318,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! success "JoinMarket"
 
-    A decentralized CoinJoin implementation using a maker-taker model. Makers offer liquidity and earn fees; takers pay for privacy. Creates transactions with varied input/output counts.
+    A decentralized CoinJoin implementation using a maker-taker model. Makers offer liquidity and earn fees; takers pay for privacy. Creates transactions with varied input/output counts. Tumbler must be used for a taker to gain any privacy.
 
 ---
 
@@ -338,7 +336,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="lightning-network"></a>
 !!! info "Lightning Network"
 
-    A Layer 2 payment protocol built on top of Bitcoin. It enables fast, low-cost transactions by creating payment channels between users that settle on the Bitcoin blockchain only when opened or closed.
+    A Layer 2 payment protocol built on top of Bitcoin. It enables fast, 'low-cost' transactions by creating payment channels between users that settle on the Bitcoin blockchain only when opened or closed.
 
 <a id="liquidity"></a>
 !!! info "Liquidity"
@@ -348,7 +346,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="lnproxy"></a>
 !!! info "lnproxy"
 
-    A simple Lightning Network privacy tool that acts as a proxy between sender and receiver. Instead of paying an original invoice directly, you pay a "proxy invoice" generated by an lnproxy relay, which then pays the original invoice. This hides the sender's and receiver's node IDs from each other without requiring trust in the relay.
+    A simple Lightning Network privacy tool that acts as a proxy between sender and receiver. Instead of paying an original invoice directly, you pay a "proxy invoice" generated by an lnproxy relay, which then pays the original invoice. This hides the sender's and receiver's node IDs from each other.
 
 <a id="low-r-signature"></a>
 !!! info "Low-R Signature"
@@ -358,7 +356,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="lsp"></a>
 !!! info "LSP (Lightning Service Provider)"
 
-    A Lightning node that provides connectivity and routing services to other nodes, particularly mobile wallets that maintain a single connection.
+    A Lightning node that provides connectivity and routing services to other nodes, particularly mobile wallets that maintain a single connection. Examples include Acinq and Zeus.
 
 ---
 
@@ -367,7 +365,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="maker"></a>
 !!! info "Maker"
 
-    A market maker is someone who offers bitcoin liquidity to the market, to be used by others for collaborative transactions.
+    A market maker is someone who offers bitcoin liquidity to the market, to be used by others.
 
 <a id="mempool"></a>
 !!! info "Mempool"
@@ -385,7 +383,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! info "Muun"
 
-    A non-custodial Lightning wallet that combines on-chain and Lightning in a single interface. No Tor support.
+    A non-custodial Lightning wallet that combines on-chain and Lightning in a single interface.
 
 !!! info "myNode"
 
@@ -403,7 +401,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="node"></a>
 !!! info "Node"
 
-    A computer running Bitcoin software that validates transactions and blocks. Running your own node allows you to verify Bitcoin's rules independently without trusting anyone else.
+    A computer running Bitcoin software that validates transactions and blocks. Running your own node allows you to verify incoming transactions independently without trusting anyone else.
 
 <a id="node-id"></a>
 !!! info "Node ID"
@@ -417,7 +415,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! info "Non-Custodial Wallet"
 
-    A wallet where you hold your own private keys. You have full control over your funds. Examples include Sparrow, Samourai, BlueWallet, and Bitcoin Core.
+    A wallet where you hold your own private keys. You have full control over your funds. Examples include Sparrow, Samourai, BlueWallet, and Ashigaru.
 
 ---
 
@@ -457,14 +455,14 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! info "Passport"
 
-    An air-gapped hardware wallet by Foundation Designs. Uses QR codes for PSBT communication. Fully open sourced firmware and hardware. ~$170.
+    An air-gapped hardware wallet by Foundation. Uses QR codes for PSBT communication. Fully open sourced firmware and hardware.
 
 <a id="payjoin-p2ep"></a>
 !!! success "PayJoin (P2EP)"
 
     A PayJoin is a collaborative transaction between two parties that facilitates an actual payment for a good or service. The merchant agrees to provide one or multiple inputs to the transaction, increasing the privacy of both parties.
 
-    A PayJoin has different onchain characteristics than an equal-output CoinJoin and is not detectable via chain analysis alone. A PayJoin transaction has multiple interpretations, all of which are equally valid. In addition to breaking the common input ownership heuristic it poisons the basis of all chain analysis, because of its undetectability.
+    A PayJoin has different onchain characteristics than an equal-output CoinJoin and is not detectable via chain analysis alone. A PayJoin transaction has multiple interpretations, all of which are equally valid. Due to it breaking the common input ownership heuristic it poisons the basis of all chain analysis.
 
 !!! tip "PayJoin v2 (BIP77)"
 
@@ -473,7 +471,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="paynym"></a>
 !!! info "PayNym"
 
-    A user-friendly identity layer built on BIP47 reusable payment codes. Allows receiving Bitcoin without revealing addresses publicly. Used by Samourai and Sparrow wallets.
+    A user-friendly identity layer built on BIP47 reusable payment codes. Allows receiving Bitcoin without revealing addresses publicly. Used by Samourai, Ashigaru and Sparrow wallets.
 
 !!! info "Peach Bitcoin"
 
@@ -491,7 +489,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! info "Phoenix"
 
-    A partially custodial Lightning wallet. Non-custodial for on-chain funds but uses liquidity service providers for Lightning channels.
+    A non-custodial Lightning wallet. Uses liquidity service providers for Lightning channels.
 
 <a id="private-channel"></a>
 !!! info "Private Channel"
@@ -501,12 +499,12 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="private-key"></a>
 !!! info "Private Key"
 
-    A secret number that allows you to spend bitcoin from a specific address. Anyone who knows your private key can spend your bitcoin. **Never share your private key with anyone.**
+    A secret number (often represented by 12 or 24 bip-39 seed words) that allows you to spend bitcoin from a specific address. Anyone who knows your private key can spend your bitcoin. **Never share your private key with anyone.**
 
 <a id="privacy-score"></a>
 !!! tip "Privacy Score"
 
-    A 0-100 rating computed by privacy scanners based on heuristics. Starts at 70, adjusted by findings. Only CoinJoin, Taproot, and high entropy can raise it. Grades: A+ (90-100), B (75-89), C (50-74), D (25-49), F (0-24).
+    A 0-100 rating computed by privacy scanners like am-i.exposed, based on heuristics.
 
 <a id="ptlc"></a>
 !!! info "PTLC (Point Time-Locked Contract)"
@@ -516,11 +514,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="public-key"></a>
 !!! info "Public Key"
 
-    A cryptographic key derived from your private key, used to generate receiving addresses. It is safe to share.
+    A cryptographic key derived from your private key, used to generate receiving addresses. It is safe to share (until the advent of sufficiently powered quantum computers).
 
 !!! info "PSBT (Partially Signed Bitcoin Transaction)"
 
-    A format for sharing unsigned or partially signed transactions between devices. Commonly used with hardware wallets where the unsigned transaction is sent to the device for signing, then returned.
+    A format for sharing unsigned or partially signed transactions between devices. Commonly used with air gapped hardware wallets where the unsigned transaction is sent to the device for signing, then returned.
 
 ---
 
@@ -532,7 +530,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! info "RBF (Replace-By-Fee)"
 
-    A feature that allows you to replace an unconfirmed transaction with a new one that pays a higher fee. Useful for speeding up stuck transactions.
+    A feature that allows you to replace an unconfirmed transaction with a new one that pays a higher fee. Useful for speeding up stuck transactions. Can be used in wallet fingerprinting.
 
 <a id="ricochet"></a>
 !!! success "Ricochet"
@@ -541,7 +539,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! info "RoboSats"
 
-    A Lightning-based P2P exchange. Simple interface, no KYC required, avatar-based identity.
+    A Lightning-based P2P exchange. Simple interface, no KYC required, tor only.
 
 !!! warning "Round Amount Detection"
 
@@ -554,7 +552,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="samourai-wallet"></a>
 !!! info "Samourai Wallet"
 
-    A mobile wallet (Android only) focused on maximum privacy. Features include Whirlpool CoinJoin, PayJoin (Stowaway), Ricochet, Stonewall, and PayNyms. Runs over Tor and connects to your own Dojo node.
+    A mobile wallet (Android only) focused on maximum privacy. Features include Whirlpool CoinJoin, PayJoin (Stowaway), Ricochet, Stonewall, and PayNyms. Runs over Tor and connects to your own Dojo node. Now succeded by Ashigaru wallet.
 
 <a id="satoshi-sat"></a>
 !!! info "Satoshi (sat)"
@@ -582,7 +580,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! info "SeedSigner"
 
-    A DIY air-gapped hardware wallet that can be built for ~$50-70. Minimizes supply chain attack risk. Stateless by default.
+    A DIY air-gapped hardware wallet that can be built using off the shelf parts. Minimizes supply chain attack risk. Stateless by default and excellent for privacy.
 
 <a id="self-send-self-transfer"></a>
 !!! danger "Self-send (Self-transfer)"
@@ -591,7 +589,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! success "Silent Payments (BIP352)"
 
-    A protocol that allows a recipient to publish a single static payment address from which senders derive unique, unlinkable Taproot (P2TR) outputs for each payment. Unlike BIP47, Silent Payments require no on-chain notification transaction.
+    A protocol that allows a recipient to publish a single static payment address from which senders derive unique, unlinkable Taproot (P2TR) outputs for each payment.
 
 !!! info "SNICKER"
 
@@ -600,7 +598,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="sparrow-wallet"></a>
 !!! info "Sparrow Wallet"
 
-    A desktop wallet (Mac/Windows/Linux) focused on privacy. Features include coin control, Whirlpool integration, hardware wallet support, and detailed transaction previews. Connects to your own node via Electrum server.
+    A desktop wallet (Mac/Windows/Linux) focused on privacy. Features include coin control, Whirlpool integration (now removed), hardware wallet support, and detailed transaction previews. Connects to your own node via Electrum server.
 
 <a id="steganographic-transaction"></a>
 !!! info "Steganographic Transaction"
@@ -614,11 +612,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! info "Start9"
 
-    A privacy-focused, self-sovereign node solution.
+    A open source, self-sovereign node solution.
 
 !!! info "Stowaway"
 
-    Ashigaru's implementation of PayJoin. Uses the Whirlpool post-mix wallet to create PayJoin transactions.
+    Samourai's implementation of PayJoin.
 
 !!! info "Submarine Swap"
 
@@ -626,11 +624,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! warning "Sweep"
 
-    A transaction that sends the entire balance of one or more addresses to a single output with no change. Common when migrating wallets or claiming funds. A single-input sweep (1-in-1-out) has zero entropy.
+    A transaction that sends the entire balance of one or more addresses to a single output with no change. Common when migrating wallets or claiming funds. Often terrible for privacy as it may involve consolidating UTXOs
 
 !!! danger "Sybil Attack"
 
-    A Sybil attack is a special kind of attack in peer-to-peer networked computing. The victim is surrounded by malicious entities, each of which act as if they are a separate entity. JoinMarket uses fidelity bonds to protect users from Sybil attacks.
+    A Sybil attack is a special kind of attack in peer-to-peer networked computing. The victim is surrounded by malicious entities, each of which act as if they are a separate entity in order to gain additional information from the victim.
 
 ---
 
@@ -638,9 +636,9 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! warning "Taint"
 
-    Taint is an external property defined by chain analysis surveillance firms. It is an attempt to trace the origin and ownership of UTXOs, classifying their owners and building lists of "good" and "bad" money.
+    "Taint" is an external property defined by chain analysis surveillance firms. It is an attempt to trace the origin and ownership of UTXOs, classifying their owners and building lists of "good" and "bad" money.
 
-    All taint in bitcoin always is and always will be arbitrarily defined and probabilistically applied.
+    All "taint" in bitcoin always is and always will be arbitrarily defined.
 
 <a id="taker"></a>
 !!! info "Taker"
@@ -664,11 +662,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="timechain"></a>
 !!! info "Timechain"
 
-    A more accurate term for what is commonly called the "blockchain." It represents a timestamped and linked list of blocks. Anyone can create a new block, but each block must have sufficient proof of work, making it costly to create new blocks.
+    An alternative term for what is commonly called the "blockchain." It represents a timestamped and linked list of blocks.
 
 !!! info "Timelock"
 
-    A UTXO can be locked up by a script which defines that said UTXO can only be spent in a block that is higher than a certain value. This makes UTXOs unspendable before a specific time.
+    A UTXO can be locked up by a script which defines that said UTXO can only be spent in a block that is higher than a certain blockheight. This makes UTXOs unspendable before a specific time.
 
 <a id="tor"></a>
 !!! success "Tor"
@@ -680,9 +678,9 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
     A bitcoin transaction describes the movement of sats. It is structured data that describes inputs and outputs, among other things. A valid bitcoin transaction has at least one input and at least one output.
 
-!!! info "Trezor Model T"
+!!! info "Trezor"
 
-    A hardware wallet with a touchscreen. Supports multisig and Shamir backup. Not air-gapped (USB connection). ~$180.
+    A hardware wallet company.
 
 <a id="tumbler"></a>
 !!! info "Tumbler"
@@ -699,7 +697,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 !!! info "Umbrel"
 
-    A plug-and-play node solution with a beautiful interface and app store. Easy setup but more expensive than DIY.
+    A plug-and-play node solution with a beautiful interface and app store.
 
 <a id="utxo"></a>
 !!! tip "UTXO"
@@ -718,12 +716,12 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="wallet"></a>
 !!! info "Wallet"
 
-    Software or hardware that stores your private keys and allows you to send and receive bitcoin. A wallet does not actually "store" bitcoin - the bitcoin exists on the blockchain. The wallet stores the keys that prove ownership.
+    Software or hardware that stores your private keys and allows you to send and receive bitcoin. A wallet does not actually "store" bitcoin - the bitcoin exists on the blockchain. The wallet stores the keys that prove ownership by allowing you to sped (move) UTXOs.
 
 <a id="wallet-fingerprint"></a>
 !!! warning "Wallet Fingerprint"
 
-    Distinctive patterns left by wallet software - transaction version, locktime, sequence numbers, signature encoding - that reveal which wallet created a transaction.
+    Distinctive patterns left by wallet software - transaction version, locktime, sequence numbers, signature encoding - that can indicate which wallet created a transaction.
 
 !!! info "Wallet of Satoshi"
 

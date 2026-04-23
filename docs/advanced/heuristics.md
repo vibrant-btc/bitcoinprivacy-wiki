@@ -131,7 +131,7 @@ This temporal fingerprint aids behavioral profiling.
 
 **Why it matters:** Even with CoinJoin, recurring payments to the same address re-link parties over time. The pattern itself is metadata that aids behavioral profiling and identity inference.
 
-**How to defend:** Use [BIP47 PayNyms](../techniques/bip47.md) or [Silent Payments](../techniques/silent-payments.md) so that each payment uses a fresh derived address. For regular payments, use Lightning Network which does not expose individual payment details on-chain.
+**How to defend:** Use [BIP47 PayNyms](../techniques/address-reuse/bip47.md) or [Silent Payments](../techniques/address-reuse/silent-payments.md) so that each payment uses a fresh derived address. For regular payments, use Lightning Network which does not expose individual payment details on-chain.
 
 ---
 

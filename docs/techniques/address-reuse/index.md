@@ -85,25 +85,25 @@ If you receive bitcoin regularly from the same people or publish a receiving add
 
 === "BIP47 PayNyms"
 
-    [BIP47](bip47.md) introduces **Payment Codes** - reusable identifiers you can share publicly. When someone wants to send you bitcoin, they use your payment code to generate a unique address that only you can spend from. Each sender gets a different address, preventing [address reuse](../glossary.md#address-reuse) while maintaining convenience.
+    [BIP47](bip47.md) introduces **Payment Codes** - reusable identifiers you can share publicly. When someone wants to send you bitcoin, they use your payment code to generate a unique address that only you can spend from. Each sender gets a different address, preventing [address reuse](../../glossary.md#address-reuse) while maintaining convenience.
 
-    BIP47 is supported by wallets like [Samourai Wallet](../glossary.md#samourai-wallet), [Sparrow Wallet](../glossary.md#sparrow-wallet), and Ashigaru Wallet. It also enables **PayNyms** - human-friendly identities that make sharing payment codes easier.
+    BIP47 is supported by wallets like [Samourai Wallet](../../glossary.md#samourai-wallet), [Sparrow Wallet](../../glossary.md#sparrow-wallet), and Ashigaru Wallet. It also enables **PayNyms** - human-friendly identities that make sharing payment codes easier.
 
     [Learn more about BIP47 PayNyms →](bip47.md)
 
 === "Silent Payments (BIP352)"
 
-    [Silent Payments](silent-payments.md) is a newer protocol that also solves [address reuse](../glossary.md#address-reuse) without requiring a notification transaction like BIP47. You share one Silent Payment address, and senders derive unique, unlinkable [Taproot](../glossary.md#taproot) outputs for each payment.
+    [Silent Payments](silent-payments.md) is a newer protocol that also solves [address reuse](../../glossary.md#address-reuse) without requiring a notification transaction like BIP47. You share one Silent Payment address, and senders derive unique, unlinkable [Taproot](../../glossary.md#taproot) outputs for each payment.
 
-    Silent Payments are supported by [Sparrow Wallet](../glossary.md#sparrow-wallet), [BlueWallet](../glossary.md#bluewallet), and [Cake Wallet](../glossary.md#cake-wallet).
+    Silent Payments are supported by [Sparrow Wallet](../../glossary.md#sparrow-wallet), [BlueWallet](../../glossary.md#bluewallet), and [Cake Wallet](../../glossary.md#cake-wallet).
 
     [Learn more about Silent Payments →](silent-payments.md)
 
 !!! tip "Which Should You Use?"
 
-    Both BIP47 and Silent Payments solve the same problem - receiving without [address reuse](../glossary.md#address-reuse). BIP47 has broader wallet support and an established ecosystem with PayNyms. Silent Payments has a cleaner on-chain footprint with no notification transaction. Check which wallets you and your regular senders support.
+    Both BIP47 and Silent Payments solve the same problem - receiving without [address reuse](../../glossary.md#address-reuse). BIP47 has broader wallet support and an established ecosystem with PayNyms. Silent Payments has a cleaner on-chain footprint with no notification transaction. Check which wallets you and your regular senders support.
 
-    [See a detailed comparison →](comparison.md)
+    [See a detailed comparison →](../comparison.md)
 
 ---
 

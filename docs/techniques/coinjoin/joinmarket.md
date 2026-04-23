@@ -66,11 +66,11 @@ This flexibility is both a strength and a weakness:
 
 ---
 
-## Why You Must Use the [Tumbler](../glossary.md#tumbler)
+## Why You Must Use the [Tumbler](../../glossary.md#tumbler)
 
 !!! danger "Single CoinJoins Are Not Enough"
 
-    **Do not use `sendpayment` for serious privacy.** A single JoinMarket CoinJoin can be partially or fully unmixed by blockchain analysis. You must use the [tumbler](../glossary.md#tumbler) script which performs multiple consecutive CoinJoins to achieve meaningful privacy.
+    **Do not use `sendpayment` for serious privacy.** A single JoinMarket CoinJoin can be partially or fully unmixed by blockchain analysis. You must use the [tumbler](../../glossary.md#tumbler) script which performs multiple consecutive CoinJoins to achieve meaningful privacy.
 
 ### The Unmixing Problem
 
@@ -82,8 +82,8 @@ In September 2016, a researcher published a tool called "jm_unmixer" on Bitcoint
 
 To understand why this works, you need to understand how JoinMarket transactions are structured:
 
-- **[Takers](../glossary.md#taker)** are the people who want to mix their coins. They pay fees.
-- **[Makers](../glossary.md#maker)** are the people providing liquidity. They earn fees.
+- **[Takers](../../glossary.md#taker)** are the people who want to mix their coins. They pay fees.
+- **[Makers](../../glossary.md#maker)** are the people providing liquidity. They earn fees.
 
 In a JoinMarket transaction, you can identify which inputs and outputs belong to makers versus takers by matching the amounts. The CoinJoin amount (the amount being mixed) appears as equal outputs for all participants. The change outputs are different for each participant.
 
@@ -91,9 +91,9 @@ Here is the key insight: **makers often reuse their outputs**. When a maker part
 
 Once the analyst knows which outputs belong to makers, they can effectively "unmix" the transaction - identifying which output belongs to the taker. This defeats the entire purpose of using CoinJoin.
 
-### Why the [Tumbler](../glossary.md#tumbler) Solves This
+### Why the [Tumbler](../../glossary.md#tumbler) Solves This
 
-The [tumbler](../glossary.md#tumbler) script in JoinMarket addresses this vulnerability by performing **multiple consecutive CoinJoins** with several important features:
+The [tumbler](../../glossary.md#tumbler) script in JoinMarket addresses this vulnerability by performing **multiple consecutive CoinJoins** with several important features:
 
 1. **Multiple Rounds**: Instead of one CoinJoin, the tumbler performs several in sequence. Each round adds another layer of ambiguity.
 
@@ -111,7 +111,7 @@ JoinMarket's own developers have acknowledged this vulnerability. As waxwing (a 
 
 > "Of course; that's why the tumbler script exists. A single coinjoin serves only to confuse automated wallet closure analysis, and to generally improve the health of Bitcoin's privacy... Whenever possible we have tried to make this clear."
 
-**Always use the [tumbler](../glossary.md#tumbler) for serious privacy.** Single CoinJoins provide a false sense of security.
+**Always use the [tumbler](../../glossary.md#tumbler) for serious privacy.** Single CoinJoins provide a false sense of security.
 
 ---
 

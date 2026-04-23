@@ -26,7 +26,7 @@ When Alice goes to send funds to Bob, she takes three keys and creates a unique 
 2. **Bob's public key** in his reusable payment code
 3. **A shared secret** (generated using the Silent Payment public key and the user's UTXO private key using ECDH) that only Alice and Bob can know
 
-These three keys combine into a unique, one-time [Taproot](../glossary.md#taproot) address that Bob can then validate and spend from. This allows Alice to generate practically infinite addresses without any communication with Bob.
+These three keys combine into a unique, one-time [Taproot](../../glossary.md#taproot) address that Bob can then validate and spend from. This allows Alice to generate practically infinite addresses without any communication with Bob.
 
 ### What It Looks Like
 
