@@ -9,8 +9,10 @@ pages:
   image: python:latest
   
   script:
-    # Install mkdocs-material and its dependencies
-    - pip install mkdocs-material
+    # Install mkdocs-material with imaging support for social cards
+    - pip install "mkdocs-material[imaging]"
+    # Install system dependencies for cairosvg
+    - apt-get update && apt-get install -y libcairo2-dev libjpeg-dev libgif-dev
     # Build the site - output goes to 'public' directory for GitLab Pages
     - mkdocs build --site-dir public
   
