@@ -1,11 +1,11 @@
 ---
-description: Comprehensive Bitcoin privacy learning resources
+description: In-depth educational resources on Bitcoin privacy - covering UTXOs, CoinJoin, Lightning Network privacy, and advanced privacy analysis
 hide:
   - navigation
   - toc
 ---
 
-# BitcoinPrivacy.Wiki
+# Home
 
 BitcoinPrivacy.Wiki is a collection of in-depth learning resources about Bitcoin privacy. This site covers everything from fundamental concepts to advanced privacy techniques, providing detailed documentation for anyone looking to understand and improve their financial privacy on Bitcoin.
 
