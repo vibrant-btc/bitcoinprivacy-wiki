@@ -27,6 +27,14 @@ This creates a free market for CoinJoin liquidity, where anyone can earn bitcoin
 
 ---
 
+## JoinMarket Transaction Example
+
+The image below shows a JoinMarket CoinJoin transaction as analyzed by [am-i.exposed](../../advanced/check-privacy.md). Notice the flexible denominations (10 equal 198,732,961 sat outpus) and 9 change outputs that distinguishes JoinMarket from other CoinJoin implementations.
+
+![JoinMarket CoinJoin transaction scanned by am-i.exposed](../../images/joinmarket.png){ loading=lazy }
+
+---
+
 ## How JoinMarket Works
 
 === "Step 1: Become a Maker or Taker"

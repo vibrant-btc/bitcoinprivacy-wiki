@@ -124,10 +124,7 @@ nav:
     - Consolidation Patterns: advanced/consolidation.md
     - Boltzmann Entropy: advanced/boltzmann.md
     - Checking Your Privacy: advanced/check-privacy.md
-  - Tools:
-    - Privacy Scanners: tools/scanners.md
-    - Block Explorers: tools/explorers.md
-    - Fee Estimation: tools/fees.md
-    - Useful Links: tools/links.md
+  - Resources:
+    - links/index.md
   - Glossary:
     - Glossary: glossary.md

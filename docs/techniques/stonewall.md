@@ -18,6 +18,14 @@ Stonewall is a method of creating a transaction with 2 inputs and 4 outputs, whe
 
 ---
 
+## Stonewall Transaction Example
+
+The image below shows a Stonewall transaction as analyzed by [am-i.exposed](../advanced/check-privacy.md). Notice the 2 inputs and 4 outputs with 2 being equal-value outputs, which mimics the appearance of a 2-party CoinJoin.
+
+![Stonewall transaction scanned by am-i.exposed](../images/stonewall.png){ loading=lazy }
+
+---
+
 ## How Stonewall Works
 
 === "Step 1: Create Two Inputs"

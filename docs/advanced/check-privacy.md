@@ -8,7 +8,7 @@ After applying privacy techniques, it is important to verify that they actually 
 
 ---
 
-## am-i.exposed
+## [am-i.exposed](https://am-i.exposed)
 
 am-i.exposed is an open-source, client-side Bitcoin privacy scanner. Paste a Bitcoin address, transaction ID, xpub/descriptor, or unsigned PSBT and get a privacy score from 0-100.
 

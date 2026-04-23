@@ -2,7 +2,7 @@
 description: A curated list of Bitcoin privacy tools and educational resources
 ---
 
-# Useful Links
+# Useful Resources
 
 A curated list of Bitcoin privacy tools and educational resources.
 

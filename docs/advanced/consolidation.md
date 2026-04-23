@@ -8,6 +8,14 @@ Consolidation occurs when multiple [UTXOs](../glossary.md#utxo) are combined int
 
 ---
 
+## UTXO Consolidation Example
+
+The image below shows a UTXO consolidation transaction as analyzed by [am-i.exposed](check-privacy.md). Notice the multiple inputs being combined into a single output, which publicly links all input addresses together.
+
+![UTXO consolidation transaction scanned by am-i.exposed](../images/utxo-consolidation.png){ loading=lazy }
+
+---
+
 ## Types of Consolidation
 
 ### Fan-In (Consolidation)
