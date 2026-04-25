@@ -59,7 +59,7 @@ This complements round-amount detection and catches cases where neither output i
 
 Some wallet software consistently places the change output in a specific position. Historically, many wallets placed change last (index 1 in a 2-output transaction). BIP69-compliant wallets sort inputs and outputs lexicographically, which randomizes position based on value and script. Bitcoin Core randomizes output order.
 
-**Why it matters:** A wallet that always puts change at the same index leaks information. Conversely, BIP69 ordering itself becomes a [wallet fingerprint](../techniques/wallet-fingerprinting.md).
+**Why it matters:** A wallet that always puts change at the same index leaks information. Conversely, BIP69 ordering itself becomes a [wallet fingerprint](wallet-fingerprinting.md).
 
 ---
 
@@ -173,7 +173,7 @@ Block reward (coinbase) transactions have no regular inputs - their single input
 
 BIP69 specifies that transaction inputs should be sorted lexicographically by txid:vout and outputs sorted by value:scriptpubkey. While designed to reduce fingerprinting through deterministic ordering, in practice it identifies specific wallet software because adoption is not universal.
 
-**Why it matters:** BIP69 compliance is primarily associated with Electrum and older Samourai versions. Most modern wallets use random ordering instead. As a result, BIP69 ordering has become a [wallet fingerprint](../techniques/wallet-fingerprinting.md) rather than a privacy enhancement.
+**Why it matters:** BIP69 compliance is primarily associated with Electrum and older Samourai versions. Most modern wallets use random ordering instead. As a result, BIP69 ordering has become a [wallet fingerprint](wallet-fingerprinting.md) rather than a privacy enhancement.
 
 **How to defend:** Use wallet software that randomizes input and output ordering (Bitcoin Core, Sparrow, most modern wallets).
 
@@ -223,7 +223,7 @@ Transaction fees and their associated metadata reveal information about the wall
 - **RBF signaling**: Replace-By-Fee is signaled via the nSequence field. This reveals the wallet supports RBF and narrows wallet identification
 - **Fee rate relative to mempool**: Significantly higher or lower fees may indicate urgency or lack of fee estimation sophistication
 
-**Why it matters:** Fee analysis alone is a weak signal. But combined with other [wallet fingerprinting](../techniques/wallet-fingerprinting.md) data, it narrows the set of possible wallet software significantly.
+**Why it matters:** Fee analysis alone is a weak signal. But combined with other [wallet fingerprinting](wallet-fingerprinting.md) data, it narrows the set of possible wallet software significantly.
 
 ---
 

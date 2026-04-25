@@ -115,10 +115,6 @@ nav:
         - techniques/stowaway.md
         - techniques/stonewall.md
         - techniques/ricochet.md
-    - Dust Attacks: techniques/dust-attacks.md
-    - Change Detection: techniques/change-detection.md
-    - Wallet Fingerprinting: techniques/wallet-fingerprinting.md
-    - Peel Chains: techniques/peel-chains.md
   - Lightning Privacy:
     - Lightning Basics: lightning/basics.md
     - Lightning Privacy: lightning/privacy.md
@@ -147,3 +143,7 @@ nav:
     - Chain Analysis Heuristics: advanced/heuristics.md
     - Checking Your Privacy: advanced/check-privacy.md
     - Consolidation Patterns: advanced/consolidation.md
+    - Dust Attacks: advanced/dust-attacks.md
+    - Change Detection: advanced/change-detection.md
+    - Wallet Fingerprinting: advanced/wallet-fingerprinting.md
+    - Peel Chains: advanced/peel-chains.md
