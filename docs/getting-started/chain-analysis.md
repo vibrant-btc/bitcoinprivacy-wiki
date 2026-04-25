@@ -12,7 +12,7 @@ When you send or receive bitcoin, the transaction is recorded on the blockchain 
 
 Companies like **Chainalysis**, **Elliptic**, **CipherTrace** (owned by Mastercard), and **Crystal Blockchain** specialize in analyzing the Bitcoin blockchain to identify who owns which addresses.
 
-!!! warning "Who Uses These Tools?"
+??? warning "Who Uses These Tools?"
 
     Their clients include:
 
@@ -73,32 +73,16 @@ Companies like **Chainalysis**, **Elliptic**, **CipherTrace** (owned by Masterca
 
 ---
 
-## Known Entity Databases
-
-Chain analysis companies maintain databases of known addresses belonging to:
-
-| Category | Examples |
-|----------|----------|
-| **Cryptocurrency exchanges** | Thousands of addresses from Binance, Coinbase, Kraken, etc. |
-| **Gambling sites** | Known gambling platforms |
-| **Darknet markets** | Silk Road, Hydra, and others |
-| **Mixing services** | Known CoinJoin and mixer addresses |
-| **Mining pools** | F2Pool, AntPool, Foundry, etc. |
-| **Scam operations** | Identified scam operations |
-| **Sanctioned entities** | OFAC-listed addresses |
-
-If your transaction interacts with any of these known addresses, it gets flagged and analyzed further.
-
----
-
 ## Wallet Fingerprinting
 
-Different wallet software produces transactions with subtly different characteristics. By examining the raw transaction data, analysts can often identify which wallet created it:
+Different wallet software produces transactions with subtly different characteristics. By examining the raw transaction data, analysts can often identify which wallet created it, Yyu do not need to worry about any of this "technical" jargon below but these are some data points analysts often look at:
 
 - **nLockTime**: Bitcoin Core sets this to the current block height. Many mobile wallets set it to 0
 - **nSequence**: Different wallets set different default values
 - **BIP69 ordering**: Some wallets sort inputs and outputs lexicographically
 - **Low-R signatures**: Bitcoin Core grinds signatures to produce smaller ones
+
+You do not need to worry about any of this "technical" jargon, just realise that the reality is 
 
 !!! info "45% of Transactions Are Identifiable"
 
@@ -125,7 +109,7 @@ The good news is that all of these techniques can be defeated or mitigated:
 
 <div class="grid cards" markdown>
 
--   :material-shield-check:{ .lg .middle } __Never Use KYC Exchanges__
+-   :material-shield-check:{ .lg .middle } __Avoid KYC Exchanges__
 
     ---
 
@@ -170,6 +154,8 @@ The good news is that all of these techniques can be defeated or mitigated:
 </div>
 
 Each technique you apply improves your privacy meaningfully. You do not need to do everything perfectly - just doing the basics puts you ahead of most Bitcoin users.
+
+More info on each of these is provided further on.
 
 ---
 

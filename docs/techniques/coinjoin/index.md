@@ -50,10 +50,6 @@ A CoinJoin is a [collaborative transaction](../../glossary.md#collaborative-tran
 
     For a 5-party CoinJoin with equal outputs, there are 1,496 valid interpretations of which input funded which output. This is 10.55 bits of [entropy](../../glossary.md#boltzmann-entropy).
 
-    For a 7-party CoinJoin, there are 426,833 interpretations (18.70 bits).
-
-    For an 8-party CoinJoin, there are 9,934,563 interpretations (23.24 bits).
-
     This exponential growth in ambiguity makes CoinJoin the most effective privacy tool available.
 
 === "The Only Positive Privacy Signal"
@@ -73,25 +69,19 @@ A CoinJoin is a [collaborative transaction](../../glossary.md#collaborative-tran
     - Fixed denominations make it easy to identify
     - Good [anonymity set](../../glossary.md#anonymity-set)
 
-    **Cons:**
-    - Limited to 5 parties
-    - Fixed denominations can be limiting
-    - Requires Samourai Wallet or compatible
-
     [Learn more about Whirlpool →](whirlpool.md)
 
 === "Wasabi Wallet (WabiSabi)"
 
-    Uses a larger [anonymity set](../../glossary.md#anonymity-set) (50-150 parties) with flexible denominations. Uses the [WabiSabi](../../glossary.md#wabisabi) protocol.
+    Uses a larger isolated [anonymity set](../../glossary.md#anonymity-set) (50-150 parties) with flexible denominations. Uses the [WabiSabi](../../glossary.md#wabisabi) protocol.
 
     **Pros:**
-    - Large anonymity set
     - Flexible denominations
-    - Desktop wallet
+    - Can select different coordinator
 
     **Cons:**
-    - Higher fees for large rounds
-    - Wasabi has faced regulatory pressure
+    - Numerous historical deanonymisation vectors
+    - No post mix spending tools (Easy to mess up and reduce privacy gains)
 
     [Learn more about Wasabi Wallet →](wasabi.md)
 
@@ -108,6 +98,9 @@ A CoinJoin is a [collaborative transaction](../../glossary.md#collaborative-tran
     - More complex to use
     - Requires more technical knowledge
     - Slower to find counterparties
+    - Prone to DoS attacks
+    - Not actively maintained
+    - Single mix as taker cannot guarantee privacy increase
 
     [Learn more about JoinMarket →](joinmarket.md)
 

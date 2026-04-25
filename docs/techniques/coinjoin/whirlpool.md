@@ -8,23 +8,23 @@ description: Learn about Whirlpool CoinJoin, its 5-party fixed denomination mode
 
 !!! info "Other CoinJoin Implementations"
 
-    Whirlpool is one of several CoinJoin implementations. Others include [JoinMarket](joinmarket.md) (decentralized, [maker](../../glossary.md#maker)-[taker](../../glossary.md#taker) model) and [Wasabi Wallet](wasabi.md) ([WabiSabi](../../glossary.md#wabisabi) protocol, 50-150 participants). Each has different trade-offs in terms of privacy, convenience, and censorship resistance.
+    Whirlpool is one of several CoinJoin implementations. Others include [JoinMarket](joinmarket.md) (decentralized, [maker](../../glossary.md#maker)-[taker](../../glossary.md#taker) model) and [Wasabi Wallet](wasabi.md) ([WabiSabi](../../glossary.md#wabisabi) protocol, 20+ participants). Each has different trade-offs in terms of privacy, convenience, and censorship resistance.
 
 ---
 
 ## What Is Whirlpool?
 
-Whirlpool is a CoinJoin protocol where exactly 5 participants come together to mix their bitcoin. Each participant contributes one input of a specific denomination and receives one output of the same denomination.
+Whirlpool is a CoinJoin protocol where *usually* exactly 5 participants come together to mix their bitcoin. Each participant contributes one input of a specific denomination and receives one output of the same denomination.
 
 !!! tip "How It Works"
 
-    5 users each contribute 0.1 BTC. The coordinator combines all 5 inputs and creates 5 outputs of 0.1 BTC each. An outside observer cannot tell which input funded which output.
+    Example: 5 users each contribute 0.1 BTC. The coordinator combines all 5 inputs and creates 5 outputs of 0.1 BTC each. An outside observer cannot tell which input funded which output.
 
 ---
 
 ## Whirlpool Transaction Example
 
-The image below shows a Whirlpool CoinJoin transaction as analyzed by [am-i.exposed](../../advanced/check-privacy.md). Notice the beautiful 5 equal outputs at a fixed denomination, the signature pattern of Whirlpool.
+The image below shows a Whirlpool CoinJoin transaction as visualised by [am-i.exposed](../../advanced/check-privacy.md). Notice the beautiful 5 equal outputs at a fixed denomination, the signature pattern of Whirlpool.
 
 ![Whirlpool CoinJoin transaction scanned by am-i.exposed](../../images/whirlpool.png){ loading=lazy }
 
@@ -227,13 +227,12 @@ Ashigaru and Sparrow include additional protections against common [chain analys
 
 ## Whirlpool and Ashigaru
 
-[Ashigaru](https://ashigaru.rs) is now the primary wallet for Whirlpool. It provides all the features originally offered by Samourai Wallet:
+[Ashigaru](https://ashigaru.rs) is now the primary wallet for Whirlpool. It provides all the features originally offered by Samourai Wallet when combined with Ashigaru Terminal:
 
-- **Premix wallet**: Where you hold bitcoin before mixing
-- **Post-mix wallet**: Where you receive mixed bitcoin
+- **Deposit**: Where you deposit Bitcoin before initiating a Tx0
+- **Premix**: Where you hold bitcoin before mixing
+- **Post-mix**: Where you receive mixed bitcoin
 - **Bad Bank**: A pool of post-mix UTXOs that have been through many rounds
-- **Stowaway**: PayJoin support for spending post-mix bitcoin
-- **Ricochet**: Adds transactional distance between post-mix and final destination
 
 Ashigaru continues to be actively maintained by an anonymous team committed to Bitcoin privacy and user sovereignty.
 
@@ -251,20 +250,16 @@ Ashigaru continues to be actively maintained by an anonymous team committed to B
 
 === "Spending Post-Mix UTXOs Together"
 
-    This is the single most damaging mistake. It completely destroys the mixing.
+    This is the single most damaging mistake. It completely destroys the forward looking anonset you could achieve.
 
 === "Doing Only One Round"
 
-    One round gives limited privacy. Do at least 3-5 rounds for meaningful privacy.
-
-=== "Not Using Tor"
-
-    Without Tor, your IP is exposed to the coordinator and other participants.
+    One round is enough to break deterministic links, multiple rounds are free and increase the forward looking anonset.
 
 === "Mixing KYC and Non-KYC"
 
     Do not mix KYC bitcoin with non-KYC bitcoin in Whirlpool. Keep them separate.
 
-=== "Consolidating Post-Mix UTXOs"
+=== "Consolidating Pre-Mix UTXOs"
 
-    Combining multiple post-mix UTXOs in a single transaction reduces your anonymity set and creates links between your mixed coins.
+    Combining multiple pre-mix UTXOs in a single transaction links those UTXOs, even though they are CoinJoined after there is a record on the permanent blockchain stating that those UTXOs likely had the same owner.

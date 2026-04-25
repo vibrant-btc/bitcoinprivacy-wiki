@@ -44,39 +44,29 @@ description: Discover where and how to buy Bitcoin without KYC to avoid identity
 
 <div class="grid cards" markdown>
 
--   :material-handshake:{ .lg .middle } __Hodl Hodl__
+-   :material-handshake:{ .lg .middle } __[Hodl Hodl](https://hodlhodl.com)__
 
     ---
 
-    Non-custodial P2P exchange. No KYC required. Wide range of payment methods. Global availability.
+    Non-custodial P2P exchange. No KYC required.
 
-    **How it works:** Sign up, click 'Buy BTC', select payment method, choose an offer, enter your receive address, generate escrow, wait for seller deposit, send funds, receive bitcoin.
-
--   :material-desktop-classic:{ .lg .middle } __Bisq__
+-   :material-desktop-classic:{ .lg .middle } __[Bisq](https://bisq.network)__
 
     ---
 
-    Desktop P2P exchange. Fully decentralised, no central server. Tor by default. Built-in dispute resolution.
+    Desktop P2P exchange. Fully decentralised, no central server. Tor by default.
 
-    **How it works:** Download, add payment method, find sellers, take offer, fund trade wallet, wait for confirmation, send payment, receive bitcoin.
-
--   :material-lightning-bolt:{ .lg .middle } __RoboSats__
+-   :material-lightning-bolt:{ .lg .middle } __[RoboSats](https://robosats.org)__
 
     ---
 
-    Lightning-based P2P exchange. Simple, clean interface. No KYC required. Avatar-based identity.
+    Lightning-based P2P exchange. Simple, clean interface. No KYC required. Tor by default.
 
--   :material-cellphone:{ .lg .middle } __Peach Bitcoin__
+-   :material-cellphone:{ .lg .middle } __[Peach Bitcoin](https://peachbitcoin.com)__
 
     ---
 
     Mobile-first P2P exchange. No KYC required. Wide range of payment methods. Good liquidity.
-
--   :material-atm:{ .lg .middle } __Bitcoin ATMs__
-
-    ---
-
-    Physical machines that sell bitcoin for cash. Find them at coinatmradar.com. Check KYC requirements before using.
 
 </div>
 
@@ -132,10 +122,8 @@ Once you have purchased Bitcoin from a KYC source you can **never** undo that. N
 ## Other Ways to Get Bitcoin
 
 - **Earn it**: Sell goods or services for bitcoin
-- **ATMs**: Find them at coinatmradar.com
-- **Vouchers**: [Azteco](../glossary.md#azteco) and similar services
-- **Meetups**: Buy in person at local Bitcoin meetups
-- **Mine it**: Garage mining (though rarely profitable today)
+- **ATMs**: Though some may require identifying info like a phone number
+- **Mine it**: Mining is rarely profitable for individuals today
 
 ---
 

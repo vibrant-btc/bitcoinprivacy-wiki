@@ -79,7 +79,7 @@ BIP47 functions as a reusable payment handshake:
 
 - **Notification transaction**: Requires an additional on-chain step to establish the relationship. This adds structure and an extra transaction but also creates a deliberate boundary for the relationship.
 - **Sender visibility**: Once a BIP47 relationship is established, the recipient can identify repeated payments from the same sender.
-- **Alternative coordination**: BIP47-style coordination can also occur through Soroban-based peer-to-peer communication, as introduced in Samourai Dojo v1.27.0, offering alternatives to the classic notification model.
+- **Alternative coordination**: BIP47-style coordination can also theoretically occur through Soroban-based peer-to-peer communication, as introduced in Samourai Dojo v1.27.0, offering alternatives to the classic notification model.
 
 ---
 
@@ -93,7 +93,7 @@ Key characteristics:
 
 - Privacy-preserving static receiving identifier
 - No dedicated notification transaction required
-- No special server infrastructure needed for basic receiving
+- Special server infrastructure needed for basic receiving
 - Cleaner conceptual model for users prioritizing efficiency
 
 ---
@@ -110,7 +110,7 @@ Silent Payments operate as follows:
 
 - **Scanning burden**: Recipients must scan the [blockchain](../glossary.md#timechain) to identify incoming Silent Payments. This requires infrastructure capable of indexing and surfacing the relevant outputs.
 - **Infrastructure maturity**: Currently, there is no mainstream, self-hostable, non-experimental indexing stack that ordinary users can confidently deploy for private, local Silent Payments detection.
-- [Wallet](../glossary.md#wallet) **support**: Practical wallet support for both sending and receiving Silent Payments is currently limited.
+- [Wallet](../glossary.md#wallet) **support**: No mainstream Bitcoin-only wallet sully supports both sending and recieving via silentpayments.
 
 ---
 
@@ -213,10 +213,10 @@ Practical wallet support for both sending and receiving Silent Payments is curre
 | **Notification [Transaction](../glossary.md#transaction)** | Required | Not required |
 | **[On-chain](../glossary.md#onchain) Footprint** | Larger (notification tx) | Smaller |
 | **[Privacy](../glossary.md#privacy-score)** | Good | Better |
-| **[Wallet](../glossary.md#wallet) Support** | Established (Samourai, Sparrow) | Growing (Sparrow, BlueWallet) |
+| **[Wallet](../glossary.md#wallet) Support** | Established (Samourai, Sparrow) | Partial (Sparrow, BlueWallet) |
 | **Complexity** | More complex | Simpler |
-| **Scan Requirement** | Recipient scans for notifications | Recipient scans [blockchain](../glossary.md#timechain) for payments |
-| **First Payment Setup** | Sender must send notification | No setup needed |
+| **Scan Requirement** | None | Recipient scans [blockchain](../glossary.md#timechain) for payments |
+| **First Payment Setup** | Sender must send notification (usually) | No setup needed |
 
 ---
 
@@ -233,7 +233,7 @@ Practical wallet support for both sending and receiving Silent Payments is curre
 
     - **Sparrow Wallet** - Partial support (Desktop)
     - **BlueWallet** - Partial support (iOS/Android)
-    - **Cake Wallet** - Full support (multi-coin)
+    - **Cake Wallet** - Full support (multi-coin iOS/Android/Desktop)
 
 ---
 

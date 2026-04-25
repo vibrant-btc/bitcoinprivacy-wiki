@@ -38,7 +38,7 @@ Most people are used to thinking about money like a bank account. Your bank acco
     2. Hand them over to the seller
     3. Receive change back
 
-    For example, you might hand over the $20 note and the $10 note ($30 total). The seller keeps $25 and gives you $5 in change.
+    For example, you might hand over the $20 note and the 10 dollar note ($30 total). The seller keeps $25 and gives you $5 in change.
 
     **After this transaction:**
 
@@ -54,7 +54,7 @@ Here is the critical privacy insight: **when you combine multiple UTXOs in a sin
 
 Going back to the purse example: imagine someone is watching every transaction you make. They see you hand over a $20 note and a $10 note together. They now know that whoever made that transaction owned both of those notes at the same time.
 
-!!! warning "The Common Input Ownership Heuristic"
+??? warning "The Common Input Ownership Heuristic"
 
     In Bitcoin terms: if a transaction spends UTXO A and UTXO B together, anyone looking at the blockchain knows that whoever made that transaction controlled both UTXO A and UTXO B.
 
@@ -86,11 +86,10 @@ With coin control, you can:
 - Keep your UTXOs separated by source and purpose
 - **Label your UTXOs** - Tag each UTXO with notes about where it came from (KYC exchange, non-KYC purchase, CoinJoin output, etc.) so you always know what you are spending
 
-!!! tip "Good Wallets with Coin Control"
+??? tip "Good Wallets with Coin Control"
 
     - **[Sparrow Wallet](../glossary.md#sparrow-wallet)** - Excellent coin control with detailed UTXO information
-    - **[Samourai Wallet](../glossary.md#samourai-wallet)** - Coin control with labeling
-    - **Bitcoin Core** - Built-in coin control (enable in settings)
+    - **[Ashigaru Wallet](../glossary.md#ashigaru-wallet)** - Coin control with labeling
     - **[BlueWallet](../glossary.md#bluewallet)** - Basic coin control
 
 ---

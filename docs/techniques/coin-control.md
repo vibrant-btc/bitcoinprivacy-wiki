@@ -61,11 +61,9 @@ With coin control, **you choose which UTXOs to spend**. This gives you complete 
 
 === "In Ashigaru Wallet"
 
-    1. Open Samourai Wallet
-    2. Go to Settings > Transactions
-    3. Enable "UTXO Freeze"
+    1. Open Ashigaru Wallet
     4. Go to the UTXO list
-    5. Freeze UTXOs you do not want to spend
+    5. Freeze UTXOs you do not want to spend by marking it as not spendable
     6. Only unfrozen UTXOs will be used
 
 ---

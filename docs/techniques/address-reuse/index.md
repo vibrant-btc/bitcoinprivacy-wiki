@@ -60,22 +60,12 @@ Address hygiene means **never reusing a Bitcoin address**. Every time you receiv
 
     **Good wallets for this:**
     - Sparrow Wallet
-    - Samourai Wallet
+    - Ashigaru Wallet
     - BlueWallet
-    - Bitcoin Core
-    - Electrum
 
 === "Never Give Out the Same Address Twice"
 
     Even if someone asks for "your Bitcoin address," give them a fresh one each time. Do not use a "main" address that you share with everyone.
-
-=== "Do Not Reuse Public Addresses"
-
-    If you publish a Bitcoin address on a website, social profile, or donation page, assume it is now public forever. Do not use that address again for anything private.
-
-=== "Separate Public and Private Receiving"
-
-    If you need a public donation address, keep that wallet separate from your personal savings wallet. Never let public funds and private funds mix.
 
 ---
 
@@ -87,7 +77,7 @@ If you receive bitcoin regularly from the same people or publish a receiving add
 
     [BIP47](bip47.md) introduces **Payment Codes** - reusable identifiers you can share publicly. When someone wants to send you bitcoin, they use your payment code to generate a unique address that only you can spend from. Each sender gets a different address, preventing [address reuse](../../glossary.md#address-reuse) while maintaining convenience.
 
-    BIP47 is supported by wallets like [Samourai Wallet](../../glossary.md#samourai-wallet), [Sparrow Wallet](../../glossary.md#sparrow-wallet), and Ashigaru Wallet. It also enables **PayNyms** - human-friendly identities that make sharing payment codes easier.
+    BIP47 is supported by wallets like Sparrow and Ashigaru Wallet. It also enables **PayNyms** - human-friendly identities that make sharing payment codes easier.
 
     [Learn more about BIP47 PayNyms →](bip47.md)
 
@@ -116,12 +106,14 @@ When you send bitcoin, your wallet typically creates two outputs:
 
 Good wallets automatically generate a fresh change address each time. This is part of good address hygiene and you do not need to do anything special.
 
-!!! tip "Change Address Best Practices"
+??? tip "Change Address Best Practices"
 
     - Your change address should be a fresh address from your wallet
     - It should use the same address type as your inputs (SegWit to SegWit)
     - It should not be reused
     - It should be labeled as "change" in your wallet
+
+    If you use any of hte wallets reccomended on this website this is automatically done for you
 
 ---
 
@@ -138,7 +130,7 @@ Good wallets automatically generate a fresh change address each time. This is pa
 
     Native SegWit (bc1q) and Taproot (bc1p) addresses offer the best privacy and lowest fees. Most modern wallets support these.
 
-    Taproot is particularly good for privacy because Taproot transactions look identical to any other complex script transaction. This makes it harder to identify your transaction type.
+    Taproot is particularly good for privacy because Taproot transactions look identical to any other complex script transaction. This makes it harder to identify your transaction type if you are doing actions like opening lightning channels.
 
 ---
 

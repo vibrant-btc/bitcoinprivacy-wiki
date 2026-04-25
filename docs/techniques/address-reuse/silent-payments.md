@@ -4,17 +4,17 @@ description: Learn about Silent Payments (BIP352), a protocol that eliminates no
 
 # Silent Payments
 
-Silent Payments ([BIP352](https://bips.dev/352/)) is a protocol for reusable payment codes in Bitcoin that eliminates the need for a notification transaction by leveraging information already present in the transaction to signal to the recipient when funds are intended for them.
+Silent Payments ([BIP352](https://bips.dev/352/)) is another attempt at addressing the address resuse issue.
 
 ---
 
 ## What Are Silent Payments?
 
-Proposed by Ruben Somsen in March 2022, Silent Payments is a new approach to reusable payment codes that removes the major drawback of [BIP47](bip47.md) payment codes - the notification transaction. Instead of requiring an on-chain notification, Silent Payments entirely relies on information that was already in the transaction.
+Proposed by Ruben Somsen in March 2022, Silent Payments is a new approach to reusable payment codes that removes the 'drawback' of [BIP47](bip47.md) payment codes - the notification transaction. Instead of requiring an on-chain notification, Silent Payments entirely relies on information that was already in the transaction.
 
-!!! tip "The Key Improvement Over BIP47"
+??? tip "The Key difference vs BIP47"
 
-    BIP47 requires a notification transaction the first time someone sends to your payment code. This transaction can be observed and may reveal the payment code. Silent Payments eliminate this requirement entirely by using Elliptic-curve Diffie-Hellman (ECDH) to create a shared secret between sender and receiver.
+    BIP47 requires a notification transaction the first time someone sends to your payment code. Silent Payments eliminate this requirement entirely by using Elliptic-curve Diffie-Hellman (ECDH) to create a shared secret between sender and receiver.
 
 ---
 
@@ -54,20 +54,6 @@ Because Bob cannot pre-generate addresses with Silent Payments, he needs to keep
 
 The key difference with Silent Payment scanning is that instead of pre-generating a large amount of addresses up front like with a standard BIP32 light client, Silent Payments requires the wallet to download 33 bytes of data per potential output and then perform an ECDH calculation to check if it is owned by the user.
 
-### The Privacy Benefit
-
-The major benefit to this approach is that it provides excellent privacy (even for light wallets) as the wallet back-end does not know what outputs belong to any light client.
-
-### Performance Optimizations
-
-Thankfully, sync performance can be drastically improved by ruling out potential outputs like:
-
-- Non-Taproot outputs
-- Taproot dust outputs <=1000 sats (~85% of Taproot outputs right now)
-- All potential Silent Payments outputs spent since you last scanned
-
-Additionally, there are many brilliant people working on reducing the impact of this tradeoff through things like transaction cut-through, Silent Payments-specific indexes in Bitcoin Core, and much more.
-
 ---
 
 ## Silent Payments vs BIP47
@@ -75,7 +61,7 @@ Additionally, there are many brilliant people working on reducing the impact of 
 | Feature | Silent Payments | BIP47 |
 |---------|----------------|-------|
 | **Notification Transaction** | Not required | Required |
-| **Privacy** | n]No on-chain notification | Notification can be observed |
+| **Privacy** | No on-chain notification | Notification can be observed |
 | **Wallet Support** | Growing | Established |
 | **On-chain Footprint** | Smaller | Larger |
 | **Scanning Requirement** | Must scan blockchain | Pre-generate addresses |
@@ -88,10 +74,10 @@ Additionally, there are many brilliant people working on reducing the impact of 
 | Wallet | Silent Payments Support | Platform |
 |--------|------------------------|----------|
 | **Sparrow Wallet** | Partial support (send only) | Desktop |
-| **BlueWallet** | Partial support | iOS/Android |
-| **Cake Wallet** | Full support (send only) | iOS/Android/Desktop |
+| **BlueWallet** | Partial support (send only) | iOS/Android |
 | **Cake Wallet** | Full support (send only) | iOS/Android/Desktop |
 
+You might notice a trend of incomplete silent payment support in wallets, this is due to the complexity of the scanning required to recieve payments. Currently there is no self hostable electrum server that support silent payment scanning that is not experimental.
 
 ---
 
@@ -103,7 +89,7 @@ Additionally, there are many brilliant people working on reducing the impact of 
 
     ---
 
-    Silent Payments provide better privacy than BIP47. Use them when both parties support it.
+    Silent Payments provide better privacy than reusing a static bitcoin address. Use them when both parties support it.
 
 -   :material-shield-check:{ .lg .middle } __Verify the Address__
 
@@ -115,13 +101,13 @@ Additionally, there are many brilliant people working on reducing the impact of 
 
     ---
 
-    Silent Payments support labels that let you differentiate incoming payments from different sources without needing multiple addresses.
+    Label incoming transactions as they arrive as unlike BIP47 there is no way to know who an incoming payment is from.
 
--   :material-incognito:{ .lg .middle } __Use Tor for Syncing
+-   :material-incognito:{ .lg .middle } __Use Tor for Syncing__
 
     ---
 
-    Route your wallet connections through Tor for maximum privacy.
+    Route your wallet connections through Tor for maximum privacy as there is no establised way to self host your own scanning server.
 
 </div>
 

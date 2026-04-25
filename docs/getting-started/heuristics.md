@@ -58,7 +58,7 @@ Chain analysis companies use a set of **heuristics** (rules of thumb or assumpti
 
 ---
 
-## CoinJoin Detection
+## CoinJoin
 
 !!! success "The ONLY Positive Privacy Signal"
 
@@ -72,23 +72,6 @@ Chain analysis companies use a set of **heuristics** (rules of thumb or assumpti
 - **Stonewall**: 2+ inputs, 4 outputs with 2 equal-value pairs
 
 **Why it matters:** CoinJoin is the ONLY positive privacy signal in on-chain analysis. A well-executed CoinJoin breaks the transaction graph by creating ambiguity. After a CoinJoin, an adversary encounters an exponential increase in possible interpretations.
-
----
-
-## Boltzmann Entropy
-
-!!! info "The Most Rigorous Privacy Measure"
-
-    Transaction entropy measures the number of valid interpretations of a transaction. Higher entropy means more ambiguity for an adversary. Entropy E = log2(N), where N is the number of valid interpretations.
-
-| Transaction Type | Interpretations (N) | Entropy (bits) |
-|-----------------|---------------------|----------------|
-| 1-in-1-out | 1 | 0 |
-| 5-party CoinJoin (Whirlpool) | 1,496 | 10.55 |
-| 7-party CoinJoin | 426,833 | 18.70 |
-| 8-party CoinJoin | 9,934,563 | 23.24 |
-
-**Why it matters:** Entropy is the most rigorous measure of transaction privacy. Unlike heuristics that flag specific patterns, entropy quantifies the actual ambiguity an adversary faces.
 
 ---
 
@@ -143,12 +126,6 @@ Chain analysis companies use a set of **heuristics** (rules of thumb or assumpti
 **Why it matters:** This is the single most damaging mistake a CoinJoin user can make. It undoes the mixing entirely. An adversary can then trace backward through each CoinJoin to the pre-mix inputs, collapsing the anonymity set to 1.
 
 **How to defend:** Never spend outputs from different CoinJoin rounds in the same transaction. Use each post-mix UTXO independently.
-
----
-
-## Entity Detection
-
-Transactions and addresses are checked against databases of known entities (exchanges, mixers, darknet markets, gambling, scams, mining pools). If your transaction interacts with any of these known addresses, it gets flagged and analyzed further.
 
 ---
 

@@ -32,7 +32,9 @@ When evaluating a wallet's privacy capabilities, consider these features:
 
 Mobile wallets provide the ultimate in convenience. They are on a device we generally have with us 24/7, which makes transacting anytime, any place, easy. This convenience comes with the trade-off that it may not be a suitable solution for storing a large proportion of your wealth.
 
-=== "Ashigaru Wallet (Android)"
+Here are two of the best mobile wallets, [Ashigaru](https://ashigaru.rs) and [BlueWallet](https://bluewallet.io)
+
+=== "Ashigaru Wallet"
 
     **Privacy Features:**
     - Connect to own node (Dojo)
@@ -47,7 +49,7 @@ Mobile wallets provide the ultimate in convenience. They are on a device we gene
 
     **Best for:** Users who want maximum privacy on mobile
 
-=== "BlueWallet (iOS/Android)"
+=== "BlueWallet"
 
     **Privacy Features:**
     - Connect to own node (via Electrum server)
@@ -55,7 +57,7 @@ Mobile wallets provide the ultimate in convenience. They are on a device we gene
     - Create multiple accounts
     - Buy bitcoin within the app via Hodl Hodl
     - Coin control + labelling
-    - Silent Payments support
+    - Partial silent Payments support
 
     **Limitations:** No Tor support
 
@@ -67,44 +69,17 @@ Mobile wallets provide the ultimate in convenience. They are on a device we gene
 
 Desktop wallets can offer more usability and a greater feature set. Most desktop wallets offer hardware wallet support. Computers are inherently more at risk of being exposed to malicious software compared to phones, so always double check the download source.
 
-=== "Sparrow Wallet (Mac/Windows/Linux)"
+There is only one wallet that is reccomended today and that is [Sparrow Wallet](https://sparrowwallet.com):
 
-    **Privacy Features:**
-    - Connect to own node
-    - PSBT and multi-sig
-    - Coin control
-    - Can run over Tor
-    - Whirlpool integration (removed)
-    - Stonewall algorithm
-    - Extremely detailed transaction previews
-    - Hardware wallet support
-
-    **Best for:** Privacy-focused users who want maximum control
-
-=== "Bitcoin Core (Mac/Windows/Linux)"
-
-    **Privacy Features:**
-    - Built in node
-    - Coin control + labelling
-    - Can be run over Tor
-    - Most trusted wallet (reference implementation)
-
-    **Limitations:** No hardware wallet support within GUI, requires downloading the full blockchain (600GB+), complex
-
-    **Best for:** Users who want to run a full node and wallet together
-
-=== "Electrum (Mac/Windows/Linux)"
-
-    **Privacy Features:**
-    - Own node connection (not by default)
-    - Coin control + labelling
-    - Lightning
-    - Extensive hardware wallet support
-    - Multi-sig
-
-    **Limitations:** UX lagging behind other implementations, connects to multiple third party servers by default
-
-    **Best for:** Advanced users who want maximum features
+**Privacy Features:**
+- Connect to own node
+- PSBT and multi-sig
+- Coin control
+- Can run over Tor
+- Whirlpool integration (removed)
+- Stonewall algorithm
+- Extremely detailed transaction previews
+- Hardware wallet support
 
 ---
 
@@ -115,7 +90,6 @@ Desktop wallets can offer more usability and a greater feature set. Most desktop
 | **Beginner, mobile only** | BlueWallet (iOS/Android) |
 | **Privacy-focused, mobile** | Samourai Wallet (Android) |
 | **Privacy-focused, desktop** | Sparrow Wallet |
-| **Cold storage** | Passport or Coldcard |
 | **DIY, minimal supply chain risk** | SeedSigner |
 
 !!! warning "Always Back Up Your Seed Phrase"

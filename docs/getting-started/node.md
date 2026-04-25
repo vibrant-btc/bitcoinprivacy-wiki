@@ -54,38 +54,13 @@ A Bitcoin node downloads every transaction and block, checks them against the ru
 
     Pre-built devices that run a node with minimal setup. Just plug in and go.
 
-    **Examples:**
-    - **Umbrel** - Beautiful interface, app store, easy setup
-    - **myNode** - Feature-rich, good for beginners
-    - **Raspiblitz** - Open source, community-driven
-    - **Start9** - Privacy-focused, self-sovereign
-
-    **Pros:**
-    - Easy setup
-    - Beautiful interfaces
-    - App ecosystems
-    - Good support
-
-    **Cons:**
-    - More expensive
-    - Less customizable
+    The best plug and play nodes are from [Start9](https://start9.com) and [Umbrel](https://umbrel.com).
 
 === "DIY Solutions"
 
-    Build your own node from scratch using a Raspberry Pi or old computer.
+    If you want to be fully sovereign you will want to build your own node from scratch.
 
-    **What you need:**
-    - Mini Pc
-    - 1TB+ SSD
-
-    **Pros:**
-    - Cheaper
-    - Fully customizable
-    - Learn more about Bitcoin
-
-    **Cons:**
-    - More technical setup
-    - Requires troubleshooting skills
+    A full walkthough of this is availiable [here](https://www.youtube.com/playlist?list=PLCRbH-IWlcW0g0HCrtI06_ZdVVolUWr39) presented by K3tan on YouTube.
 
 ---
 
@@ -97,17 +72,9 @@ Once your node is running, you can connect your wallet to it:
 
     1. Open Sparrow Wallet
     2. Go to Preferences > Server
-    3. Enter your node's IP address and port (usually 50002 for Electrum)
+    3. Enter your node's IP address and port (usually 50001 for Electrum)
     4. Test the connection
     5. Save and restart
-
-=== "Electrum Wallet"
-
-    1. Open Electrum
-    2. Go to Network settings
-    3. Uncheck "Select server automatically"
-    4. Enter your node's IP and port
-    5. Connect
 
 === "BlueWallet"
 
@@ -129,7 +96,7 @@ For maximum privacy, run your node over [Tor](../glossary.md#tor) so your IP add
     - Makes it harder to target your node
     - Protects your physical location
 
-Most node software (Umbrel, start9, Raspiblitz) has built-in Tor support. Enable it in settings.
+Most plug and play nodes have tor supported out of the box.
 
 ### Why Tor Matters
 
@@ -143,20 +110,8 @@ Running your node over Tor hides all of this. Your node appears to be coming fro
 
 ---
 
-## Node Requirements Summary
-
-| Requirement | Minimum | Recommended |
-|-------------|---------|-------------|
-| **Storage** | 1TB SSD | 1TB+ SSD |
-| **RAM** | 4GB | 12GB+ |
-| **Internet** | Stable broadband | Unmetered broadband |
-| **Uptime** | Occasional | 24/7 preferred |
-| **Power** | Standard outlet | UPS recommended |
-
----
-
 ## What Comes Next
 
-Now that you have the basics set up, let's look at your privacy checklist - a quick summary of everything you should do to protect your privacy.
+Now you understand the fundamentals of using bitcoin privately here is a short summary everything we have covered so far.
 
-[Your Privacy Checklist →](checklist.md)
+[First Steps To Privacy →](first-steps.md)

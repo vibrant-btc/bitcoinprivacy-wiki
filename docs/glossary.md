@@ -35,6 +35,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
     If you are putting on a hat and sunglasses to hide in a crowd of people that are wearing the same hat and sunglasses, your anonymity set is the size of this crowd. If said crowd is 50 people, an attacker could mistake you for anyone out of these 50 people. Similarly, when doing a collaborative transaction in bitcoin, you are creating an onchain footprint that is equivalent to the onchain footprint of others.
 
+<a id="ashigaru-wallet"></a>
 !!! info "Ashigaru Wallet"
 
     A fork of Samourai Wallet created after the Samourai developers' arrest. Inherits all of Samourai's privacy features including Whirlpool, Stowaway, Stonewall, and Ricochet.

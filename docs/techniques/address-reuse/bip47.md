@@ -57,7 +57,7 @@ Your wallet needs to know that someone is trying to pay you using your payment c
 The notification transaction has some privacy implications:
 
 - It creates an extra [transaction](../../glossary.md#transaction) on the [blockchain](../../glossary.md#timechain)
-- It can potentially be observed by [chain analysis](../../glossary.md#chain-analysis) companies
+- It can potentially be observed by [chain analysis](../../glossary.md#chain-analysis) companies so do not use KYCd UTXOs
 
 ---
 
@@ -90,7 +90,6 @@ The notification transaction has some privacy implications:
 | **Sparrow Wallet** | Full support | Desktop |
 | **Ashigaru Wallet** | Full support | Android |
 | **Stack Wallet** | Full support | iOS/Android |
-| **Electrum** | Plugin support | Desktop |
 
 ---
 
@@ -104,11 +103,11 @@ The notification transaction has some privacy implications:
 
     If you want to keep different identities separate, use different payment codes for each.
 
--   :material-incognito:{ .lg .middle } __Use [Tor](../../glossary.md#tor) for Notification Transactions__
+-   :material-incognito:{ .lg .middle } __Use Non KYC UTXOs for Notification Transactions__
 
     ---
 
-    Notification transactions can reveal your payment code. Route them through Tor.
+    Notification transactions can be picked up by chainanalysis, use non-kyc UTXOs to reduce the risk of identification.
 
 -   :material-shield-check:{ .lg .middle } __Verify the Payment Code__
 
@@ -128,25 +127,17 @@ The notification transaction has some privacy implications:
 
 ## BIP47 Limitations
 
-=== "Notification Transaction Privacy"
+=== "Notification Transaction"
 
-    The first time someone sends to your payment code, they must send a notification transaction. This transaction can be observed by [chain analysis](../../glossary.md#chain-analysis) and may reveal the payment code.
-
-=== "Wallet Support"
-
-    BIP47 is not widely supported by all wallets. Check compatibility before sharing your payment code.
-
-=== "Complexity"
-
-    BIP47 is more complex than simple address sharing. Users need to understand how it works to use it correctly.
+    The first time someone sends to your payment code, they must send a notification transaction. This transaction can be observed by [chain analysis](../../glossary.md#chain-analysis) and may reveal who you are establishing a relationship with. Also the notification is an additional step which naturally can require more time initially.
 
 === "Sender Continuity"
 
-    Once a BIP47 relationship is established, the recipient can identify repeated payments from the same sender. This may be undesirable in scenarios where sender continuity should not be visible to the receiver.
+    Once a BIP47 relationship is established, the recipient can identify repeated payments from the same sender. This may be undesirable in scenarios where sender continuity should not be visible to the receiver. However this could be a benefit in the case that you want to provide refunds.
 
 ---
 
 ## References
 
 - [BIP47 Specification (GitHub)](https://github.com/bitcoin/bips/blob/master/bip-0047.mediawiki)
-- [BIP47 Test Vectors](https://gist.github.com/SamouraiDev/6aad669604c5930864bd)
+- [Paymentcode.io](https://paymentcode.io)

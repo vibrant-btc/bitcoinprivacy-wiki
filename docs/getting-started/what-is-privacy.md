@@ -54,7 +54,7 @@ There is nothing in this address that says "this belongs to John Smith." However
 
     ---
 
-    When your [wallet](../glossary.md#wallet) connects to the Bitcoin network through someone else's server, that server can see your IP address and which addresses you are querying. Your IP address can often be linked to your physical location and your internet service provider account.
+    When your [wallet](../glossary.md#wallet) "connects to the Bitcoin network" through someone else's server, that server can see your IP address and which addresses you are querying. Your IP address can often be linked to your physical location and your internet service provider account.
 
 -   :material-web:{ .lg .middle } __Public Activity__
 
@@ -90,7 +90,7 @@ Privacy is recognized as a fundamental human right by the United Nations and man
 
     **Keeping your bitcoin holdings private is not just about digital privacy - it is about physical safety.**
 
-### Your Employer Could See Your Income
+### Future Employer Could See Your Income
 
 If your employer knows your Bitcoin address, they could see exactly how much you earn and how you spend it. This could affect your negotiating position, your job security, or your personal relationships.
 
@@ -110,7 +110,7 @@ It is important to understand the difference:
 | **Bitcoin** | Bitcoin does not provide this | Bitcoin provides the tools for this |
 | **Example** | Cash transactions in person | Using [CoinJoin](../glossary.md#coinjoin) to break transaction links |
 
-Bitcoin does not give you anonymity. It gives you the **tools for privacy** - the ability to selectively reveal information about yourself while keeping other information hidden.
+Bitcoin does not give you anonymity. However there are **tools for privacy** - offering you the ability to selectively reveal information about yourself while keeping other information hidden.
 
 ---
 

@@ -88,8 +88,6 @@ nav:
     - What is Bitcoin Privacy?: getting-started/what-is-privacy.md
     - Understanding UTXOs: getting-started/utxos.md
     - How Chain Analysis Works: getting-started/chain-analysis.md
-    - The Transaction Graph: getting-started/transaction-graph.md
-    - Entity Detection: getting-started/entity-detection.md
     - Privacy Heuristics Explained: getting-started/heuristics.md
     - Acquiring Bitcoin Privately: getting-started/acquiring.md
     - Choosing a Wallet: getting-started/wallets.md

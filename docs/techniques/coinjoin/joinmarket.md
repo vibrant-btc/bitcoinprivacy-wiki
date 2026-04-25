@@ -8,7 +8,7 @@ JoinMarket is a peer-to-peer marketplace for CoinJoin on Bitcoin. Unlike other C
 
 !!! info "Other CoinJoin Implementations"
 
-    JoinMarket is one of several CoinJoin implementations. Others include [Whirlpool](whirlpool.md) (5-party, fixed denominations) and [Wasabi Wallet](wasabi.md) (WabiSabi protocol, 50-150 participants). Each has different trade-offs in terms of privacy, convenience, and censorship resistance.
+    JoinMarket is one of several CoinJoin implementations. Others include [Whirlpool](whirlpool.md) (5-party, fixed denominations) and [Wasabi Wallet](wasabi.md) (WabiSabi protocol, 20+ participants). Each has different trade-offs in terms of privacy, convenience, and censorship resistance.
 
 ---
 
@@ -39,7 +39,7 @@ The image below shows a JoinMarket CoinJoin transaction as analyzed by [am-i.exp
 
 === "Step 1: Become a Maker or Taker"
 
-    **As a Maker:** You run a JoinMarket bot that advertises your availability to participate in CoinJoins. You earn fees when others use your liquidity.
+    **As a Maker:** You advertise your availability to participate in CoinJoins. You earn fees when others use your liquidity.
 
     **As a Taker:** You initiate a CoinJoin and pay fees to the makers who participate.
 
@@ -125,13 +125,7 @@ JoinMarket's own developers have acknowledged this vulnerability. As waxwing (a 
 
 ## JoinMarket Fees
 
-Makers set their own fees. Typical fees are:
-
-| Amount | Typical Fee |
-|--------|-------------|
-| Small (< 0.01 BTC) | 0.1-0.5% |
-| Medium (0.01-0.1 BTC) | 0.05-0.2% |
-| Large (> 0.1 BTC) | 0.01-0.1% |
+Makers set their own fees. You can view the [orderbook](https://nixbitcoin.org/orderbook/) to get an idea of the fees.
 
 !!! tip "Earn Bitcoin as a Maker"
 
@@ -191,8 +185,8 @@ Makers set their own fees. Typical fees are:
 | **Denominations** | Flexible | Fixed | Flexible |
 | **Fees** | Earn as maker | Pay coordinator | Pay coordinator |
 | **Complexity** | High | Low | Medium |
-| **Censorship Resistance** | High | Low | Medium |
-| **Anonymity Set** | Variable | 5 | 50-150 |
+| **Censorship Resistance** | High | Low | Low |
+| **Anonymity Set** | Variable | 5 or 8 or 9 | 20+ |
 
 ---
 
