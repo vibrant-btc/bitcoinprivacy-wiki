@@ -52,7 +52,7 @@ Now compare to a 5-party Whirlpool CoinJoin:
 
 ![Whirlpool CoinJoin transaction](../images/whirlpool.png){ loading=lazy }
 
-- **5 inputs** of 10,000,000 sats each
+- **5 inputs** of 5,000,000 sats each (excluding miner fees)
 - **5 outputs** of 5,000,000 sats each
 
 There are **1,496** valid stories. **Entropy = 10.55 bits.**
