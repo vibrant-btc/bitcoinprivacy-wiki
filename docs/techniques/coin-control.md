@@ -59,7 +59,7 @@ With coin control, **you choose which UTXOs to spend**. This gives you complete 
     5. Create a new transaction
     6. Sparrow will only use the selected UTXOs
 
-=== "In Samourai Wallet"
+=== "In Ashigaru Wallet"
 
     1. Open Samourai Wallet
     2. Go to Settings > Transactions
@@ -67,21 +67,6 @@ With coin control, **you choose which UTXOs to spend**. This gives you complete 
     4. Go to the UTXO list
     5. Freeze UTXOs you do not want to spend
     6. Only unfrozen UTXOs will be used
-
-=== "In Bitcoin Core"
-
-    1. Go to Settings > Options > Wallet
-    2. Enable "Coin Control Features"
-    3. When sending, click "Inputs..."
-    4. Select the UTXOs you want to spend
-    5. Confirm and send
-
-=== "In Electrum"
-
-    1. Go to the "Coins" tab
-    2. Select the UTXOs you want to spend
-    3. Right-click and choose "Spend"
-    4. Electrum will only use those UTXOs
 
 ---
 

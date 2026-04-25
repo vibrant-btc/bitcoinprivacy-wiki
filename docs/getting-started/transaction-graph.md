@@ -43,11 +43,11 @@ By following these links, analysts can build clusters of addresses that likely b
 
 === "CoinJoin"
 
-    CoinJoin creates transactions where the input-output mapping is ambiguous. This breaks the deterministic links that clustering algorithms rely on.
+    [CoinJoin](../glossary.md#coinjoin) creates transactions where the input-output mapping is ambiguous. This breaks the deterministic links that clustering algorithms rely on.
 
 === "PayJoin"
 
-    PayJoin adds a recipient input to the transaction, poisoning the CIOH and creating false links.
+    [PayJoin](../glossary.md#payjoin-p2ep) adds a recipient input to the transaction, poisoning the CIOH and creating false links.
 
 === "Address Hygiene"
 
@@ -55,7 +55,7 @@ By following these links, analysts can build clusters of addresses that likely b
 
 === "UTXO Management"
 
-    Careful coin control prevents accidental linking of addresses that should remain separate.
+    Careful [coin control](../glossary.md#coin-control) prevents accidental linking of addresses that should remain separate.
 
 ---
 

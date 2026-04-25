@@ -59,6 +59,8 @@ Whirlpool wallets use 4 distinct accounts to support the coinjoin process:
 | **Postmix** | `2147483646'` | Mixed UTXOs after completing rounds |
 | **Bad Bank** | `2147483644'` | [Doxxic change](../../glossary.md#doxxic-change) from Tx0 transactions |
 
+### Whirlpool Tx0 and CoinJoin Flow
+
 === "Step 1: Create the Tx0"
 
     When you initiate a mix, your wallet creates a Tx0 transaction. This transaction takes your deposit UTXO(s) and splits them into equal-sized premix outputs. Any leftover bitcoin becomes **[doxxic change](../../glossary.md#doxxic-change)**.

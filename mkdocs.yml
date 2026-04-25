@@ -10,14 +10,14 @@ theme:
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: black
-      accent: amber
+      accent: blue
       toggle:
         icon: material/toggle-switch
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: black
-      accent: amber
+      accent: blue
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to light mode
@@ -54,7 +54,11 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.details
   - pymdownx.tabbed:
       alternate_style: true
@@ -66,12 +70,17 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.arithmatex:
+      generic: true
 plugins:
   - search
   - tags
   - social:
       cards_layout_dir: layouts
       cards_layout: bitcoin
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 nav:
   - Home:
     - index.md
@@ -79,6 +88,8 @@ nav:
     - What is Bitcoin Privacy?: getting-started/what-is-privacy.md
     - Understanding UTXOs: getting-started/utxos.md
     - How Chain Analysis Works: getting-started/chain-analysis.md
+    - The Transaction Graph: getting-started/transaction-graph.md
+    - Entity Detection: getting-started/entity-detection.md
     - Privacy Heuristics Explained: getting-started/heuristics.md
     - Acquiring Bitcoin Privately: getting-started/acquiring.md
     - Choosing a Wallet: getting-started/wallets.md
@@ -88,23 +99,26 @@ nav:
   - Privacy Techniques:
     - Address Reuse:
       - techniques/address-reuse/index.md
+      - techniques/coin-control.md
       - techniques/address-reuse/bip47.md
       - techniques/address-reuse/silent-payments.md
-      - techniques/comparison.md   
-    - Coin Control: techniques/coin-control.md
+      - techniques/comparison.md
     - CoinJoin:
       - techniques/coinjoin/index.md
-      - "Implementations":
+      - Implementations:
         - techniques/coinjoin/whirlpool.md
         - techniques/coinjoin/joinmarket.md
         - techniques/coinjoin/wasabi.md
-      - "Post Mix Spending":
+      - Post Mix Spending:
         - techniques/post-mix.md
         - techniques/payjoin.md
         - techniques/stowaway.md
         - techniques/stonewall.md
         - techniques/ricochet.md
     - Dust Attacks: techniques/dust-attacks.md
+    - Change Detection: techniques/change-detection.md
+    - Wallet Fingerprinting: techniques/wallet-fingerprinting.md
+    - Peel Chains: techniques/peel-chains.md
   - Lightning Privacy:
     - Lightning Basics: lightning/basics.md
     - Lightning Privacy: lightning/privacy.md
@@ -113,18 +127,23 @@ nav:
     - Blinded Paths: lightning/blinded-paths.md
     - BOLT12 Offers: lightning/bolt12.md
     - lnproxy: lightning/lnproxy.md
-  - Advanced Topics:
-    - The Privacy Spectrum: advanced/privacy-spectrum.md
-    - Transaction Graph Analysis: advanced/transaction-graph.md
-    - Chain Analysis Heuristics: advanced/heuristics.md
-    - Change Detection: advanced/change-detection.md
-    - Wallet Fingerprinting: advanced/wallet-fingerprinting.md
-    - Entity Detection: advanced/entity-detection.md
-    - Peel Chains: advanced/peel-chains.md
-    - Consolidation Patterns: advanced/consolidation.md
-    - Boltzmann Entropy: advanced/boltzmann.md
-    - Checking Your Privacy: advanced/check-privacy.md
+  - Boltzmann:
+    - boltzmann/index.md
+    - What Is Entropy?: boltzmann/what-is-entropy.md
+    - Valid Interpretations: boltzmann/valid-interpretations.md
+    - Link Probability Matrix: boltzmann/link-probability-matrix.md
+    - Privacy Analysis Walkthrough:
+      - analysis/index.md
+      - Examples:
+        - analysis/batch-payment.md
+        - analysis/consolidation.md
+        - analysis/stonewall.md
+        - analysis/whirlpool.md
   - Resources:
     - links/index.md
   - Glossary:
     - Glossary: glossary.md
+  - Advanced Reference:
+    - Chain Analysis Heuristics: advanced/heuristics.md
+    - Checking Your Privacy: advanced/check-privacy.md
+    - Consolidation Patterns: advanced/consolidation.md

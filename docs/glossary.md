@@ -123,6 +123,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
     A measure of the number of possible interpretations of a Bitcoin transaction's inputs and outputs. Higher entropy means more ambiguity and better privacy. Named after physicist Ludwig Boltzmann.
 
+<a id="actual-entropy"></a>
+!!! info "Actual Entropy"
+
+    The entropy of a transaction computed after incorporating blockchain context, such as clustering heuristics or change detection. Actual entropy is always less than or equal to [intrinsic entropy](#intrinsic-entropy) because additional information can only reduce ambiguity.
+
 <a id="bluewallet"></a>
 !!! info "BlueWallet"
 
@@ -312,6 +317,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
     A Lightning Network payment request containing the recipient's node ID, payment amount, payment hash, and expiry time.
 
+<a id="intrinsic-entropy"></a>
+!!! info "Intrinsic Entropy"
+
+    The entropy of a transaction computed in isolation, with no outside information. This is the raw privacy the transaction structure provides based solely on its inputs, outputs, and values. Compare with [actual entropy](#actual-entropy).
+
 ---
 
 ## J
@@ -337,6 +347,16 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 !!! info "Lightning Network"
 
     A Layer 2 payment protocol built on top of Bitcoin. It enables fast, 'low-cost' transactions by creating payment channels between users that settle on the Bitcoin blockchain only when opened or closed.
+
+<a id="link-probability"></a>
+!!! info "Link Probability"
+
+    The probability that a specific input funded a specific output in a transaction, computed by counting how many valid interpretations contain that link and dividing by the total number of interpretations. See also [Link Probability Matrix](#link-probability-matrix).
+
+<a id="link-probability-matrix"></a>
+!!! info "Link Probability Matrix (LPM)"
+
+    A table showing the link probability for every input-output pair in a transaction. Rows represent inputs, columns represent outputs. Each cell shows the probability that the row's input funded the column's output. A cell value of 1.0 (100%) indicates a [deterministic link](#deterministic-link).
 
 <a id="liquidity"></a>
 !!! info "Liquidity"
@@ -416,6 +436,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 !!! info "Non-Custodial Wallet"
 
     A wallet where you hold your own private keys. You have full control over your funds. Examples include Sparrow, Samourai, BlueWallet, and Ashigaru.
+
+<a id="np-hard"></a>
+!!! info "NP-Hard"
+
+    A classification from computer science describing problems that are computationally difficult to solve. NP-hard problems have no known efficient algorithm - as the problem size grows, the time required grows extremely fast (often exponentially). Finding all valid interpretations for a transaction with mixed values is NP-hard, which is why tools like am-i.exposed use optimized algorithms and timeouts.
 
 ---
 

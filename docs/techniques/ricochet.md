@@ -12,10 +12,13 @@ description: Learn how Ricochet adds transactional distance between post-mix UTX
 
 Ricochet creates a chain of 4 transactions:
 
-1. **Ricochet Origin**: Your post-mix UTXO is sent to the first hop
-2. **Ricochet Hop 1**: Funds move to the second hop
-3. **Ricochet Hop 2**: Funds move to the third hop
-4. **Ricochet Destination**: Funds are sent to the final recipient
+``` mermaid
+graph LR
+    A[Origin] --> B[Hop 1]
+    B --> C[Hop 2]
+    C --> D[Hop 3]
+    D --> E[Destination]
+```
 
 !!! tip "The Key Idea"
 

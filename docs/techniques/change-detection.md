@@ -35,7 +35,7 @@ Wallets typically generate change addresses of the same type as their receiving 
 
 ### Round Payment Amount
 
-If one output is a round amount and the other is not, the non-round output is likely change. This overlaps with [round amount detection](heuristics.md#round-amount-detection).
+If one output is a round amount and the other is not, the non-round output is likely change. This overlaps with [round amount detection](../advanced/heuristics.md#round-amount-detection).
 
 ### Unnecessary Input Heuristic
 

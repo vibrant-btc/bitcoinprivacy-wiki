@@ -38,8 +38,6 @@ A CoinJoin is a [collaborative transaction](../../glossary.md#collaborative-tran
 
     Once all signatures are collected, the transaction is broadcast to the Bitcoin network.
 
----
-
 ## Why CoinJoin Is So Powerful
 
 === "Breaking the Common Input Ownership Heuristic"

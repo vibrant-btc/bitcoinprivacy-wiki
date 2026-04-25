@@ -39,13 +39,13 @@ BitcoinPrivacy.Wiki is a collection of in-depth learning resources about Bitcoin
 
     [Lightning Basics →](lightning/basics.md)
 
--   :material-brain:{ .lg .middle } __Advanced Topics__
+-   :material-calculator:{ .lg .middle } __Boltzmann Entropy__
 
     ---
 
-    Deep dives into privacy analysis: Boltzmann entropy, transaction graph analysis, the privacy spectrum, and tools for checking your own privacy.
+    The mathematical foundation of Bitcoin transaction privacy: what entropy means, how to count valid interpretations, the link probability matrix, and the partition formula for CoinJoins.
 
-    [Advanced Topics →](advanced/privacy-spectrum.md)
+    [Boltzmann Entropy →](boltzmann/index.md)
 
 -   :material-tools:{ .lg .middle } __Tools & Resources__
 
