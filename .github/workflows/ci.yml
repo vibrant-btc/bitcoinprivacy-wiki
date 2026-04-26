@@ -26,5 +26,5 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - run: pip install "mkdocs-material[imaging]"
-      - run: apt-get update && apt-get install -y libcairo2-dev libjpeg-dev libgif-dev
+      - run: sudo apt-get update && sudo apt-get install -y libcairo2-dev libjpeg-dev libgif-dev
       - run: mkdocs gh-deploy --force
