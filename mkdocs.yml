@@ -133,10 +133,6 @@ nav:
         - analysis/consolidation.md
         - analysis/stonewall.md
         - analysis/whirlpool.md
-  - Resources:
-    - links/index.md
-  - Glossary:
-    - Glossary: glossary.md
   - Advanced Reference:
     - Chain Analysis Heuristics: advanced/heuristics.md
     - Checking Your Privacy: advanced/check-privacy.md
@@ -145,3 +141,8 @@ nav:
     - Change Detection: advanced/change-detection.md
     - Wallet Fingerprinting: advanced/wallet-fingerprinting.md
     - Peel Chains: advanced/peel-chains.md
+  - Resources:
+    - links/index.md
+  - Glossary:
+    - Glossary: glossary.md
+
