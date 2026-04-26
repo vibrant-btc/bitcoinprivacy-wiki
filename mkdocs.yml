@@ -23,6 +23,7 @@ theme:
         name: Switch to light mode
   icon:
     logo: simple/bitcoin
+    repo: fontawesome/brands/github
   features:
     - content.action.edit
     - navigation.instant
