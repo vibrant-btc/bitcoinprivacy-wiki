@@ -25,7 +25,6 @@ theme:
     logo: simple/bitcoin
     repo: fontawesome/brands/github
   features:
-    - header.autohide
     - content.action.edit
     - navigation.instant
     - navigation.instant.prefetch
