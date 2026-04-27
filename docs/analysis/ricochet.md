@@ -12,8 +12,8 @@ This example demonstrates how Ricochet works in practice. Unlike [CoinJoin](../g
 
 The image below shows a complete Ricochet chain as visualized by [am-i.exposed](https://am-i.exposed). From left to right, you can see all 5 transactions (hop 0 through hop 4) that make up this Ricochet:
 
-![Ricochet transaction graph showing 5 hops from origin to destination](../images/riccochet-graph.png#only-dark){ loading=lazy }
-![Ricochet transaction graph showing 5 hops from origin to destination](../images/riccochet-graph-light.png#only-light)
+![Ricochet transaction graph showing 5 hops from origin to destination (left to right)](../images/riccochet-graph.png#only-dark){ loading=lazy }
+![Ricochet transaction graph showing 5 hops from origin to destination (left to right)](../images/riccochet-graph-light.png#only-light)
 
 
 **Interactive graph:** [View this Ricochet chain on am-i.exposed](https://am-i.exposed/graph/?network=mainnet#graph=AgAFAAAAAAADipTblJoVymges2qo15EsVxVUoJirQK7e400UUiQZtwAA__8Ay3vN5XNBDuKW6ekJS9HAIWNn6hIhJEAPzRKEo5DsMVcBAQAAAtuDf5F2KiNiKqIugLKzsmhoH8DPMrZ6tQt0-URk_by3AgEAAQAptalZJCJ8Efcewo-gcPGbSjqTvxOxH41nMUfVUEnX7gMBAAIAe7XstuOLj2F6j7ly48Xp_0eHUAbFVQQsMS30KZ825qEEAQADAAAFAADCCjJBQzD0BwABQ1i56UJQxAgAAkPl-fpDJ6E0AANEMHGZQjnxBgAERHCJF0MjmjIAAgAAEFJpY2NvY2hldCBPcmlnaW4ABAtEZXN0aW5hdGlvbgAAAAA)

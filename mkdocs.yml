@@ -88,7 +88,7 @@ plugins:
       draggable: true
       auto_caption: true
       caption_position: bottom
-      background: white
+      background: none
       shadow: false
 extra_javascript:
   - javascripts/mathjax.js
