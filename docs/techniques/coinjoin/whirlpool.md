@@ -24,7 +24,7 @@ Whirlpool is a CoinJoin protocol where *usually* exactly 5 participants come tog
 
 ## Whirlpool Transaction Example
 
-The image below shows a Whirlpool CoinJoin transaction as visualised by [am-i.exposed](../../advanced/check-privacy.md). Notice the beautiful 5 equal outputs at a fixed denomination, the signature pattern of Whirlpool.
+The image below shows a Whirlpool CoinJoin transaction as visualised by [am-i.exposed](https://am-i.exposed). Notice the beautiful 5 equal outputs at a fixed denomination, the signature pattern of Whirlpool.
 
 ![Whirlpool CoinJoin transaction scanned by am-i.exposed](../../images/whirlpool.png){ loading=lazy }
 

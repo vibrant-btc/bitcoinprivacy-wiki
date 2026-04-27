@@ -24,7 +24,7 @@ Wasabi Wallet is an open-source, non-custodial Bitcoin wallet for desktop that f
 
 ## WabiSabi Transaction Example
 
-The image below shows a WabiSabi (Wasabi Wallet) CoinJoin transaction as visualised by [am-i.exposed](../../advanced/check-privacy.md). Notice the large number of inputs and various sets of variable denomination outputs that distinguish WabiSabi from fixed-denomination CoinJoins like Whirlpool.
+The image below shows a WabiSabi (Wasabi Wallet) CoinJoin transaction as visualised by [am-i.exposed](https://am-i.exposed). Notice the large number of inputs and various sets of variable denomination outputs that distinguish WabiSabi from fixed-denomination CoinJoins like Whirlpool.
 
 ![WabiSabi CoinJoin transaction scanned by am-i.exposed](../../images/wabisabi.png){ loading=lazy }
 

@@ -18,13 +18,13 @@ Let us start with a common transaction pattern: someone sending bitcoin to five 
 
 ## What We Notice
 
-When we scan this transaction with [am-i.exposed](../advanced/check-privacy.md), several things stand out:
+When we scan this transaction with [am-i.exposed](https://am-i.exposed), several things stand out:
 
 ![Batch payment findings from am-i.exposed](../images/batch-payment-findings.png){ loading=lazy }
 
 ### 1. Round Amount Output Detected
 
-One of the five outputs is a round number - exactly 60k sats. This is a classic [round amount detection](../advanced/heuristics.md#round-amount-detection) finding.
+One of the five outputs is a round number - exactly 60k sats. This is a classic "round amount" finding.
 
 **Why this matters:** When you send bitcoin, people typically choose a round amount like "send 0.01 BTC" or "send 100,000 sats." The [change](../glossary.md#change) other outputs, by contrast, is generally whatever is left over after subtracting the payment and the fee. Change is almost never round.
 

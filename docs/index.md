@@ -53,7 +53,7 @@ BitcoinPrivacy.Wiki is a collection of in-depth learning resources about Bitcoin
 
     Privacy scanners, block explorers, fee estimation tools, and curated links for further learning.
 
-    [Tools →](advanced/check-privacy.md)
+    [Tools →](links/index.md)
 
 -   :material-format-list-bulleted:{ .lg .middle } __Glossary__
 
