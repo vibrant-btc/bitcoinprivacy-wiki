@@ -69,8 +69,8 @@ This is the critical insight. In a single valid interpretation, one input can be
 
 For the Whirlpool example:
 - There are 1,496 total interpretations
-- Each input-output pair appears together in 511 of those interpretations
-- 511 / 1,496 = **34.2%**
+- Each input-output pair appears together in 512 of those interpretations
+- 512 / 1,496 = **34.2%**
 
 This is why the link probability is 34.2%, not 20%. The 20% figure would only be correct if each input funded exactly one output per interpretation (a one-to-one assignment). But the Boltzmann algorithm counts **many-to-many mappings**, where one input can fund multiple outputs in the same interpretation.
 

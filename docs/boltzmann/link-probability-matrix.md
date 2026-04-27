@@ -50,7 +50,7 @@ This has 1,496 valid interpretations. The LPM looks like this:
 | **I4** | 0.342 | 0.342 | 0.342 | 0.342 | 0.342 |
 | **I5** | 0.342 | 0.342 | 0.342 | 0.342 | 0.342 |
 
-Every cell is 0.342 (which is 511/1496). This is a **perfectly uniform** LPM.
+Every cell is 0.342 (which is 512/1496). This is a **perfectly uniform** LPM.
 
 ### What This Means
 
