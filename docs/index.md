@@ -78,3 +78,9 @@ This site draws knowledge from the following sources:
 - **[silentpaymentsxyz](https://silentpayments.xyz/)** - Silent Payments explanation, BIP47 comparison, wallet support
 - **[paymentcode.io](https://paymentcode.io/)** - BIP47 protocol, Paynym API, Auth47
 - **[Planb Academy](https://planb.academy/)** - Bitcoin courses, node setup, security, wallet guidance
+
+---
+
+## Special Thanks
+
+Special thanks to **[Arkad](https://x.com/Multicripto)**, co-author of [am-i.exposed](https://am-i.exposed/), for auditing the Boltzmann entropy explanations and mathematics to ensure their accuracy.
