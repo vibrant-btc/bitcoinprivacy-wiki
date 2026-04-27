@@ -44,6 +44,8 @@ theme:
     - content.code.annotate
     - content.tabs.link
 markdown_extensions:
+  - toc:
+      permalink: true
   - admonition
   - attr_list
   - md_in_html
