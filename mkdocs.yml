@@ -25,6 +25,7 @@ theme:
     logo: simple/bitcoin
     repo: fontawesome/brands/github
   features:
+    - header.autohide
     - content.action.edit
     - navigation.instant
     - navigation.instant.prefetch
@@ -91,8 +92,11 @@ plugins:
       background: none
       shadow: false
 extra_javascript:
+  - js/popup.js
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+extra:
+  generator: false
 nav:
   - Home:
     - index.md
