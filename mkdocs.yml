@@ -133,7 +133,7 @@ nav:
     - Blinded Paths: lightning/blinded-paths.md
     - BOLT12 Offers: lightning/bolt12.md
     - lnproxy: lightning/lnproxy.md
-  - Boltzmann:
+  - Boltzmann Entropy:
     - boltzmann/index.md
     - What Is Entropy?: boltzmann/what-is-entropy.md
     - Valid Interpretations: boltzmann/valid-interpretations.md
