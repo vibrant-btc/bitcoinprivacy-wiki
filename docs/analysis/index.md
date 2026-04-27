@@ -52,9 +52,17 @@ Each example shows:
 
     ---
 
-    A steganographic transaction: 3 inputs, 4 outputs with 2 equal pairs. Learn how it creates plausible deniability with 4 interpretations.
+    A steganographic transaction: 2 inputs, 4 outputs with 2 equal pairs. Learn how it creates plausible deniability with 5 interpretations.
 
     [View Example →](stonewall.md)
+
+-   :material-swap-horizontal:{ .lg .middle } __Ricochet__
+
+    ---
+
+    A chain of 5 self-payments creating transactional distance. Learn how it protects against taint analysis and why the Classic variant is detectable.
+
+    [View Example →](ricochet.md)
 
 </div>
 

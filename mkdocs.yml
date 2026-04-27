@@ -134,6 +134,7 @@ nav:
         - analysis/consolidation.md
         - analysis/stonewall.md
         - analysis/whirlpool.md
+        - analysis/ricochet.md
   - Advanced Reference:
     - Chain Analysis Heuristics: advanced/heuristics.md
     - Checking Your Privacy: advanced/check-privacy.md

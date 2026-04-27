@@ -1,5 +1,5 @@
 ---
-description: Learn how Ricochet adds transactional distance between post-mix UTXOs and final destinations with 4-hop self-payments
+description: Learn how Ricochet adds transactional distance between post-mix UTXOs and final destinations with 5-hop self-payments (hop 0 through hop 4)
 ---
 
 # Ricochet
@@ -10,19 +10,19 @@ description: Learn how Ricochet adds transactional distance between post-mix UTX
 
 ## What Is Ricochet?
 
-Ricochet creates a chain of 4 transactions:
+Ricochet creates a chain of 5 transactions (hop 0 through hop 4):
 
 ``` mermaid
 graph LR
-    A[Origin] --> B[Hop 1]
+    A[Hop 0: Origin] --> B[Hop 1]
     B --> C[Hop 2]
     C --> D[Hop 3]
-    D --> E[Destination]
+    D --> E[Hop 4: Destination]
 ```
 
 !!! tip "The Key Idea"
 
-    Each hop creates a new transaction with its own change output. This makes it much harder for chain analysis to trace the funds back to the original post-mix UTXO.
+    Each hop is a new transaction with its own inputs and outputs. This makes it much harder for chain analysis to trace the funds back to the original post-mix UTXO.
 
     Think of it like bouncing a ball off several walls before it reaches its target. Each bounce adds distance and makes it harder to trace the original trajectory.
 
@@ -36,9 +36,9 @@ Ricochet is a technique where you create several self-payments to your own fresh
 
 For example, if you perform a coinjoin, your postmix coin will be identifiable as having passed through a coinjoin. Chain-analysis tools can detect coinjoin patterns and tag coins that exit them. Coinjoins break historical links, but their presence is still detectable - like encrypted text: you can't read it, but it's easy to see that encryption was applied.
 
-That coinjoin-tagged coin label can affect fungibility. Regulated entities, for example exchanges, may refuse coinjoin-sourced UTXOs, ask for explanations, or even freeze accounts or funds. In some cases, an exchange may report activity to state authorities.
+That coinjoin-tagged coin label can affect fungibility. Regulated entities, for example exchanges, may refuse coinjoin-sourced UTXOs, ask for explanations, or even freeze accounts or funds.
 
-Ricochet addresses this by inserting four successive self-transactions, each to a new address you control, then sending to the final destination, for example an exchange. The goal is to create distance between the original coinjoin and the final spend. This makes chain-analysis tools more likely to consider a change of ownership has occurred post-coinjoin, discouraging them from taking action against the sender.
+Ricochet addresses this by inserting five successive transactions (hop 0 through hop 4), with four self-payments to new addresses you control, then sending to the final destination, for example an exchange. The goal is to create distance between the original coinjoin and the final spend. This makes chain-analysis tools more likely to consider a change of ownership has occurred post-coinjoin, discouraging them from taking action against the sender.
 
 You might ask why chain-analysis tools don't simply look beyond four hops. In practice, these companies face an optimization dilemma: they must choose a threshold for number of hops after which they assume a change of ownership likely occurred and ignore older links. Raising that threshold increases false positives exponentially - wrongly flagging people as coinjoin participants when someone else did the coinjoin earlier in the chain. Too many false positives push users to competitors and threaten long-term viability. As a result, raising the threshold is challenging; four hops is often enough to defeat their heuristics in many cases.
 
@@ -67,7 +67,7 @@ Ashigaru offers two Ricochet variants:
 
 === "Staggered Delivery (Reinforced Ricochet)"
 
-    - Distributes the 100,000-sat service fee across the five successive transactions
+    - Distributes the 100,000-sat service fee across hops 1-4 in randomized amounts
     - Ensures each transaction is broadcast at a distinct time and confirms in a different block
     - Maximizes the appearance of ownership change for better resistance to chain analysis
     - Slower, but preferred when you're not in a hurry
@@ -102,13 +102,9 @@ Ashigaru offers two Ricochet variants:
 
     After a CoinJoin, your post-mix UTXOs are private but still traceable backward through the CoinJoin. Ricochet adds multiple hops between the post-mix and the final destination, making it much harder to trace.
 
-=== "Creating Change Outputs"
-
-    Each hop creates a new change output. This means chain analysis must figure out which output is the payment and which is the change at each hop.
-
 === "Adding Time Distance"
 
-    The 4 transactions take time to confirm. This temporal distance makes it harder to link the origin to the destination.
+    The 5 transactions (especially in Staggered mode) take time to confirm. This temporal distance makes it harder to link the origin to the destination.
 
 ---
 
@@ -132,7 +128,7 @@ Ashigaru offers two Ricochet variants:
 
     ---
 
-    Ricochet takes time because 4 transactions need to confirm. Do not rush it.
+    Ricochet takes time because 5 transactions need to confirm. Do not rush it.
 
 -   :material-hand-back-right-off:{ .lg .middle } __Use One Post-Mix UTXO__
 
@@ -144,28 +140,16 @@ Ashigaru offers two Ricochet variants:
 
 ---
 
-## Ricochet vs Other Techniques
-
-| Feature | Ricochet | Stowaway | Regular PayJoin |
-|---------|----------|----------|-----------------|
-| **Hops** | 4 transactions | 1 transaction | 1 transaction |
-| **Privacy Level** | Very High | High | Medium-High |
-| **Speed** | Slow (4 confirmations) | Fast | Fast |
-| **Best For** | Maximum privacy | Post-mix spending | General spending |
-| **Fees** | Higher (4 transactions) | Normal | Normal |
-
----
-
 ## Common Ricochet Mistakes
 
 === "Using Ricochet for Non-Post-Mix UTXOs"
 
     Ricochet is designed for post-mix spending. For regular spending, use PayJoin or Stonewall.
 
-=== "Not Using Tor"
-
-    Without Tor, your Ricochet transactions can be linked to your IP address.
-
 === "Combining Post-Mix UTXOs"
 
     Never spend more than one post-mix UTXO in a Ricochet. This re-links your mixed outputs.
+
+## Further reading
+
+- [Ricochet Analysis](../analysis/ricochet.md) - Riccochet deep dive and examples
