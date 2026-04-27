@@ -79,8 +79,23 @@ Now consider a slightly more complex transaction:
 
 How many valid interpretations exist? **Two:**
 
-1. Input 1 funded Output 1, and Input 2 funded Output 2
-2. Both inputs combined to fund both outputs
+??? note "View the interpretations"
+
+    ``` mermaid
+    graph TD
+        subgraph Interpretation 2
+            I1_2[Input 1: 63,990] --> BOTH[Both Outputs: 95,467]
+            I2_2[Input 2: 31,942] --> BOTH
+        end
+        
+        subgraph Interpretation 1
+            I1_1[Input 1: 63,990] --> O1_1[Output 1: 63,717]
+            I2_1[Input 2: 31,942] --> O2_1[Output 2: 31,750]
+        end
+    ```
+
+    1. **Interpretation 1:** Input 1 funded Output 1, and Input 2 funded Output 2
+    2. **Interpretation 2:** Both inputs combined to fund both outputs
 
 $$E = \log_2(2) = 1.00 \text{ bit}$$
 
@@ -147,6 +162,7 @@ Computed **after incorporating blockchain context**. If clustering heuristics te
 #### Concrete Example: Intrinsic vs. Actual Entropy
 
 Consider a 2-input, 2-output transaction with **2 valid interpretations** (intrinsic entropy = 1 bit):
+
 
 - **Interpretation 1:** Input 1 → Output 1, Input 2 → Output 2
 - **Interpretation 2:** Both inputs → Both outputs

@@ -68,7 +68,24 @@ Now consider a simpler transaction:
 
 **Transaction ID:** [`ce3d95a2...`](https://am-i.exposed/#tx=ce3d95a2ec0237898ed0e5961699408e67b19fc2fcce7dfdbf439cbc3b797921)
 
-Looking at this transaction in isolation, there are 2 valid interpretations. However, when we incorporate blockchain context (the same address appears in both an input and an output), the [actual entropy](../glossary.md#actual-entropy) reveals **2 deterministic links**:
+Looking at this transaction in isolation, there are 2 valid interpretations:
+
+??? note "View the interpretations"
+
+    ``` mermaid
+    graph TD
+        subgraph Interpretation 2
+            I1_2[Input 1] --> BOTH_1[Both Outputs]
+            I2_2[Input 2] --> BOTH_1
+        end
+        
+        subgraph Interpretation 1
+            I1_1[Input 1] --> O1_1[Output 1]
+            I2_1[Input 2] --> O2_1[Output 2]
+        end
+    ```
+
+However, when we incorporate blockchain context (the same address appears in both an input and an output), the [actual entropy](../glossary.md#actual-entropy) reveals **2 deterministic links**:
 
 ![Link probability matrix showing 2 deterministic links](../images/two-in-two-out-analysis.png){ loading=lazy }
 

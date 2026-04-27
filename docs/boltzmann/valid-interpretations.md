@@ -82,16 +82,31 @@ But in Bitcoin, the reality is more flexible. A single input can fund **multiple
 
 A valid interpretation is a **many-to-many mapping**. Consider the 2-input, 2-output transaction above:
 
-**Interpretation 1:**
-- Input 1 (63,990) funds Output 1 (63,717), leaving 273 sats for fees
-- Input 2 (31,942) funds Output 2 (31,750), leaving 192 sats for fees
+??? note "View the interpretations"
 
-Total fees: 273 + 192 = 465 ✓
+    ``` mermaid
+    graph TD
+        subgraph Interpretation 2: Many-to-Many
+            I1_2[Input 1: 63,990] --> BOTH_1[Both Outputs: 95,467]
+            I2_2[Input 2: 31,942] --> BOTH_1
+        end
+        
+        subgraph Interpretation 1: One-to-One
+            I1_1[Input 1: 63,990] --> O1_1[Output 1: 63,717]
+            I2_1[Input 2: 31,942] --> O2_1[Output 2: 31,750]
+        end
+    ```
 
-**Interpretation 2:**
-- Input 1 + Input 2 (95,932 combined) fund both Output 1 + Output 2 (95,467), leaving 465 sats for fees
+    **Interpretation 1:**
+    - Input 1 (63,990) funds Output 1 (63,717), leaving 273 sats for fees
+    - Input 2 (31,942) funds Output 2 (31,750), leaving 192 sats for fees
 
-Total fees: 465 ✓
+    Total fees: 273 + 192 = 465 ✓
+
+    **Interpretation 2:**
+    - Input 1 + Input 2 (95,932 combined) fund both Output 1 + Output 2 (95,467), leaving 465 sats for fees
+
+    Total fees: 465 ✓
 
 This transaction has **2 valid interpretations**, so its [intrinsic entropy](../glossary.md#intrinsic-entropy) is:
 
@@ -119,49 +134,51 @@ Total inputs: 11,380,000 sats
 Total outputs: 11,320,000 sats
 Difference (fee): 60,000 sats ✓
 
-Let us find all valid interpretations. The diagram below shows how the three interpretations group inputs and outputs:
+Let us find all valid interpretations.
 
-``` mermaid
-graph TD
-    subgraph Interpretation 1
-        I1_1[Input 1: 10M] --> O1_1[Output 1: 100k]
-        I1_1 --> O2_1[Output 2: 9.85M]
-        I2_1[Input 2: 1.38M] --> O3_1[Output 3: 100k]
-        I2_1 --> O4_1[Output 4: 1.27M]
-    end
-    
-    subgraph Interpretation 2
-        I1_2[Input 1: 10M] --> O2_2[Output 2: 9.85M]
-        I1_2 --> O3_2[Output 3: 100k]
-        I2_2[Input 2: 1.38M] --> O1_2[Output 1: 100k]
-        I2_2 --> O4_2[Output 4: 1.27M]
-    end
-    
-    subgraph Interpretation 3
-        I1_3[Input 1: 10M] --> ALL[All Outputs: 11.32M]
-        I2_3[Input 2: 1.38M] --> ALL
-    end
-```
+??? note "View the interpretations"
 
-### Interpretation 1:
+    ``` mermaid
+    graph TD
+        subgraph Interpretation 3
+            I1_3[Input 1: 10M] --> ALL[All Outputs: 11.32M]
+            I2_3[Input 2: 1.38M] --> ALL
+        end
+        
+        subgraph Interpretation 2
+            I1_2[Input 1: 10M] --> O2_2[Output 2: 9.85M]
+            I1_2 --> O3_2[Output 3: 100k]
+            I2_2[Input 2: 1.38M] --> O1_2[Output 1: 100k]
+            I2_2 --> O4_2[Output 4: 1.27M]
+        end
+        
+        subgraph Interpretation 1
+            I1_1[Input 1: 10M] --> O1_1[Output 1: 100k]
+            I1_1 --> O2_1[Output 2: 9.85M]
+            I2_1[Input 2: 1.38M] --> O3_1[Output 3: 100k]
+            I2_1 --> O4_1[Output 4: 1.27M]
+        end
+    ```
 
-- Input 1 (10M) funds Output 1 (100k) + Output 2 (9.85M) = 9.95M, leaving 50k for fees
-- Input 2 (1.38M) funds Output 3 (100k) + Output 4 (1.27M) = 1.37M, leaving 10k for fees
+    ### Interpretation 1:
 
-Total fees: 50k + 10k = 60k ✓
+    - Input 1 (10M) funds Output 1 (100k) + Output 2 (9.85M) = 9.95M, leaving 50k for fees
+    - Input 2 (1.38M) funds Output 3 (100k) + Output 4 (1.27M) = 1.37M, leaving 10k for fees
 
-### Interpretation 2:
+    Total fees: 50k + 10k = 60k ✓
 
-- Input 1 (10M) funds Output 2 (9.85M) + Output 3 (100k) = 9.95M, leaving 50k for fees
-- Input 2 (1.38M) funds Output 1 (100k) + Output 4 (1.27M) = 1.37M, leaving 10k for fees
+    ### Interpretation 2:
 
-Total fees: 50k + 10k = 60k ✓
+    - Input 1 (10M) funds Output 2 (9.85M) + Output 3 (100k) = 9.95M, leaving 50k for fees
+    - Input 2 (1.38M) funds Output 1 (100k) + Output 4 (1.27M) = 1.37M, leaving 10k for fees
 
-### Interpretation 3:
+    Total fees: 50k + 10k = 60k ✓
 
-- Input 1 + Input 2 (11.38M combined) fund ALL outputs (11.32M), leaving 60k for fees
+    ### Interpretation 3:
 
-Total fees: 60k ✓
+    - Input 1 + Input 2 (11.38M combined) fund ALL outputs (11.32M), leaving 60k for fees
+
+    Total fees: 60k ✓
 
 This transaction has **3 valid interpretations**, so its entropy is:
 
