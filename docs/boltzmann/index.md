@@ -91,6 +91,13 @@ This section is broken into four pages, each building on the last:
 
     [Link Probability Matrix →](link-probability-matrix.md)
 
+-   :material-magnify-scan:{ .lg .middle } __Privacy Analysis Walkthrough__
+
+    ---
+
+    Apply everything you have learned to real Bitcoin transactions. See exactly what chain analysts can figure out.
+
+    [View Examples →](../analysis/index.md)
 
 </div>
 

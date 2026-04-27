@@ -8,9 +8,11 @@ Let us start with a common transaction pattern: someone sending bitcoin to five 
 
 ![Batch payment transaction scanned by am-i.exposed](../images/batch-payment.png){ loading=lazy }
 
-**Transaction ID:** `6ae34b88b5d9a3898d64264e7eb481df761b014becaf2d992e565722e596681d`
+**Transaction ID:** [`6ae34b88...`](https://am-i.exposed/#tx=6ae34b88b5d9a3898d64264e7eb481df761b014becaf2d992e565722e596681d)
 
 **Structure:** 1 input → 5 outputs
+
+**Entropy:** 0 bits (only 1 valid interpretation - the single input funds all 5 outputs)
 
 ---
 

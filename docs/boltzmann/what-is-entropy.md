@@ -26,6 +26,25 @@ This is the essence of a CoinJoin.
 
 ## Entropy in Bitcoin Transactions
 
+### What Is an "Interpretation"?
+
+Before we look at examples, let us clarify what an **interpretation** means in the context of Boltzmann entropy. This is a common point of confusion.
+
+An interpretation is a **mathematically valid way to group inputs and outputs** such that the total value of inputs in each group equals the total value of outputs in that group (within the transaction fee). It is purely about the **transaction structure** - the amounts and how they can be combined.
+
+!!! warning "Common Confusion: Interpretation vs. Change Detection"
+
+    People often think: "I do not know which output is the payment and which is the change, so there must be 2 interpretations."
+
+    **This is not how Boltzmann entropy works.** The entropy calculation does not care which output is the payment or which is the change. It only asks: "How many ways can I group these inputs and outputs so the values balance?"
+
+    For a 1-input, 2-output transaction, there is only **one** way to group them: the single input funds both outputs. Whether you can tell which output is the payment is a **separate question** (change detection) that is not part of the raw entropy calculation.
+
+    **Entropy measures structural ambiguity, not contextual ambiguity.**
+
+    Contextual ambiguity is very important in bitcoin privacy, but in order to understand from the perspective of boltzmann entropy you must put that aside for now.
+
+
 ### A Normal Payment (Zero Entropy)
 
 Consider a straightforward transaction:
@@ -35,10 +54,12 @@ Consider a straightforward transaction:
 **Transaction ID:** [`639fc4b0...`](https://am-i.exposed/#tx=639fc4b0cace9370ed9e113b6e80a5765a27ebe601dd03ef350ada5b01bd2846)
 
 - **Input:** 2,487,401 sats
-- **Output 1:** 1,701,348 sats (change, minus fee)
-- **Output 2:** 785,767 sats (payment)
+- **Output 1:** 1,701,348 sats
+- **Output 2:** 785,767 sats
 
-There is only **one** valid interpretation: the single input funded both outputs. No ambiguity. No privacy. **Entropy = 0 bits.**
+How many ways can we group these inputs and outputs so the values balance? **Only one:** the single input funds both outputs. There is no other mathematically valid grouping.
+
+**Entropy = 0 bits.** No structural ambiguity. No privacy from the transaction structure alone.
 
 Roughly **85% of all Bitcoin transactions** look like this. An observer can determine with complete certainty exactly where the money went.
 
@@ -121,7 +142,18 @@ Computed from the transaction **alone**, with no outside information. This is th
 
 Computed **after incorporating blockchain context**. If clustering heuristics tell us certain inputs belong to the same entity, we merge them, reducing valid interpretations. If change detection identifies an output as change, we eliminate interpretations that contradict this.
 
-**Actual entropy never exceeds intrinsic entropy.** Extra information can only shrink number of possibilities.
+**Actual entropy never exceeds intrinsic entropy.** Extra information can only shrink the number of possibilities.
+
+#### Concrete Example: Intrinsic vs. Actual Entropy
+
+Consider a 2-input, 2-output transaction with **2 valid interpretations** (intrinsic entropy = 1 bit):
+
+- **Interpretation 1:** Input 1 → Output 1, Input 2 → Output 2
+- **Interpretation 2:** Both inputs → Both outputs
+
+Now suppose we discover that the address for Input 1 is the **same address** as Output 1. This means Output 1 is definitely change (the sender is paying themselves). This eliminates Interpretation 1 (which assumed Input 1 funded Output 1 as a separate payment).
+
+**Actual entropy = 0 bits** (only 1 interpretation remains). The blockchain context reduced the ambiguity.
 
 ### 3. Maximum Entropy
 
@@ -161,10 +193,10 @@ Think of entropy as measuring **structural privacy** - how hard the transaction 
 So far we have discussed equal-value CoinJoins. Most Bitcoin transactions are not CoinJoins - they have inputs and outputs of different values. Computing valid interpretations for these is harder:
 
 - We must find all groupings where each group's input sum equals its output sum (within the fee)
-- This is a **constrained subset sum problem**, which is [NP-hard](../glossary.md#np-hard)
+- This is a **constrained subset sum problem**, which is [NP-hard](../glossary.md#np-hard) - meaning there is no known fast algorithm to solve it, and the time required grows extremely fast as the number of inputs and outputs increases
 - For large transactions, brute-force enumeration becomes impractical
 
-The tool [am-i.exposed](https://am-i.exposed) implements the full Boltzmann algorithm in Rust.
+The tool [am-i.exposed](https://am-i.exposed) implements the full Boltzmann algorithm in Rust, using optimized techniques to handle these computations efficiently.
 
 ---
 

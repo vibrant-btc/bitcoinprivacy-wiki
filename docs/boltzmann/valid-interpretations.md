@@ -14,6 +14,16 @@ A valid interpretation is a **complete story** about which inputs funded which o
 
 More precisely, it is a **partition** of all inputs and all outputs into groups, where each group's input sum equals its output sum (within the transaction fee tolerance).
 
+!!! warning "Important: Interpretation Is About Structure, Not Semantics"
+
+    A common point of confusion: people think "I do not know which output is the payment and which is the change, so there must be 2 interpretations."
+
+    **This is not how Boltzmann entropy works.** An interpretation is purely about **mathematical grouping** - can the input values be combined to match the output values? It does not matter which output is the payment or which is the change. Those are semantic questions that are separate from the raw entropy calculation based on the .
+
+    **Entropy measures structural ambiguity, not contextual ambiguity.**
+
+    Contextual ambiguity is very important, but in order to understand from the perspective of boltzmann entropy you must put that aside for now.
+
 Let us unpack that definition step by step.
 
 ---
@@ -109,7 +119,29 @@ Total inputs: 11,380,000 sats
 Total outputs: 11,320,000 sats
 Difference (fee): 60,000 sats ✓
 
-Let us find all valid interpretations.
+Let us find all valid interpretations. The diagram below shows how the three interpretations group inputs and outputs:
+
+``` mermaid
+graph TD
+    subgraph Interpretation 1
+        I1_1[Input 1: 10M] --> O1_1[Output 1: 100k]
+        I1_1 --> O2_1[Output 2: 9.85M]
+        I2_1[Input 2: 1.38M] --> O3_1[Output 3: 100k]
+        I2_1 --> O4_1[Output 4: 1.27M]
+    end
+    
+    subgraph Interpretation 2
+        I1_2[Input 1: 10M] --> O2_2[Output 2: 9.85M]
+        I1_2 --> O3_2[Output 3: 100k]
+        I2_2[Input 2: 1.38M] --> O1_2[Output 1: 100k]
+        I2_2 --> O4_2[Output 4: 1.27M]
+    end
+    
+    subgraph Interpretation 3
+        I1_3[Input 1: 10M] --> ALL[All Outputs: 11.32M]
+        I2_3[Input 2: 1.38M] --> ALL
+    end
+```
 
 ### Interpretation 1:
 

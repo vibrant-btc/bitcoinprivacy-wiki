@@ -10,7 +10,7 @@ This example demonstrates the [Boltzmann entropy](../boltzmann/index.md) framewo
 
 ![Whirlpool CoinJoin transaction scanned by am-i.exposed](../images/whirlpool.png){ loading=lazy }
 
-**Transaction ID:** `323df21f0b0756f98336437aa3d2fb87e02b59f1946b714a7b09df04d429dec2`
+**Transaction ID:** [`323df21f...`](https://am-i.exposed/#tx=323df21f0b0756f98336437aa3d2fb87e02b59f1946b714a7b09df04d429dec2)
 
 **Structure:** 5 inputs → 5 equal outputs of 5,000,000 sats each
 
@@ -91,6 +91,17 @@ For equal-output CoinJoins, the number of valid interpretations can be computed 
 **Total N = 1 + 25 + 100 + 200 + 450 + 600 + 120 = 1,496**
 
 **Entropy = log2(1,496) = 10.55 bits**
+
+??? info "Where Does 14400 Come From?"
+
+    The number 14,400 is **5! × 5!** (120 × 120). It represents the total number of ways to permute both the inputs and outputs before grouping them. The formula divides this by the symmetries within each partition to avoid overcounting.
+
+    For example, the partition [3,2] means "one group of 3 outputs and one group of 2 outputs." The denominator (144 × 1) accounts for:
+    - The ways to permute inputs within each group
+    - The ways to permute outputs within each group
+    - The ways to permute groups of the same size
+
+    This is advanced combinatorics - you do not need to understand the formula to use Boltzmann entropy. The key takeaway is that **many-to-many mappings create far more interpretations than one-to-one mappings**.
 
 The classic permutation model (5! = 120) undercounts because it only considers one-to-one assignments. The partition model correctly accounts for the possibility that multiple outputs could be funded by the same input, yielding significantly more valid interpretations.
 

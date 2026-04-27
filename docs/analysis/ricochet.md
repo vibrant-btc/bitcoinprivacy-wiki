@@ -39,6 +39,20 @@ This Ricochet chain consists of **5 transactions** (hops 0 through 4):
 
 ---
 
+## Why Ricochet Is Not Analyzed with Boltzmann Entropy
+
+You may notice that this page does not show a Boltzmann entropy calculation for the Ricochet chain. This is intentional.
+
+**Boltzmann entropy applies to a single transaction**, measuring the ambiguity within that transaction's structure. Ricochet is a **chain of 5 separate transactions**, not a single transaction.
+
+Each individual hop in the Ricochet chain has **0 bits of entropy**:
+- **Hop 0:** 1 input → 3 outputs. Only 1 valid interpretation (the input funds all 3 outputs).
+- **Hops 1-4:** 1 input → 1 output. Only 1 valid interpretation (the input funds the output).
+
+The privacy benefit of Ricochet does not come from structural ambiguity within a single transaction. It comes from **transactional distance** - the difficulty of linking the origin to the destination across multiple hops. This is a different kind of privacy than what Boltzmann entropy measures.
+
+---
+
 ## How Ricochet Works
 
 ### The Problem It Solves
