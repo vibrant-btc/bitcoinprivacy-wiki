@@ -671,9 +671,10 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
     A open source, self-sovereign node solution.
 
+<a id="stowaway"></a>
 !!! info "Stowaway"
 
-    Samourai's implementation of PayJoin.
+    Ashigaru's implementation of PayJoin, designed for spending post-mix UTXOs with an extra layer of privacy.
 
 !!! info "Submarine Swap"
 

@@ -50,7 +50,7 @@ A post-mix UTXO is an output from a CoinJoin transaction. It has been mixed with
 
     ---
 
-    PayJoin (Stowaway) adds an extra layer of privacy to post-mix spending.
+    [PayJoin & Stowaway](payjoin.md) add an extra layer of privacy to post-mix spending.
 
 -   :material-incognito:{ .lg .middle } __Use Tor__
 

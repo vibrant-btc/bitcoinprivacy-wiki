@@ -159,7 +159,7 @@ In practice, you don't need a guide just to make Stonewall - Ashigaru generates 
 
 Not all privacy techniques are created equal. When you're about to make a payment, here's a simple decision tree to help you pick the best option available:
 
-### 1. First Choice: [PayJoin](payjoin.md) (or [Stowaway](stowaway.md))
+### 1. First Choice: [PayJoin & Stowaway](payjoin.md)
 
 If the merchant or service you're paying supports PayJoin, always use it. PayJoin is the strongest option because it involves the actual recipient in the collaborative transaction. This means the person receiving your payment also contributes an input, which [poisons the Common Input Ownership Heuristic](../glossary.md#common-input-ownership-heuristic) at its core. Chain analysts can't even be sure which input was the payment and which was the recipient's contribution.
 

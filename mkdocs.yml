@@ -127,7 +127,6 @@ nav:
       - Post Mix Spending:
         - techniques/post-mix.md
         - techniques/payjoin.md
-        - techniques/stowaway.md
         - techniques/stonewall.md
         - techniques/ricochet.md
   - Lightning Privacy:

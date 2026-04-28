@@ -1,10 +1,12 @@
 ---
-description: Discover how PayJoin poisons the Common Input Ownership Heuristic by having recipients contribute inputs to transactions
+description: Discover how PayJoin and Stowaway poison the Common Input Ownership Heuristic by having recipients contribute inputs to transactions
 ---
 
-# PayJoin
+# PayJoin & Stowaway
 
 [PayJoin](../glossary.md#payjoin-p2ep) (also known as Pay-to-Endpoint or P2EP) is a privacy technique where the recipient of a Bitcoin payment contributes an input to the transaction. This breaks the [Common Input Ownership Heuristic](../glossary.md#common-input-ownership-heuristic) and makes it appear as though the sender is paying themselves.
+
+[Stowaway](../glossary.md#stowaway) is a specific PayJoin implementation built into Ashigaru Wallet, designed for spending post-mix UTXOs with an extra layer of privacy.
 
 ---
 
@@ -50,6 +52,32 @@ In a PayJoin transaction:
 
 ---
 
+## Why PayJoin Is Powerful
+
+### Poisoning the Heuristic
+
+The [Common Input Ownership Heuristic](../glossary.md#common-input-ownership-heuristic) assumes all inputs belong to the same entity. PayJoin deliberately violates this assumption.
+
+When [chain analysis](../glossary.md#chain-analysis) software sees a PayJoin, it incorrectly links all inputs to the sender. This creates false links that poison the analysis.
+
+### Breaking Change Detection
+
+In a normal transaction, [change detection](../glossary.md#change-detection) can identify which output returns to the sender. In a PayJoin, the recipient's input makes this much harder.
+
+### Hiding the Payment Amount
+
+PayJoin also deceives observers about the actual payment amount. By examining the transaction structure, an analyst might believe the payment equals one of the outputs. However, the real payment amount is the difference between the recipient's output UTXO and the recipient's input UTXO. In this sense, PayJoin falls into the domain of [steganography](../glossary.md#steganographic-transaction) — hiding the real transaction within a decoy.
+
+??? tip "What Is Steganography?"
+
+    Steganography is a technique of concealing information within other data or objects in such a way that the presence of the hidden information is not perceptible. Unlike encryption, which makes information incomprehensible without the decryption key, steganography does not modify the information. It remains displayed in plain sight. Its objective is to hide the existence of the secret message, whereas encryption clearly reveals the presence of hidden information.
+
+### No Coordinator Needed
+
+Unlike [CoinJoin](../glossary.md#coinjoin), PayJoin is a two-party protocol.
+
+---
+
 ## Types of PayJoin
 
 === "BIP78 PayJoin"
@@ -58,7 +86,6 @@ In a PayJoin transaction:
 
     **Supported by:**
     - Sparrow Wallet
-    - Samourai Wallet
     - BTCPay Server
     - JoinMarket
 
@@ -71,27 +98,67 @@ In a PayJoin transaction:
     bitcoin:bc1q...?amount=0.01&pj=https://example.com/payjoin
     ```
 
-=== "Stowaway"
+=== "BIP77 PayJoin (v2)"
 
-    Samourai Wallet's implementation of PayJoin. Uses the Whirlpool post-mix wallet to create PayJoin transactions.
+    The asynchronous, serverless version of the PayJoin protocol. Unlike PayJoin v1 which required the receiver to run a server and respond in real time, v2 uses a relay directory so sender and receiver do not need to be online simultaneously.
 
 ---
 
-## Why PayJoin Is Powerful
+## PayJoin vs CoinJoin
 
-=== "Poisoning the Heuristic"
+| Feature | PayJoin | CoinJoin |
+|---------|---------|----------|
+| **Parties** | 2 (sender + recipient) | 5+ participants |
+| **Coordinator** | None needed | Usually required |
+| **Privacy Gain** | Poisons heuristics | Breaks transaction graph |
+| **Speed** | Fast (one transaction) | Slower (queue for round) |
+| **Fees** | Normal transaction fees | Additional coordination fees |
+| **Best For** | Regular spending | Mixing large amounts |
 
-    The [Common Input Ownership Heuristic](../glossary.md#common-input-ownership-heuristic) assumes all inputs belong to the same entity. PayJoin deliberately violates this assumption.
+---
 
-    When [chain analysis](../glossary.md#chain-analysis) software sees a PayJoin, it incorrectly links all inputs to the sender. This creates false links that poison the analysis.
+## Stowaway: PayJoin for Post-Mix Spending
 
-=== "Breaking Change Detection"
+Stowaway is Ashigaru's PayJoin implementation. It allows users to create PayJoin transactions using their Whirlpool post-mix UTXOs, adding an extra layer of privacy after CoinJoin.
 
-    In a normal transaction, [change detection](../glossary.md#change-detection) can identify which output returns to the sender. In a PayJoin, the recipient's input makes this much harder.
+!!! tip "The Key Benefit"
 
-=== "No Coordinator Needed"
+    Stowaway used after a whirlpool coinjoin combines the privacy benefits of CoinJoin (Whirlpool) with the heuristic-poisoning benefits of PayJoin. This combination is one of the most powerful privacy techniques available.
 
-    Unlike [CoinJoin](../glossary.md#coinjoin), PayJoin is a two-party protocol. No coordinator or third party is needed.
+
+### How Stowaway Works in Ashigaru
+
+Stowaway belongs to Samourai's "Cahoots" category — collaborative transactions that exchange information off-chain. Ashigaru currently offers two Cahoots tools: Stowaway (PayJoins) and [Stonewall X2](stonewall.md).
+
+Cahoots require exchanging PSBTs (partially signed transactions) between users. Manually, this involves five successive QR scans between participants, suitable when you're together in person. At a distance, manual exchange is cumbersome; **Soroban**, an encrypted Tor-based protocol, automates the PSBT exchange in the background.
+
+Soroban requires an authenticated channel between participants. It uses users' [PayNyms](../glossary.md#paynym) for identification and encrypted communications.
+
+??? info "Key Terms"
+
+    - **PayJoin** = specific collaborative transaction structure
+    - **Stowaway** = Ashigaru's PayJoin implementation
+    - **Cahoots** = Samourai's name for collaborative transaction types (Stowaway, Stonewall X2), now in Ashigaru
+    - **Soroban** = Tor-based encrypted communications for Cahoots
+    - **PayNym** = unique wallet identifier used to establish Soroban communications for Cahoots
+
+### How to Do a PayJoin in Ashigaru
+
+1. **Establish PayNym Connection**: Before initiating Stowaway, ensure both PayNyms follow each other — it's required to establish the encrypted Soroban channel.
+
+2. **Initiate or Participate**: Tap your PayNym image top-left, then open `Collaborate`. Choose `Initiate` if you are the payer, or `Participate` if you are the recipient collaborator.
+
+3. **Choose Collaboration Mode**:
+   - **Online** via Soroban — automated PSBT exchange over Tor
+   - **In Person / Manual** — QR code exchanges
+
+4. **Complete the Exchange**: Follow the prompts to set up the transaction, then either wait for Soroban to complete automatically or alternate QR scans with your collaborator.
+
+5. **Broadcast**: After both participants finish signing, broadcast to the Bitcoin network.
+
+!!! tip "Stowaway Blurs Input Ownership"
+
+    Stowaway blurs input ownership and destination; observers cannot reliably assign roles, which strengthens privacy.
 
 ---
 
@@ -133,66 +200,39 @@ In a PayJoin transaction:
 
 ---
 
-## PayJoin vs CoinJoin
+## Stowaway Best Practices
 
-| Feature | PayJoin | CoinJoin |
-|---------|---------|----------|
-| **Parties** | 2 (sender + recipient) | 5+ participants |
-| **Coordinator** | None needed | Usually required |
-| **Privacy Gain** | Poisons heuristics | Breaks transaction graph |
-| **Speed** | Fast (one transaction) | Slower (queue for round) |
-| **Fees** | Normal transaction fees | Additional coordination fees |
-| **Best For** | Regular spending | Mixing large amounts |
+<div class="grid cards" markdown>
 
----
+-   :material-shuffle:{ .lg .middle } __Use After Whirlpool__
 
-## Stowaway: PayJoin in Ashigaru
+    ---
 
-Ashigaru includes a PayJoin tool called **Stowaway**, available in the Ashigaru Android app. To complete a PayJoin, the recipient who also acts as the collaborator must use software compatible with Stowaway - currently, Ashigaru only.
+    Stowaway is designed to be used after Whirlpool CoinJoin. It adds an extra layer of privacy to your post-mix spending.
 
-Stowaway belongs to Samourai's "Cahoots" category - collaborative transactions that exchange information off-chain. Ashigaru currently offers two Cahoots tools: Stowaway (PayJoins) and [Stonewall X2](stonewall.md).
+-   :material-incognito:{ .lg .middle } __Use Tor__
 
-Cahoots require exchanging PSBTs (partially signed transactions) between users. Manually, this involves five successive QR scans between participants, suitable when you're together in person. At a distance, manual exchange is cumbersome; **Soroban**, an encrypted Tor-based protocol, automates the PSBT exchange in the background.
+    ---
 
-Soroban requires an authenticated channel between participants. It uses users' PayNyms for identification and encrypted communications.
+    Always route Stowaway through Tor. Ashigaru supports this natively.
 
-!!! info "Stowaway Summary"
+-   :material-hand-back-right-off:{ .lg .middle } __Spend Post-Mix Independently__
 
-    - **PayJoin** = specific collaborative transaction structure
-    - **Stowaway** = Ashigaru's PayJoin implementation
-    - **Cahoots** = Samourai's name for collaborative transaction types (Stowaway, Stonewall X2), now in Ashigaru
-    - **Soroban** = Tor-based encrypted communications for Cahoots
-    - **PayNym** = unique wallet identifier used to establish Soroban communications for Cahoots
+    ---
 
-### How Stowaway Works
+    Each Stowaway transaction should use only one post-mix UTXO. Never combine post-mix outputs.
 
-Payjoin is a specific structure of Bitcoin transaction that enhances user privacy during a payment by collaborating with the payment recipient. What makes PayJoin unique is that it produces a transaction that looks ordinary at first glance but is actually a mini coinjoin between two parties. To achieve this, the recipient participates in the inputs alongside the sender. The recipient also includes a self-payment in the transaction, allowing them to be paid.
+-   :material-shield-check:{ .lg .middle } __Verify the Transaction__
 
-In a PayJoin transaction, the Common Input Ownership Heuristic is deliberately violated. When chain analysis software sees a PayJoin, it incorrectly links all inputs to the sender. This creates false links that poison the analysis.
+    ---
 
-Furthermore, PayJoin also allows for deceiving an external observer about the actual amount of the payment that has been made. By examining the transaction structure, the analyst might believe that the payment is equivalent to the amount of one of the outputs. However, in reality, the payment amount does not correspond to any of the outputs. It is actually the difference between the recipient's output UTXO and the recipient's input UTXO.
+    Always verify the Stowaway transaction before signing. A malicious recipient could try to deanonymize you.
 
-### How to Do a PayJoin in Ashigaru
-
-1. **Establish PayNym Connection**: Before initiating Stowaway, ensure both PayNyms follow each other - it's required to establish the encrypted Soroban channel.
-
-2. **Initiate or Participate**: Tap your PayNym image top-left, then open `Collaborate`. Choose `Initiate` if you are the payer, or `Participate` if you are the recipient collaborator.
-
-3. **Choose Collaboration Mode**:
-   - **Online** via Soroban - automated PSBT exchange over Tor
-   - **In Person / Manual** - QR code exchanges
-
-4. **Complete the Exchange**: Follow the prompts to set up the transaction, then either wait for Soroban to complete automatically or alternate QR scans with your collaborator.
-
-5. **Broadcast**: After both participants finish signing, broadcast to the Bitcoin network.
-
-!!! tip "Stowaway Blurs Input Ownership"
-
-    Stowaway blurs input ownership and destination; observers cannot reliably assign roles, which strengthens privacy.
+</div>
 
 ---
 
-## Common PayJoin Mistakes
+## Common PayJoin & Stowaway Mistakes
 
 === "Not Using Tor"
 
@@ -205,3 +245,17 @@ Furthermore, PayJoin also allows for deceiving an external observer about the ac
 === "Not Verifying the Transaction"
 
     Always verify the PayJoin transaction before signing. A malicious recipient could try to steal your funds.
+
+=== "Spending Multiple Post-Mix UTXOs"
+
+    Never spend more than one post-mix UTXO in a Stowaway transaction. This re-links your mixed outputs.
+
+=== "Using Stowaway for Non-Post-Mix UTXOs"
+
+    Stowaway is designed for post-mix spending. For regular spending, use regular PayJoin.
+
+---
+
+## History and Origins
+
+In 2015, [LaurentMT](https://twitter.com/LaurentMT) first described this method as "steganographic transactions" in a document available [here](https://gist.githubusercontent.com/LaurentMT/e758767ca4038ac40aaf/raw/c8125f6a3c3d0e90246dc96d3b603690ab6f1dcc/gistfile1.txt). Samourai Wallet adopted and implemented it as "Stowaway" in 2018. PayJoin concepts are also discussed in [BIP78](https://github.com/bitcoin/bips/blob/master/bip-0078.mediawiki), and [BIP77](https://payjoin.org/docs/how-it-works/payjoin-v2-bip-77/).

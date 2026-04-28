@@ -209,6 +209,10 @@ The privacy model stays the same: every output looks identical, so nobody can te
 
     Surge Cycles were introduced by Samourai Wallet in June 2023. Read the full announcement: [Introducing Whirlpool Surge Cycles](https://medium.com/samourai-wallet/introducing-whirlpool-surge-cycles-b5b484a1670f)
 
+!!! tip "See Whirlpool Entropy Analysis"
+
+    Want to see the math behind Whirlpool's privacy? The [Boltzmann entropy analysis](../../analysis/whirlpool.md) page breaks down exactly how many valid interpretations a Whirlpool transaction has, what the link probability matrix looks like, and why the 34.2% figure matters. It's a deep dive into the mathematical foundation of Whirlpool's privacy guarantees.
+
 ---
 
 ## Spending the Doxxic Change
@@ -381,3 +385,11 @@ Ashigaru continues to be actively maintained by an anonymous team committed to B
 === "Consolidating Pre-Mix UTXOs"
 
     Combining multiple pre-mix UTXOs in a single transaction links those UTXOs, even though they are CoinJoined after there is a record on the permanent blockchain stating that those UTXOs likely had the same owner.
+
+---
+
+## References
+
+- [Loïc Morel's Educational Content](https://pandul.fr/) — Comprehensive Bitcoin privacy tutorials and guides
+- [Introducing Whirlpool Surge Cycles](https://medium.com/samourai-wallet/introducing-whirlpool-surge-cycles-b5b484a1670f) — Original Surge Cycles announcement from Samourai Wallet
+- [Whirlpool Boltzmann Analysis](../../analysis/whirlpool.md) — Detailed entropy and link probability analysis of Whirlpool transactions

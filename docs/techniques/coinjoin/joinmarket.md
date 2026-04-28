@@ -295,3 +295,10 @@ For detailed guidance on managing post-mix coins and handling doxxic change, see
 !!! info "Post-Mix Best Practices"
 
     The post-mix management principles from [Whirlpool](whirlpool.md#how-to-manage-postmix) apply equally to JoinMarket. Never merge mixed and unmixed UTXOs, prefer spending from post-mix directly, don't reuse addresses, and be cautious with script types and consolidations.
+
+---
+
+## References
+
+- [Loïc Morel's Educational Content](https://pandul.fr/) — Comprehensive Bitcoin privacy tutorials and guides
+- [JAM Documentation](https://jamdocs.org) — Official documentation for the JoinMarket Web UI
