@@ -65,6 +65,7 @@ A CoinJoin is a [collaborative transaction](../../glossary.md#collaborative-tran
     Developed by [Samourai Wallet](../../glossary.md#samourai-wallet). Uses a 5-party model with fixed denominations (50k, 100k, 1M, 5M, 50M [sats](../../glossary.md#satoshi-sat)).
 
     **Pros:**
+
     - Simple to use
     - Fixed denominations make it easy to identify
     - Good [anonymity set](../../glossary.md#anonymity-set)
@@ -76,10 +77,12 @@ A CoinJoin is a [collaborative transaction](../../glossary.md#collaborative-tran
     Uses a larger isolated [anonymity set](../../glossary.md#anonymity-set) (50-150 parties) with flexible denominations. Uses the [WabiSabi](../../glossary.md#wabisabi) protocol.
 
     **Pros:**
+
     - Flexible denominations
     - Can select different coordinator
 
     **Cons:**
+
     - Numerous historical deanonymisation vectors
     - No post mix spending tools (Easy to mess up and reduce privacy gains)
 
@@ -90,11 +93,13 @@ A CoinJoin is a [collaborative transaction](../../glossary.md#collaborative-tran
     A peer-to-peer marketplace for CoinJoin. [Makers](../../glossary.md#maker) provide liquidity and earn fees, [Takers](../../glossary.md#taker) initiate CoinJoins.
 
     **Pros:**
+
     - No central coordinator
     - Flexible party sizes
     - Makers earn fees
 
     **Cons:**
+    
     - More complex to use
     - Requires more technical knowledge
     - Slower to find counterparties

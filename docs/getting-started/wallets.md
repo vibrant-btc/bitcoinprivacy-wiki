@@ -37,6 +37,7 @@ Here are two of the best mobile wallets, [Ashigaru](https://ashigaru.rs) and [Bl
 === "Ashigaru Wallet"
 
     **Privacy Features:**
+
     - Connect to own node (Dojo)
     - Runs over Tor
     - CoinJoin (Whirlpool) + PayJoin (Stowaway)
@@ -52,6 +53,7 @@ Here are two of the best mobile wallets, [Ashigaru](https://ashigaru.rs) and [Bl
 === "BlueWallet"
 
     **Privacy Features:**
+    
     - Connect to own node (via Electrum server)
     - PSBT and multi-sig
     - Create multiple accounts
