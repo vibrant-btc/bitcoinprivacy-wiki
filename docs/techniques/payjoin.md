@@ -89,15 +89,6 @@ Unlike [CoinJoin](../glossary.md#coinjoin), PayJoin is a two-party protocol.
     - BTCPay Server
     - JoinMarket
 
-=== "BIP21 PayJoin"
-
-    An extension of the BIP21 URI scheme that allows PayJoin to be initiated through a simple Bitcoin URI.
-
-    **Example:**
-    ```
-    bitcoin:bc1q...?amount=0.01&pj=https://example.com/payjoin
-    ```
-
 === "BIP77 PayJoin (v2)"
 
     The asynchronous, serverless version of the PayJoin protocol. Unlike PayJoin v1 which required the receiver to run a server and respond in real time, v2 uses a relay directory so sender and receiver do not need to be online simultaneously.
