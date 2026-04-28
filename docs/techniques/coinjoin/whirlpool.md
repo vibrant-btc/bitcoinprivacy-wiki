@@ -1,10 +1,10 @@
 ---
-description: Learn about Whirlpool CoinJoin, its 5-party fixed denomination model, and how to manage post-mix UTXOs safely
+description: Learn about Whirlpool CoinJoin, its fixed denomination model, Surge Cycles, and how to manage post-mix UTXOs safely
 ---
 
 # Whirlpool
 
-[Whirlpool](../../glossary.md#whirlpool) is a [CoinJoin](../../glossary.md#coinjoin) implementation originally developed by [Samourai Wallet](../../glossary.md#samourai-wallet). It uses a 5-party model with fixed denominations to create privacy on the Bitcoin blockchain.
+[Whirlpool](../../glossary.md#whirlpool) is a [CoinJoin](../../glossary.md#coinjoin) implementation originally developed by [Samourai Wallet](../../glossary.md#samourai-wallet). It uses a fixed-denomination model to create privacy on the Bitcoin blockchain.
 
 !!! info "Other CoinJoin Implementations"
 
@@ -14,7 +14,7 @@ description: Learn about Whirlpool CoinJoin, its 5-party fixed denomination mode
 
 ## What Is Whirlpool?
 
-Whirlpool is a CoinJoin protocol where *usually* exactly 5 participants come together to mix their bitcoin. Each participant contributes one input of a specific denomination and receives one output of the same denomination.
+Whirlpool is a CoinJoin protocol where participants come together to mix their bitcoin. Each participant contributes one input of a specific denomination and receives one output of the same denomination.
 
 !!! tip "How It Works"
 
@@ -24,31 +24,15 @@ Whirlpool is a CoinJoin protocol where *usually* exactly 5 participants come tog
 
 ## Whirlpool Transaction Example
 
-The image below shows a Whirlpool CoinJoin transaction as visualised by [am-i.exposed](https://am-i.exposed). Notice the beautiful 5 equal outputs at a fixed denomination, the signature pattern of Whirlpool.
+The image below shows a Whirlpool CoinJoin transaction as visualised by [am-i.exposed](https://am-i.exposed). Notice the beautiful equal outputs at a fixed denomination — the signature pattern of Whirlpool.
 
 ![Whirlpool CoinJoin transaction scanned by am-i.exposed](../../images/whirlpool.png){ loading=lazy }
 
 ---
 
-## Whirlpool Denominations
-
-Whirlpool uses fixed denominations to make the CoinJoin outputs indistinguishable from each other:
-
-| Denomination | Sats | Use Case |
-|-------------|------|----------|
-| **0.0005 BTC** | 50,000 | Small amounts, testing |
-| **0.001 BTC** | 100,000 | Small payments |
-| **0.01 BTC** | 1,000,000 | Medium amounts |
-| **0.05 BTC** | 5,000,000 | Larger amounts |
-| **0.5 BTC** | 50,000,000 | Large holdings |
-
-!!! warning "Fixed Denominations Matter"
-
-    The fixed denominations are what make Whirlpool effective. If outputs were different sizes, they could be linked to specific inputs.
-
----
-
 ## How Whirlpool Works
+
+### The Four Accounts
 
 Whirlpool wallets use 4 distinct accounts to support the coinjoin process:
 
@@ -59,19 +43,19 @@ Whirlpool wallets use 4 distinct accounts to support the coinjoin process:
 | **Postmix** | `2147483646'` | Mixed UTXOs after completing rounds |
 | **Bad Bank** | `2147483644'` | [Doxxic change](../../glossary.md#doxxic-change) from Tx0 transactions |
 
-### Whirlpool Tx0 and CoinJoin Flow
+### The Mixing Process
 
 === "Step 1: Create the Tx0"
 
-    When you initiate a mix, your wallet creates a Tx0 transaction. This transaction takes your deposit UTXO(s) and splits them into equal-sized premix outputs. Any leftover bitcoin becomes **[doxxic change](../../glossary.md#doxxic-change)**.
+    When you initiate a mix, your wallet creates a [Tx0](../../glossary.md#tx0) transaction. This takes your deposit UTXO(s) and splits them into equal-sized premix outputs. Any leftover bitcoin becomes **[doxxic change](../../glossary.md#doxxic-change)**.
 
 === "Step 2: Enter the Queue"
 
-    Your premix UTXOs enter the queue. When 5 participants are ready, the CoinJoin round executes.
+    Your premix UTXOs enter the queue. You choose a [cycle priority](../../glossary.md#cycle-priority) (low, normal, or high) which determines how quickly your first mix will occur based on mining fee rates.
 
 === "Step 3: Complete the Mix"
 
-    Once the round completes, you receive post-mix outputs of the same denomination. These UTXOs have been mixed with 4 other participants.
+    When enough participants are ready, the CoinJoin round executes. You receive post-mix outputs of the same denomination, mixed with other participants.
 
 === "Step 4: Remix"
 
@@ -79,17 +63,151 @@ Whirlpool wallets use 4 distinct accounts to support the coinjoin process:
 
 ---
 
+## Whirlpool Denominations
+
+Whirlpool uses fixed denominations to make the CoinJoin outputs indistinguishable from each other.
+
+### Original Samourai Pools
+
+When Whirlpool was first launched by Samourai Wallet, these were the available pool sizes:
+
+| Denomination | Sats | Use Case |
+|-------------|------|----------|
+| **0.0005 BTC** | 50,000 | Small amounts, testing |
+| **0.001 BTC** | 100,000 | Small payments |
+| **0.01 BTC** | 1,000,000 | Medium amounts |
+| **0.05 BTC** | 5,000,000 | Larger amounts |
+| **0.5 BTC** | 50,000,000 | Large holdings |
+
+### Current Ashigaru Pools
+
+Today, [Ashigaru](https://ashigaru.rs) offers two active pools:
+
+| Denomination | Entry Fee | Sats |
+|-------------|-----------|------|
+| **0.025 BTC** | 0.00125 BTC | 2,500,000 |
+| **0.25 BTC** | 0.0125 BTC | 25,000,000 |
+
+The original Samourai pool sizes may return in the future, but for now only these two are available.
+
+!!! warning "Fixed Denominations Matter"
+
+    The fixed denominations are what make Whirlpool effective. If outputs were different sizes, they could be linked to specific inputs.
+
+---
+
+## Understanding Tx0: The Preparation Step
+
+Before your coins can enter a Whirlpool round, they need to be prepared. This is what the Tx0 transaction does.
+
+### What Tx0 Actually Does
+
+Tx0 is the preparation step. Before your coins can enter a Whirlpool round, they need to be split into pieces that match the pool's denomination. Your wallet takes your deposit UTXO and chops it into equal-sized premix outputs.
+
+Each premix output is slightly larger than the pool denomination — the extra sats cover the mining fee that will be paid when this premix UTXO eventually enters the actual CoinJoin round.
+
+### A Real Tx0 Example
+
+The image below shows a real Tx0 transaction from the Samourai Wallet era:
+
+![Tx0 transaction scanned by am-i.exposed](../../images/tx0.png){ loading=lazy }
+
+- **Transaction ID:** [`cc27f73a...`](https://am-i.exposed/#tx=cc27f73a536bed8edb60f580f43b5cb75a17e940fc40fce7f6e710353b0a18da)
+- **Block:** #707,908
+- **Date:** November 2, 2021
+
+??? note "View the Tx0 Output Breakdown"
+
+    | Output | Amount (BTC) | Purpose |
+    |--------|-------------|---------|
+    | 7 outputs | 0.05002117 each | Premix UTXOs (going to the premix account) |
+    | 1 OP_RETURN | 0 | [Coordinator fee](../../glossary.md#coordinator-fee) |
+    | 1 output | 0.00175000 | Whirlpool pool entry fee |
+    | 1 output | 0.02599109 | Doxxic change (going to the Bad Bank account) |
+
+    **Input:** 0.37792239 BTC (from the deposit account)
+
+    In this example, the user wanted to join the 0.05 BTC pool. Their wallet took their single deposit of 0.37792239 BTC and split it into 7 equal premix outputs of 0.05002117 BTC each. The extra 2,117 sats per output cover the mining fee for the future CoinJoin round.
+
+### The Doxxic Change Problem
+
+After creating premix outputs, there is often leftover bitcoin. This leftover is called [doxxic change](../../glossary.md#doxxic-change) — and it's a privacy risk.
+
+This change has **not** been mixed. It is still linked to the user's original deposit. If you were to spend this change together with your mixed coins, you would instantly connect your clean (mixed) coins to your dirty (unmixed) history, wiping out all the privacy benefits you just paid for.
+
+That's why Whirlpool sends doxxic change to a separate account called the "Bad Bank." This keeps toxic (unmixed) UTXOs physically separated from clean (mixed) ones in your wallet, making it much harder to accidentally combine them.
+
+### The Fee Structure
+
+Tx0 involves two fee-related outputs:
+
+1. **[Coordinator fee](../../glossary.md#coordinator-fee) (OP_RETURN):** This is the service fee paid to the Whirlpool coordinator for running the mixing service. It's written as an [OP_RETURN](../../glossary.md#op_return) output — a way to embed data in the blockchain that doesn't carry any bitcoin value.
+
+2. **Pool entry fee:** This is the one-time fee you pay to enter the pool. Once you've paid it, all your future remixes are completely free — no extra service fees, no extra mining fees.
+
+!!! tip "Bigger Tx0 = Better Fee Deal"
+
+    The bigger your Tx0 input, the better the fee deal. Since you only pay the entry fee once per Tx0, getting more premix outputs from a single transaction means the fee gets spread across more coins. If you create 7 premix outputs from one entry fee payment, the effective fee per output is much smaller than if you had only created one or two.
+
+!!! info "This Example Is from the Samourai Era"
+
+    This transaction is from November 2021, when Samourai Wallet was still actively maintained. Today, Whirlpool is performed through [Ashigaru](https://ashigaru.rs), which continues the same protocol. The Samourai founders were arrested in April 2024, but the Whirlpool technology lives on through Ashigaru.
+
+---
+
 ## Whirlpool Fees
 
-Whirlpool charges a coordinator fee for each Tx0. Remixes cost nothing extra - no additional service or mining fees.
+Whirlpool charges a [coordinator fee](../../glossary.md#coordinator-fee) for each Tx0. Remixes cost nothing extra — no additional service or mining fees.
 
-| Denomination | Fee |
-|-------------|-----|
-| 0.0005 BTC | 0.000005 BTC (1%) |
-| 0.001 BTC | 0.00001 BTC (1%) |
-| 0.01 BTC | 0.0001 BTC (1%) |
-| 0.05 BTC | 0.0005 BTC (1%) |
-| 0.5 BTC | 0.005 BTC (1%) |
+### Original Samourai Fees
+
+These were the fees when Samourai Wallet offered all five pool sizes:
+
+| Denomination | Fee | Percentage |
+|-------------|-----|------------|
+| 0.0005 BTC | 0.000005 BTC | 1% |
+| 0.001 BTC | 0.00001 BTC | 1% |
+| 0.01 BTC | 0.0001 BTC | 1% |
+| 0.05 BTC | 0.0005 BTC | 1% |
+| 0.5 BTC | 0.005 BTC | 1% |
+
+### Current Ashigaru Fees
+
+On Ashigaru, only two pools are currently active:
+
+| Denomination | Entry Fee | Percentage |
+|-------------|-----------|------------|
+| 0.025 BTC | 0.00125 BTC | 5% |
+| 0.25 BTC | 0.0125 BTC | 5% |
+
+The fee is a one-time payment when you enter the pool. All remixes after that are free.
+
+---
+
+## Surge Cycles
+
+Whirlpool also supports rounds with more than 5 participants. These are called "[Surge Cycles](../../glossary.md#surge-cycle)" and can include 6, 7, 8, 9, or 10 people instead of the original 5.
+
+### How Surge Cycles Work
+
+Surge Cycles were introduced to make better use of mining fees. Here's how they happen:
+
+When you enter Whirlpool, you choose a [cycle priority](../../glossary.md#cycle-priority) — low, normal, or high. This determines the mining fee rate your premix UTXOs can support. The Whirlpool coordinator also sets a "trigger fee rate" based on current network conditions.
+
+If mining fees on the Bitcoin network suddenly drop after your premix UTXOs have already committed to a higher fee rate, there's a surplus of mining fees available. Instead of wasting this surplus, the coordinator adds more [remixers](../../glossary.md#remixer) to the round, making the transaction larger and using up the extra fees efficiently.
+
+### Benefits of Surge Cycles
+
+- **Better fee efficiency:** Your premix UTXOs get more privacy for the same mining fee
+- **Higher anonymity sets:** More participants means more possible interpretations
+- **Faster remixing:** Remixers get mixed more frequently
+- **No client update needed:** Surge Cycles are handled entirely by the coordinator
+
+The privacy model stays the same: every output looks identical, so nobody can tell which input belongs to which output.
+
+??? info "Read the Original Surge Cycles Announcement"
+
+    Surge Cycles were introduced by Samourai Wallet in June 2023. Read the full announcement: [Introducing Whirlpool Surge Cycles](https://medium.com/samourai-wallet/introducing-whirlpool-surge-cycles-b5b484a1670f)
 
 ---
 
@@ -97,9 +215,9 @@ Whirlpool charges a coordinator fee for each Tx0. Remixes cost nothing extra - n
 
 Remember: Whirlpool's model equalizes coins in the Tx0 before entering pools, which makes tracking harder. This is the most effective coinjoin model, but it has a drawback: a change output that does not go through the coinjoin process, we call this **[doxxic change](../../glossary.md#doxxic-change)**.
 
-This change output is created for each Tx0. It is isolated in a specific account named `Doxxic Change` or `Bad Bank` depending on the software to avoid using it with your other [UTXOs](../../glossary.md#utxo). This point is critical: these UTXOs have not been mixed - their traceability links remain intact and can compromise your privacy by tying you to your coinjoin activity. Handle them carefully and never use them with other UTXOs, mixed or not. **Combining a toxic UTXO with a mixed UTXO destroys all privacy gains from coinjoins.**
+This change output is created for each Tx0. It is isolated in a specific account named `Doxxic Change` or `Bad Bank` depending on the software to avoid using it with your other [UTXOs](../../glossary.md#utxo). This point is critical: these UTXOs have not been mixed — their traceability links remain intact and can compromise your privacy by tying you to your coinjoin activity. Handle them carefully and never use them with other UTXOs, mixed or not. **Combining a toxic UTXO with a mixed UTXO destroys all privacy gains from coinjoins.**
 
-Currently, Ashigaru does not provide direct access to the `Doxxic Change` account, at least it wasn't found at the time of writing. This feature will likely be added in a future update. In the meantime, the only way to retrieve these funds is to import your seed into Sparrow Wallet. Sparrow usually auto-detects a Whirlpool wallet and gives access to all four accounts, including `Doxxic Change`. You can then spend those UTXOs like regular bitcoin from Sparrow.
+Currently, Ashigaru does not provide direct access to the `Doxxic Change` account, at least it wasn't found at the time of writing. This feature will likely be added in a future update. In the meantime, the only way to retrieve these funds is to import your seed into Sparrow Wallet. Sparrow usually auto-detects a Whirlpool wallet and gives access to all four accounts, including `Bad Bank`. You can then spend those UTXOs like regular bitcoin from Sparrow.
 
 Here are several possible strategies to handle coinjoin change UTXOs without compromising your privacy:
 
@@ -109,7 +227,7 @@ Here are several possible strategies to handle coinjoin change UTXOs without com
 
     ---
 
-    If a toxic UTXO is large enough for a smaller pool, this is often the best option. Do not merge multiple toxic UTXOs to reach the threshold - that would link your entries.
+    If a toxic UTXO is large enough for a smaller pool, this is often the best option. Do not merge multiple toxic UTXOs to reach the threshold — that would link your entries.
 
 -   :material-lock:{ .lg .middle } __Mark Them as Unspendable__
 
@@ -157,7 +275,7 @@ Some users prefer moving mixed BTC to a hardware wallet. This is possible, but i
 
 === "Never Merge Mixed and Unmixed UTXOs"
 
-    The most common mistake is merging UTXOs. Never combine mixed UTXOs with unmixed UTXOs in the same transaction, or you risk creating links via the [CIOH](../../glossary.md#cioh). This means rigorous UTXO management is key - clear and precise labeling is essential. In general, UTXO merging is risky and often leads to privacy loss when done poorly.
+    The most common mistake is merging UTXOs. Never combine mixed UTXOs with unmixed UTXOs in the same transaction, or you risk creating links via the [CIOH](../../glossary.md#cioh). This means rigorous UTXO management is key — clear and precise labeling is essential. In general, UTXO merging is risky and often leads to privacy loss when done poorly.
 
 === "Be Careful with Consolidation"
 
@@ -238,7 +356,7 @@ Ashigaru continues to be actively maintained by an anonymous team committed to B
 
 !!! info "Whirlpool Is Now Done via Ashigaru"
 
-    [Ashigaru](https://ashigaru.rs) is a Bitcoin wallet that continues the Samourai Wallet project in a new form. In April 2024, the founders of Samourai Wallet were arrested by American authorities and their servers were seized. While the original Samourai app remained usable, it is no longer maintained.
+    [Ashigaru](https://ashigaru.rs) is a Bitcoin wallet that continues the Samourai Wallet project in a new form. In April 2024, the founders of Samourai Wallet were arrested by American authorities and their servers were seized. While the original Samourai app remained usable for a time, it is no longer maintained.
 
     Ashigaru is a free, open-source fork maintained by an anonymous team to preserve Samourai's functionality and original philosophy: defending the privacy and sovereignty of Bitcoin users. All Whirlpool CoinJoin features are now accessed through Ashigaru.
 

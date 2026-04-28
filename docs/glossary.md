@@ -215,6 +215,21 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
     A wallet where a third party holds your private keys. You trust the custodian to manage your funds. Examples include exchange wallets and Wallet of Satoshi. If the custodian goes bankrupt or freezes your account, you lose access to your funds.
 
+<a id="coordinator-fee"></a>
+!!! info "Coordinator Fee"
+
+    A service fee charged by the Whirlpool coordinator for organizing and facilitating CoinJoin rounds. This fee is paid once when entering a pool and covers the infrastructure costs of running the mixing service.
+
+<a id="cycle-priority"></a>
+!!! info "Cycle Priority"
+
+    A setting in Whirlpool that lets users choose how quickly they want their first mix to occur. Low priority uses a 24-block moving average of fee rates, normal uses 6 blocks, and high uses 2 blocks. Higher priority means faster confirmation but higher mining fees.
+
+<a id="zerolink"></a>
+!!! info "ZeroLink"
+
+    A comprehensive mixing protocol that incorporates Chaumian coinjoins and strategies to protect users' anonymity against chain analysis. It enforces strict separation between pre-mix and post-mix UTXOs using separate wallet accounts, standardizes script types and transaction options, and prevents accidental associations between mixed and unmixed coins. Whirlpool is the only implementation that rigorously follows the ZeroLink protocol.
+
 ---
 
 ## D
@@ -563,9 +578,15 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
     A technique where you create several self-payments to your own fresh addresses to simulate a change of ownership of your bitcoin before the final spend. Provides retrospective anonymity by adding distance between a CoinJoin and the final destination.
 
-!!! info "RoboSats"
+<a id="remixer"></a>
+!!! info "Remixer"
 
-    A Lightning-based P2P exchange. Simple interface, no KYC required, tor only.
+    A participant in a CoinJoin round who has already completed at least one mix and is going through another round to increase their [anonymity set](#anonymity-set). Remixers do not pay additional service or mining fees — these are covered by new entrants ([premixers](#premixer)).
+
+<a id="premixer"></a>
+!!! info "Premixer"
+
+    A new entrant into a CoinJoin pool. Premixers are users whose coins have not yet been mixed. They pay the mining fees for the round, which also cover the costs for remixers participating in the same round.
 
 !!! warning "Round Amount Detection"
 
@@ -634,7 +655,17 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 <a id="stonewall"></a>
 !!! tip "Stonewall"
 
-    A steganographic transaction format from Samourai Wallet (now Ashigaru) that mimics a CoinJoin. Has 2-4 inputs and exactly 4 outputs: 2 equal-valued outputs (one real payment, one decoy) and 2 change outputs. Solo Stonewall uses only the sender's UTXOs. STONEWALLx2 involves a collaborator contributing inputs, making it indistinguishable from a genuine 2-party CoinJoin.
+    A steganographic transaction format from Samourai Wallet (now Ashigaru) that mimics a CoinJoin. Has a minimum of 2 inputs and exactly 4 outputs: 2 equal-valued outputs (one real payment, one decoy) and 2 change outputs. Solo Stonewall uses only the sender's UTXOs. STONEWALLx2 involves a collaborator contributing inputs, making it indistinguishable from a genuine 2-party CoinJoin.
+
+<a id="surge-cycle"></a>
+!!! info "Surge Cycle"
+
+    A Whirlpool CoinJoin round with more than 5 participants. Surge Cycles can include 6, 7, 8, 9, or 10 participants. They are triggered when on-chain mining fees drop after premixers have already committed to a higher fee rate, allowing the coordinator to fit more remixers into the same round without increasing costs. This increases privacy by creating more possible interpretations of the transaction.
+
+<a id="tx0"></a>
+!!! info "Tx0"
+
+    The preparation transaction in Whirlpool. It takes a user's deposit UTXO(s) and splits them into equal-sized premix outputs matching the pool denomination. Any leftover bitcoin becomes [doxxic change](#doxxic-change). The Tx0 also pays the coordinator service fee and the one-time pool entry fee.
 
 !!! info "Start9"
 
