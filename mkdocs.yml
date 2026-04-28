@@ -133,7 +133,6 @@ nav:
     - Lightning Basics: lightning/basics.md
     - Lightning Privacy: lightning/privacy.md
     - Routing Analysis: lightning/routing-analysis.md
-    - Channel Coinjoins: lightning/channel-coinjoins.md
     - Blinded Paths: lightning/blinded-paths.md
     - BOLT12 Offers: lightning/bolt12.md
     - lnproxy: lightning/lnproxy.md

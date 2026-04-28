@@ -81,7 +81,6 @@ However, this is not enough in all cases. A large payment will naturally have fe
 The following pages dive deeper into specific attack vectors and mitigations:
 
 - [Routing Analysis](routing-analysis.md) - How routing nodes can compromise sender and receiver privacy
-- [Channel Coinjoins](channel-coinjoins.md) - Protecting your on-chain history when opening and closing channels
 - [Blinded Paths](blinded-paths.md) - Receiver privacy through blinded routes and trampoline routing
 - [BOLT12](bolt12.md) - Reusable payment codes and offers for better receiver privacy
 
