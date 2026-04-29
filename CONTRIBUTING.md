@@ -1,10 +1,3 @@
----
-description: How to contribute to BitcoinPrivacy.Wiki
-hide:
-  - navigation
-  - toc
----
-
 # Contributing
 
 Thank you for your interest in improving BitcoinPrivacy.Wiki! This guide will help you get started.
