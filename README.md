@@ -13,11 +13,11 @@
 
 | Section | Covers |
 |---------|--------|
-| **Getting Started** | Bitcoin basics, UTXOs, chain analysis, KYC-free acquisition, wallets, nodes |
+| **Getting Started** | Bitcoin basics, UTXOs, chain analysis, wallets, nodes |
 | **Privacy Techniques** | Address hygiene, coin control, CoinJoin, PayJoin etc |
 | **Lightning Privacy** | Channel privacy, routing analysis, blinded paths, BOLT12, lnproxy |
 | **Boltzmann Entropy** | Transaction entropy, valid interpretations, link probability matrices |
-| **Analysis Walkthrough** | Real transaction examples with privacy scoring and recommendations |
+| **Analysis Walkthrough** | Real transaction examples with advanced privacy analysis |
 | **Glossary** | Comprehensive Bitcoin privacy terminology |
 
 ---
