@@ -68,6 +68,7 @@ And many more. For a 5-party equal-output CoinJoin like Whirlpool, there are exa
 This is the critical insight. In a single valid interpretation, one input can be linked to **multiple outputs simultaneously**. When we count how many interpretations contain each link, a single input can appear linked to several outputs in the same interpretation.
 
 For the Whirlpool example:
+
 - There are 1,496 total interpretations
 - Each input-output pair appears together in 512 of those interpretations
 - 512 / 1,496 = **34.2%**
