@@ -31,15 +31,9 @@ mkdocs serve
 
 ---
 
-## References
-
-This site draws from: [Mastering Bitcoin](https://github.com/bitcoinbook/bitcoinbook) · [Athena Alpha](https://www.athena-alpha.com/bitcoin-privacy/) · [bitcoiner.guide](https://bitcoiner.guide/) · [am-i.exposed](https://am-i.exposed/) · [silentpayments.xyz](https://silentpayments.xyz/) · [paymentcode.io](https://paymentcode.io/) · [Planb Academy](https://planb.academy/)
-
----
-
 ## Contributing
 
-Contributions welcome! Follow the existing content structure and Material for MkDocs formatting conventions.
+Contributions welcome! See the [Contributing Guide](CONTRIBUTING.md) for details.
 
 ## License
 
