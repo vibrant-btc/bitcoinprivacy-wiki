@@ -48,6 +48,7 @@ You may notice that this page does not show a Boltzmann entropy calculation for 
 **Boltzmann entropy applies to a single transaction**, measuring the ambiguity within that transaction's structure. Ricochet is a **chain of 5 separate transactions**, not a single transaction.
 
 Each individual hop in the Ricochet chain has **0 bits of entropy**:
+
 - **Hop 0:** 1 input → 3 outputs. Only 1 valid interpretation (the input funds all 3 outputs).
 - **Hops 1-4:** 1 input → 1 output. Only 1 valid interpretation (the input funds the output).
 

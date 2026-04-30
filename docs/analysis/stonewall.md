@@ -36,6 +36,7 @@ The matrix above shows the probability that each input funded each output. Unlik
 ### Why 5 Interpretations?
 
 A Stonewall transaction has a specific structure:
+
 - 2 inputs (1,015,000 sats and 1,010,000 sats)
 - 4 outputs: 2 equal-value outputs (900,000 sats each) + 2 different-value outputs (change totalling 222,840 sats)
 
@@ -83,6 +84,7 @@ This is the key privacy benefit: **plausible deniability**. Even if an analyst s
 Stonewall adds meaningful entropy to a transaction and confuses [chain analysis](../glossary.md#chain-analysis) heuristics. From the outside, it can be misinterpreted as a small two-party CoinJoin. The ambiguity about who paid and who contributed which inputs/outputs is the privacy benefit.
 
 **Best practices:**
+
 - Do not overuse Stonewall - if every transaction has this structure, it becomes a [wallet fingerprint](../glossary.md#wallet-fingerprint)
 - Never spend two outputs from a Stonewall together
 - Combine with good [address hygiene](../techniques/address-reuse/index.md) and [coin control](../techniques/coin-control.md)

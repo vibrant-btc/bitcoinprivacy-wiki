@@ -49,12 +49,15 @@ You might naturally think that with 5 inputs and 5 outputs, each input would hav
 A valid interpretation (or "complete mapping") is a way of grouping ALL inputs and ALL outputs into groups where each group's input sum matches its output sum (within fee tolerance). This is a **many-to-many mapping**, not a one-to-one assignment.
 
 For example, one valid interpretation might be:
+
 - Input 1 funds Output 1 AND Output 2
 - Input 2 funds Output 3
 - Input 3 funds Output 4 AND Output 5
-- Inputs 4 and 5 fund nothing (they are combined with other inputs in the same groups)
+- Input 4 funds Output 1 AND Output 4
+- Input 5 funds Output 2 AND Output 5
 
 Another valid interpretation:
+
 - Input 1 funds Output 1
 - Input 2 funds Output 2
 - Input 3 funds Output 3
@@ -98,6 +101,7 @@ For equal-output CoinJoins, the number of valid interpretations can be computed 
     The number 14,400 is **5! × 5!** (120 × 120). It represents the total number of ways to permute both the inputs and outputs before grouping them. The formula divides this by the symmetries within each partition to avoid overcounting.
 
     For example, the partition [3,2] means "one group of 3 outputs and one group of 2 outputs." The denominator (144 × 1) accounts for:
+
     - The ways to permute inputs within each group
     - The ways to permute outputs within each group
     - The ways to permute groups of the same size
