@@ -71,11 +71,44 @@ While WabiSabi's change subdivision is a big improvement over Wasabi 1.0, it is 
 
     WabiSabi tries to create multiple equal-sized change outputs to confuse observers. But sometimes, creating too many different denominations can actually make things worse. When there are unusual or rare output amounts, those outputs stand out and become easier to identify. This can shrink your effective [anonymity set](../../glossary.md#anonymity-set) instead of growing it.
 
-??? danger "The Dust UTXO Problem"
+!!! danger "The Dust UTXO Problem"
 
     Breaking change into many small pieces creates a lot of low-value UTXOs. Some of these can become so small that they turn into "dust" — amounts that cost more in mining fees to spend than they are worth.
 
     When users eventually try to consolidate these dust UTXOs together, the [Common Input Ownership Heuristic](../../glossary.md#common-input-ownership-heuristic) kicks in. This heuristic assumes that all inputs in a transaction belong to the same person. By combining dust outputs, you are essentially telling the blockchain: "Yes, all these small pieces belong to me." This can reduce or even cancel out the privacy benefits you gained from the original CoinJoin.
+
+    !!! danger "Real-World Example: The Inevitable Consolidation Problem"
+
+        The dust UTXO problem is not theoretical — it happens in practice, and it is devastating to privacy.
+
+        Consider this [WabiSabi CoinJoin](https://am-i.exposed/#tx=c8fa558593aa089e00bdfdbd914bc895eb3536faa3070190fd2ad7634c129f1b), as we know change will be subdivided to create more smaller 'like' outputs which invevtibly tend towards dust.
+
+        This consolidation transaction is directly linked to 39 separate WabiSabi CoinJoins and showcases the danger of the wabisabi protocol in practice: [102 inputs → 1 output](https://am-i.exposed/#tx=b893d2f3dccf0b4ce22e572e431b97b7a14fdf00992fbfb344937ba717eec793). This transaction spends **101 outputs from 39 different CoinJoin transactions** as inputs in a single transaction.
+
+        The [Common Input Ownership Heuristic](../../glossary.md#common-input-ownership-heuristic) re-links these UTXOs, **completely destroying the anonymity set gained from mixing**. Because the inputs come from different CoinJoin rounds, an observer can now link activity across those rounds to the same entity.
+
+        In plain English not only has the consolidating individual lost all of their privacy gains but users from 39 other WabiSabi Coinjoins have had their anonymity set reduced.
+
+        This type of near-dust UTXO consolidation is not isolated to this example — it is commonplace, you will find this type of postmix behaviour in numerous WabiSabi CoinJoins.
+
+        **Why This Happens:** WabiSabi lacks the structural protections that other CoinJoin implementations provide. Whirlpool uses a [Tx0](../../glossary.md#tx0) preparation transaction that breaks away doxxic change *before* the CoinJoin, keeping the CoinJoin outputs isolated. Whirlpool also enforces strict pre-mix/post-mix separation through separate wallet accounts and provides post-mix spending tools to maintain privacy.
+
+        Simply this means that Whirlpool makes it extremely difficult to make the same postmix mistakes that WabiSabi allows freely.
+
+        WabiSabi's change subdivision pretends to increase entropy compared to Whirlpool, but the reality is that these outputs are very likely to be consolidated.
+        
+        Especially with large multi WabiSabi coinjoin consolidations the danger of cross-CoinJoin links being made increases, potentially allowing more probable inferences to be drawn about user activity. The consolidation example above is particularly damaging because of the number of previous CoinJoins it affects.
+
+        **The lesson:** Without proper post-mix spending tools and account separation etc, the privacy benefits of WabiSabi are fragile and easily destroyed by normal wallet behavior.
+
+        ??? danger "Here are a 5 more examples to prove this is not an isolated case"
+            1. [154 inputs → 1 output (This transaction spends 122 outputs from 49 different CoinJoin transactions)](https://am-i.exposed/#tx=b910e88eff5e1dc5740a89e3ac1044f3ffbcde260d67e8d084df2b09e4fb2127)
+            2. [183 inputs → 1 output (This transaction spends 137 outputs from 49 different CoinJoin transactions)](https://am-i.exposed/#tx=c04435b0f4000cbfd1f528146e90b1d698da309bf4c5fb7c4f0a081f171d1108)
+            3. [32 inputs → 1 output (This transaction spends 30 outputs from 17 different CoinJoin transactions)](https://am-i.exposed/#tx=e03bcd05eced28b999c78c7aae3ad40737981102045cb307b12b369d7fa95291)
+            4. [131 inputs → 1 output (This transaction spends 116 outputs from 50 different CoinJoin transactions)](https://am-i.exposed/#tx=caecf49eb07e12dce1ab8b489f1c5468d884bad0d6533710dd497c75fde4c05e)
+            5. [25 inputs → 1 output (This transaction spends 23 outputs from 7 different CoinJoin transactions)](https://am-i.exposed/#tx=4575666f5e472afb785e04f4cce8690f8e379c794b8d6fd7dcf3bec8b8ef5179)
+
+            There are probably hundreds more, you can easily find them using the transaction graph explorer in am-i.exposed
 
 ---
 
