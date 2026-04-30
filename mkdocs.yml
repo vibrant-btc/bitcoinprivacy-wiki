@@ -157,4 +157,6 @@ nav:
     - links/index.md
   - Glossary:
     - Glossary: glossary.md
+  - Donate:
+    - donate/index.md
 

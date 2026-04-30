@@ -337,11 +337,11 @@ Ashigaru and Sparrow include additional protections against common [chain analys
 
     Keep track of which UTXOs are post-mix. Never mix them with premix.
 
--   :material-shield-check:{ .lg .middle } __Use Sparrow for Desktop__
+-   :material-shield-check:{ .lg .middle } __Use Ashigaru Terminal__
 
     ---
 
-    Sparrow Wallet has built-in Whirlpool support for desktop users.
+    Ashigaru Terminal has built-in Whirlpool support, you can learn more [here](https://planb.academy/en/tutorials/privacy/on-chain/ashigaru-terminal-9a0d46d3-33b9-4c64-84c5-bfa25b3a0add).
 
 </div>
 
