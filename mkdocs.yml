@@ -116,6 +116,8 @@ nav:
     - Your First Steps: getting-started/first-steps.md
     - Your Privacy Checklist: getting-started/checklist.md
   - Privacy Techniques:
+    - Which Privacy Tool Should I Use?: techniques/decision-tree.md
+    - Public Receiving: techniques/public-receiving.md
     - Address Reuse:
       - techniques/address-reuse/index.md
       - techniques/coin-control.md
