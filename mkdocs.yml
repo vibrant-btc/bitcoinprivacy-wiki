@@ -107,6 +107,7 @@ nav:
     - index.md
   - Getting Started:
     - What is Bitcoin Privacy?: getting-started/what-is-privacy.md
+    - Threat Modeling: getting-started/threat-modeling.md
     - Understanding UTXOs: getting-started/utxos.md
     - How Chain Analysis Works: getting-started/chain-analysis.md
     - Privacy Heuristics Explained: getting-started/heuristics.md
@@ -114,6 +115,7 @@ nav:
     - Choosing a Wallet: getting-started/wallets.md
     - Running Your Own Node: getting-started/node.md
     - Your First Steps: getting-started/first-steps.md
+    - Recovering from Privacy Mistakes: getting-started/recovering-from-privacy-mistakes.md
     - Your Privacy Checklist: getting-started/checklist.md
   - Privacy Techniques:
     - Which Privacy Tool Should I Use?: techniques/decision-tree.md

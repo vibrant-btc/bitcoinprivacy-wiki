@@ -124,6 +124,8 @@ This site will guide you through everything you need to know, from the absolute 
 
 ## What Comes Next
 
-Now that you understand why privacy matters, the next step is to understand how Bitcoin actually works under the hood. The key concept is called [UTXOs](utxos.md) - and understanding them is the foundation of all Bitcoin privacy.
+Now that you understand why privacy matters, the next step is to think about what you are personally trying to protect. Bitcoin privacy is not one-size-fits-all: a public donation page, a long-term savings wallet, and everyday spending all need different habits.
 
-[Understanding UTXOs →](utxos.md)
+Start by undertanding how to build a simple threat model tailored to your needs.
+
+[Threat Modeling →](threat-modeling.md)
