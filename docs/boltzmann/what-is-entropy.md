@@ -63,6 +63,22 @@ How many ways can we group these inputs and outputs so the values balance? **Onl
 
 Roughly **85% of all Bitcoin transactions** look like this. An observer can determine with complete certainty exactly where the money went.
 
+??? note "Deep Dive: LaurentMT's Original Study (2015)"
+
+    In 2015, LaurentMT processed **97,977,912 Bitcoin transactions** (from block 1 to block 388,602) to compute their entropy. Here are the full results:
+
+    | Metric | Percentage |
+    |--------|------------|
+    | Transactions with null entropy (E = 0) | **85.47%** |
+    | Transactions with E ≥ 1 bit | **14.52%** |
+    | Transactions with E ≥ 1.585 bits (basic CoinJoin level) | **1.89%** |
+
+    The study could compute entropy for 98.59% of all transactions. The remaining 1.41% were too large or complex for the brute-force algorithm.
+
+    **What this means:** Even in 2015, less than 2% of Bitcoin transactions had privacy comparable to a basic CoinJoin. The vast majority were fully transparent.
+
+    **Important caveat:** These numbers count transactions with *high entropy*, not necessarily *CoinJoin transactions*. Some transactions produce high entropy without being intentional CoinJoins (e.g., batch payments with many inputs and outputs).
+
 ### A 2-Input, 2-Output Transaction (One Bit of Entropy)
 
 Now consider a slightly more complex transaction:
@@ -307,6 +323,14 @@ So far we have discussed equal-value CoinJoins. Most Bitcoin transactions are no
 - For large transactions, brute-force enumeration becomes impractical
 
 The tool [am-i.exposed](https://am-i.exposed) implements the full Boltzmann algorithm in Rust, using optimized techniques to handle these computations efficiently.
+
+??? note "Deep Dive: What Is the Subset Sum Problem?"
+
+    The subset sum problem asks: given a set of numbers, can you find a subset that adds up to a specific target? For Bitcoin transactions, this becomes: can we group the inputs and outputs so that each group's input total matches its output total (within the fee)?
+
+    This problem is classified as [NP-hard](../glossary.md#np-hard), which means there is no known algorithm that can solve it efficiently for all cases. As the number of inputs and outputs grows, the time required to check every possible grouping grows exponentially. This is why computing valid interpretations for large transactions becomes impractical - the number of combinations to check quickly becomes enormous.
+
+    This computational difficulty is actually good news for privacy. Chain analysts cannot easily compute the full set of interpretations for large CoinJoins, though they can use heuristics and side-channel information to reduce the problem space.
 
 ---
 
