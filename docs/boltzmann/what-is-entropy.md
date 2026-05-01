@@ -175,6 +175,52 @@ Now suppose we discover that the address for Input 1 is the **same address** as 
 
 The entropy of a "perfect" CoinJoin with the same structure (equal inputs, equal outputs). This is the theoretical ceiling.
 
+??? note "Transaction Efficiency: How Much Privacy Survived?"
+
+    A [CoinJoin](../glossary.md#coinjoin) can look very private when it first confirms. It may have many possible interpretations and a high [intrinsic entropy](../glossary.md#intrinsic-entropy). However, later blockchain activity can reveal new information. If users later [consolidate](../analysis/consolidation.md) their post-mix outputs, reuse addresses, or mix coins that should have stayed separate, the [actual entropy](../glossary.md#actual-entropy) can fall.
+
+    **Transaction efficiency** asks a simple question: **how much of the transaction's possible privacy is still left after the known blockchain evidence is considered?**
+
+    ### Maximum Entropy
+
+    **Maximum entropy** ($E_{\text{max}}$) is the maximum possible entropy for a transaction structure. It represents the highest entropy a transaction with a given number of inputs and outputs can theoretically achieve.
+
+    For example, a 5-input, 5-output CoinJoin with equal inputs and equal outputs has:
+
+    $$E_{\text{max}} = \log_2(1{,}496) = 10.55 \text{ bits}$$
+
+    This is the theoretical ceiling for any 5-input, 5-output transaction.
+
+    ### Transaction Efficiency in Bits
+
+    Transaction efficiency can be written in bits as:
+
+    $$E_f = E_{\text{actual}} - E_{\text{max}}$$
+
+    Where:
+
+    - $E_f$ = transaction efficiency in bits
+    - $E_{\text{actual}}$ = the actual entropy of the transaction in bits
+    - $E_{\text{max}}$ = the maximum possible entropy for the transaction structure in bits
+
+    If $E_f = 0$, the transaction kept all of its possible privacy. If $E_f$ is negative, that many bits of potential privacy were lost.
+
+    ### Transaction Efficiency as a Percentage
+
+    More commonly, efficiency is expressed as a percentage:
+
+    $$E_f(\%) = \frac{E_{\text{actual}}}{E_{\text{max}}} \times 100\%$$
+
+    An efficiency of 100% means the transaction is maximizing its confidentiality potential for its structure. A low percentage means that blockchain context has damaged much of the privacy that the transaction appeared to have at first.
+
+    ### Why This Matters
+
+    Transaction efficiency is useful because it separates **the privacy a transaction could have had** from **the privacy that still survives after later blockchain evidence is considered**. A high entropy number on its own can be misleading if later transactions re-link outputs, consolidate post-mix coins, or otherwise reduce the real ambiguity ([as is often the case in WabiSabi CoinJoins](../techniques/coinjoin/wasabi.md/#risks-of-change-subdivision))
+
+    ### Key Takeaway
+
+    Transaction efficiency answers: **"How much of my CoinJoin's potential privacy did I actually keep?"** A high upper-bound entropy number is not enough. If later transactions re-link outputs, the actual privacy can be much lower than the number users first see.
+
 ---
 
 ## The Golden Rule
@@ -201,6 +247,54 @@ Entropy measures structural ambiguity within a **single transaction**. It does n
 - **Steganographic transactions**: Transactions designed to look like something they are not can trick analysis
 
 Think of entropy as measuring **structural privacy** - how hard the transaction is to analyze in isolation. Real-world privacy depends on much more.
+
+??? note "Entropy Density: Comparing Transactions of Different Sizes"
+
+    Entropy is a good indicator for measuring the confidentiality of a transaction, but it depends in part on the number of inputs and outputs in the transaction. To compare the entropy of two different transactions with different numbers of inputs and outputs, we can calculate the **entropy density**. This indicator provides a perspective on the entropy relative to each input or output of the transaction. Density is useful for evaluating and comparing the efficiency of transactions of different sizes.
+
+    ### The Formula
+
+    To calculate entropy density, we simply divide the total entropy of the transaction by the total number of inputs and outputs involved in the transaction:
+
+    $$d = \frac{E}{N}$$
+
+    Where:
+    
+    - $d$ = entropy density in bits
+    - $E$ = the entropy of the transaction in bits
+    - $N$ = total number of inputs and outputs in the transaction
+
+    ### Example: 5x5 vs. 8x8 Whirlpool
+
+    Let us take the example of a standard 5-party [Whirlpool](../glossary.md#whirlpool) CoinJoin:
+
+    - 5 inputs, 5 outputs = 10 total UTXOs
+    - 1,496 interpretations
+    - Entropy = $\log_2(1{,}496) = 10.55$ bits
+    - **Entropy density = 10.55 / 10 = 1.06 bits per UTXO**
+
+    Let us also calculate the entropy density of an 8x8 [Surge Cycle](../glossary.md#surge-cycle) Whirlpool CoinJoin:
+
+    - 8 inputs, 8 outputs = 16 total UTXOs
+    - 9,934,563 interpretations
+    - Entropy = $\log_2(9{,}934{,}563) = 23.25$ bits
+    - **Entropy density = 23.25 / 16 = 1.45 bits per UTXO**
+
+    By analyzing the entropy density of these two types of CoinJoin, it becomes clear that the "Surge Cycle 8x8" CoinJoin generates significantly more uncertainty for the analysis. Not only does it have higher total entropy (23.25 vs. 10.55 bits), but it also has a higher entropy density (1.45 vs. 1.06 bits per UTXO). This means that even when normalizing entropy by the number of UTXOs, the 8x8 Surge Cycle provides more privacy per input and output than the standard 5x5 Whirlpool.
+
+    ### How to Interpret Entropy Density
+
+    | Entropy Density | What It Means |
+    |---|---|
+    | 0 bits/UTXO | No privacy - every input-output link is deterministic |
+    | 0.1-0.3 bits/UTXO | Low - slight ambiguity per UTXO |
+    | 0.3-0.7 bits/UTXO | Moderate - meaningful ambiguity per UTXO |
+    | 0.7-1.0 bits/UTXO | Good - strong per-UTXO privacy |
+    | 1.0+ bits/UTXO | Excellent - each UTXO contributes significant uncertainty |
+
+    ### Key Takeaway
+
+    **Do not just look at raw entropy.** Entropy density lets you compare a 5-party CoinJoin to a 50-party CoinJoin fairly. Use entropy density to evaluate which CoinJoin structure gives you the best privacy for your situation.
 
 ---
 

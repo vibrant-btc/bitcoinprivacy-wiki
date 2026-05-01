@@ -75,7 +75,7 @@ The key difference with Silent Payment scanning is that instead of pre-generatin
 |--------|------------------------|----------|
 | **Sparrow Wallet** | Partial support (send only) | Desktop |
 | **BlueWallet** | Partial support (send only) | iOS/Android |
-| **Cake Wallet** | Full support (send only) | iOS/Android/Desktop |
+| **Cake Wallet** | Full support (send & recieve) | iOS/Android/Desktop |
 
 You might notice a trend of incomplete silent payment support in wallets, this is due to the complexity of the scanning required to recieve payments. Currently there is no self hostable electrum server that support silent payment scanning that is not experimental.
 
