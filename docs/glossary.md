@@ -634,6 +634,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
     A transaction where one or more outputs return to an address that was also an input. This trivially identifies the change output, revealing the sender's remaining balance and the exact payment amount.
 
+<a id="silent-payments"></a>
 !!! success "Silent Payments (BIP352)"
 
     A protocol that allows a recipient to publish a single static payment address from which senders derive unique, unlinkable Taproot (P2TR) outputs for each payment.

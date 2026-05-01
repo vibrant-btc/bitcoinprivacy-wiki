@@ -22,7 +22,7 @@ You do not need to hide from everyone in the world. You need to understand your 
 
 ## Why Threat Modeling Matters
 
-Bitcoin privacy can feel overwhelming because there are many tools: [CoinJoin](../glossary.md#coinjoin), [PayJoin](../glossary.md#payjoin-p2ep), [Stonewall](../glossary.md#stonewall), [Lightning](../glossary.md#lightning-network), [Tor](../glossary.md#tor), [BIP47](../glossary.md#bip-bitcoin-improvement-proposal), and [Silent Payments](../glossary.md#silent-payments-bip352).
+Bitcoin privacy can feel overwhelming because there are many tools: [CoinJoin](../glossary.md#coinjoin), [PayJoin](../glossary.md#payjoin-p2ep), [Stonewall](../glossary.md#stonewall), [Lightning](../glossary.md#lightning-network), [Tor](../glossary.md#tor), [BIP47](../glossary.md#bip-bitcoin-improvement-proposal), and [Silent Payments](../glossary.md#silent-payments).
 
 A threat model helps you avoid two common mistakes:
 
