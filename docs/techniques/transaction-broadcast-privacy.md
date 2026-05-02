@@ -1,5 +1,5 @@
 ---
-description: Learn how Bitcoin transaction broadcasting can leak your IP address and how Tor, I2P, Bitcoin Core privatebroadcast, P2P Transport V2, Dandelion, and careful wallet setup improve network privacy.
+description: Learn how Bitcoin transaction broadcasting can leak your IP address and how Tor, I2P, Bitcoin Core privatebroadcast, P2P Transport V2 and Samourai Dojo's PandoTX can improve network privacy.
 ---
 
 # Transaction Broadcast Privacy
