@@ -83,4 +83,6 @@ This site draws knowledge from the following sources:
 
 ## Special Thanks
 
+Special thanks to **[LaurentMT](https://github.com/LaurentMT)**, creator of the Boltzmann transaction privacy framework, for [auditing](https://x.com/LaurentMT/status/2050679000293425429) the Boltzmann entropy explanations and mathematics to ensure their accuracy.
+
 Special thanks to **[Arkad](https://x.com/Multicripto)**, co-author of [am-i.exposed](https://am-i.exposed/), for auditing the Boltzmann entropy explanations and mathematics to ensure their accuracy.
