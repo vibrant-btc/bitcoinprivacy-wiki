@@ -280,7 +280,37 @@ It can be controlled with the `v2transport` option in Bitcoin Core configuration
 
 ## Dandelion
 
-Dandelion was a proposed transaction relay protocol designed to hide the source node of a transaction. It was formalized in BIP156, but it was not adopted into Bitcoin Core.
+Dandelion was a proposed transaction relay protocol designed to hide the source [node](../glossary.md#node) that first broadcasts a [transaction](../glossary.md#transaction). It was formalized in BIP156, but it was never implemented in Bitcoin Core and is currently classified as rejected.
+
+The problem Dandelion tried to solve is simple: if a spying node can work out which node first announced a transaction, it may guess that the operator of that node created the transaction. If that node is using a normal clearnet IP address, the transaction may become linked to an IP address, rough location, and internet provider.
+
+!!! danger "Why Source Detection Matters"
+
+    A Bitcoin transaction does not contain your name or IP address. But if an observer can link the first broadcast point to your IP address, that gives them an entry point for [chain analysis](../glossary.md#chain-analysis).
+
+    Governments, internet service providers, VPN providers, Wi-Fi operators, and large surveillance companies may be able to connect an IP address to a real person.
+
+### Normal Relay vs Dandelion Relay
+
+In normal Bitcoin relay, your node announces the transaction to its connected peers. Those peers verify it, then relay it again. This spreads transactions reliably, but it can also create a fairly predictable diffusion pattern.
+
+Dandelion changes the first part of that process. Instead of immediately broadcasting widely, it adds a private-looking path first.
+
+=== "Normal Relay"
+
+    1. Your wallet creates a transaction.
+    2. Your node verifies it.
+    3. Your node announces it to many peers.
+    4. Those peers announce it to more peers.
+    5. Spy nodes try to work backward toward the source.
+
+=== "Dandelion Relay"
+
+    1. Your wallet creates a transaction.
+    2. Your node sends it to one random peer.
+    3. That peer forwards it to another peer.
+    4. After a few hops, one node starts normal wide broadcast.
+    5. Spy nodes may find the fluff origin, but not necessarily the real origin.
 
 Dandelion splits transaction broadcast into two phases:
 
@@ -290,9 +320,13 @@ Dandelion splits transaction broadcast into two phases:
 
     The goal is to move the transaction away from the original source before broadcasting it widely.
 
+    Think of this like quietly passing a note across a few desks before someone reads it aloud to the room.
+
 === "Fluff Phase"
 
     After the stem phase, the transaction is broadcast widely across the network like a normal Bitcoin transaction.
+
+    A spy may discover where the wide broadcast began, but that node may only be the last node in the stem path, not the original sender.
 
 ``` mermaid
 graph LR
@@ -308,7 +342,46 @@ graph LR
 
 If a spy sees the transaction during the fluff phase, they may identify the node that started the fluff phase. But that node is not necessarily the original creator of the transaction.
 
-This creates doubt about where the transaction began.
+This creates doubt about where the transaction began. The spy can no longer confidently say: "the first node I found must be the spender."
+
+??? info "Why the Name Dandelion?"
+
+    The name comes from the shape of transaction propagation.
+
+    During the **stem phase**, the transaction travels along a narrow path, like the stem of a dandelion.
+
+    During the **fluff phase**, it spreads widely across the network, like dandelion seeds blowing outward.
+
+??? example "How Spy Nodes Are Confused"
+
+    Imagine Alice's node creates a transaction.
+
+    Without Dandelion:
+
+    1. Alice's node announces the transaction to many peers.
+    2. Some of those peers are spy nodes.
+    3. The spies compare timing and guess Alice's node was the source.
+
+    With Dandelion:
+
+    1. Alice's node sends the transaction to Bob's node.
+    2. Bob's node sends it to Carol's node.
+    3. Carol's node starts the wide broadcast.
+    4. Spy nodes may identify Carol's node as the fluff origin.
+
+    But Carol was only an intermediate relay. The spies now have doubt.
+
+### Why Tor and P2P Transport V2 Still Matter
+
+Dandelion would be stronger when combined with encrypted or anonymity-preserving network paths.
+
+- If a stem hop uses [Tor](../glossary.md#tor), the previous node's clearnet IP address is hidden.
+- If peers use P2P Transport V2, passive network observers have a harder time reading or fingerprinting peer-to-peer traffic.
+- If every hop leaks obvious network metadata, the stem is easier to analyze.
+
+!!! tip "Layered Network Privacy"
+
+    Dandelion is not a replacement for Tor or P2P Transport V2. It is a relay strategy. Tor hides where connections come from. P2P Transport V2 encrypts node transport. Dandelion would change how transactions spread.
 
 ### Why It Was Not Adopted
 
@@ -316,7 +389,21 @@ One major concern is denial-of-service risk.
 
 In normal Bitcoin relay, each node verifies a transaction before relaying it. Invalid transactions are dropped quickly.
 
-Dandelion's stem phase could require relaying transactions before the network has widely verified them, which may create new ways to waste node resources.
+Dandelion's stem phase could require relaying transactions through intermediate nodes in a way that changes the normal validation-and-relay pattern. If designed badly, attackers might use this to waste node resources by pushing invalid or unwanted data farther than they should.
+
+??? warning "What is a denial-of-service risk?"
+
+    A denial-of-service attack tries to waste resources so a system becomes slower, unreliable, or unavailable.
+
+    In Bitcoin relay, nodes protect themselves by checking transactions before forwarding them. Invalid transactions are normally stopped early.
+
+    Any new relay design must be careful not to make it easier for attackers to flood nodes with junk.
+
+??? info "Dandelion Status"
+
+    Dandelion was proposed as BIP156, but it was not merged into Bitcoin Core.
+
+    Today, you should treat it as an important educational idea rather than a feature you can turn on. For practical broadcast privacy, focus on [Tor](../glossary.md#tor), I2P where supported, P2P Transport V2, careful wallet configuration, and Bitcoin Core `privatebroadcast` where available.
 
 !!! note "Dandelion Is Educational Here"
 
@@ -400,6 +487,6 @@ Dandelion's stem phase could require relaying transactions before the network ha
 - [Samourai Dojo v1.27.0 Release Notes](https://github.com/Dojo-Open-Source-Project/samourai-dojo/releases/tag/v1.27.0) — Soroban P2P network and PandoTx
 - [BIP324: Version 2 P2P Encrypted Transport Protocol](https://github.com/bitcoin/bips/blob/master/bip-0324.mediawiki)
 - [BIP156: Dandelion](https://github.com/bitcoin/bips/blob/master/bip-0156.mediawiki)
-- [Loïc Morel's course'](https://planb.academy/en/courses/65c138b0-4161-4958-bbe3-c12916bc959c/privacy-on-the-p2p-network-04a2467b-db84-4076-a9ff-919be5135106) — Educational material covering Dandelion, P2P Transport V2, and Tor
+- [Loïc Morel's course](https://planb.academy/en/courses/65c138b0-4161-4958-bbe3-c12916bc959c/privacy-on-the-p2p-network-04a2467b-db84-4076-a9ff-919be5135106) — Educational material covering Dandelion, P2P Transport V2, and Tor
 - [Bitcoin Core 27.0 Release Notes](https://bitcoincore.org/en/releases/27.0/) — P2P Transport V2 enabled by default
 - [Tor Project](https://www.torproject.org/) — Tor documentation and downloads
