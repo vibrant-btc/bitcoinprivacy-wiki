@@ -197,6 +197,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
     A collaborative transaction is a bitcoin transaction that is initiated and signed by multiple participants. A collaborative transaction involves two or more parties and is thus always a batch transaction. All CoinJoins are collaborative transactions.
 
+<a id="client-side-block-filtering"></a>
+!!! info "Client-Side Block Filtering"
+
+    A lightweight wallet privacy model where wallets download compact filters for blocks and check them locally for matches. This avoids directly asking a server about each wallet address, but uses more bandwidth than public server queries.
+
 <a id="common-input-ownership-heuristic"></a>
 !!! danger "Common Input Ownership Heuristic"
 
@@ -234,10 +239,20 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
 ## D
 
+<a id="dandelion"></a>
+!!! info "Dandelion"
+
+    A proposed Bitcoin transaction relay protocol that tries to hide the original source of a transaction by first sending it through a random "stem" path before broadcasting it widely in the "fluff" phase. It was proposed in BIP156 but was not adopted into Bitcoin Core.
+
 <a id="deterministic-link"></a>
 !!! info "Deterministic Link"
 
     A connection between a transaction input and output that exists in ALL possible interpretations of that transaction. Even in CoinJoin transactions, some input-output links can be deterministic, meaning the CoinJoin provides zero privacy for those specific participants.
+
+<a id="digital-forensics"></a>
+!!! warning "Digital Forensics"
+
+    The recovery and analysis of data from devices, drives, files, backups, logs, or memory. In Bitcoin privacy, digital forensics can reveal wallet files, transaction history, seed phrase photos, labels, or other sensitive wallet data.
 
 <a id="doxxic-change"></a>
 !!! warning "Doxxic Change"
@@ -269,6 +284,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
     A long-standing desktop wallet (Mac/Windows/Linux) with extensive features including Lightning, multisig, hardware wallet support, and coin control. Can connect to your own node.
 
+<a id="electrum-server"></a>
+!!! info "Electrum Server"
+
+    Server software that indexes Bitcoin blockchain data so lightweight wallets can quickly check balances, transaction history, and confirmations. Public Electrum servers can learn which wallet addresses are queried; running your own Electrum server improves privacy.
+
 <a id="equal-output-coinjoin"></a>
 !!! info "Equal-Output CoinJoin"
 
@@ -291,6 +311,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 !!! info "Fungibility"
 
     The property of a good where each unit is interchangeable with any other unit. Cash is fungible - one $10 bill is worth the same as any other. Bitcoin's fungibility can be compromised when certain coins are tainted by their history.
+
+<a id="full-node"></a>
+!!! info "Full Node"
+
+    A Bitcoin node that downloads and verifies the blockchain for itself. Full nodes provide the strongest wallet-history privacy because they do not need to ask a third-party server which addresses or transactions belong to the wallet.
 
 <a id="funding-transaction"></a>
 !!! info "Funding Transaction"
@@ -449,6 +474,7 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 
     A per-input field that encodes RBF and timelock information. Different wallets set different default nSequence values, making it a [wallet fingerprint](#wallet-fingerprint) signal.
 
+<a id="non-custodial-wallet"></a>
 !!! info "Non-Custodial Wallet"
 
     A wallet where you hold your own private keys. You have full control over your funds. Examples include Sparrow, Samourai, BlueWallet, and Ashigaru.
@@ -497,6 +523,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 !!! info "Passport"
 
     An air-gapped hardware wallet by Foundation. Uses QR codes for PSBT communication. Fully open sourced firmware and hardware.
+
+<a id="p2p-transport-v2"></a>
+!!! info "P2P Transport V2"
+
+    A newer Bitcoin peer-to-peer transport protocol from BIP324 that encrypts communication between nodes. It makes Bitcoin traffic harder for passive observers to inspect or fingerprint, but it does not hide your IP address like Tor.
 
 <a id="payjoin-p2ep"></a>
 !!! success "PayJoin (P2EP)"
@@ -717,6 +748,11 @@ description: Comprehensive terminology reference for Bitcoin privacy concepts.
 !!! info "Temporal Analysis"
 
     The practice of analyzing the timing of transactions to identify patterns and link addresses. This includes studying when transactions occur, how quickly funds are spent, and whether there are regular payment patterns.
+
+<a id="transaction-broadcast"></a>
+!!! warning "Transaction Broadcast"
+
+    The act of sending a signed Bitcoin transaction to the peer-to-peer network so miners can eventually include it in a block. Broadcasting can leak network information, such as the IP address or node that first relayed the transaction.
 
 <a id="timechain"></a>
 !!! info "Timechain"

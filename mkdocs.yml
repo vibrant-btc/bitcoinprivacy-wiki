@@ -26,6 +26,7 @@ theme:
     repo: fontawesome/brands/github
   features:
     - content.action.edit
+    - navigation.expand
     - navigation.instant
     - navigation.instant.prefetch
     - navigation.instant.progress
@@ -120,6 +121,7 @@ nav:
   - Privacy Techniques:
     - Which Privacy Tool Should I Use?: techniques/decision-tree.md
     - Public Receiving: techniques/public-receiving.md
+    - Private Transaction Boradcasting: techniques/transaction-broadcast-privacy.md
     - Address Reuse:
       - techniques/address-reuse/index.md
       - techniques/coin-control.md
@@ -165,4 +167,5 @@ nav:
     - Glossary: glossary.md
   - Donate:
     - donate/index.md
+
 
