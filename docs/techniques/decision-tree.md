@@ -21,16 +21,14 @@ graph TD
     A[What are you trying to do?] --> B[Receive publicly]
     A --> C[Spend on-chain]
     A --> D[Break old transaction links]
-    A --> E[Make small payments]
-    A --> F[Recieve via Lightning privately]
+    A --> E[Recieve via Lightning privately]
 
     B --> B1[Use BIP47 PayNyms, Silent Payments or BTCPay Server]
     C --> C1[Does recipient support PayJoin?]
     C1 -->|Yes| C2[Use PayJoin or Stowaway]
     C1 -->|No| C3[Use Stonewall if available]
     D --> D1[Use CoinJoin]
-    E --> E1[Consider Lightning]
-    F --> F1[Consider lnproxy or Bolt12 invoices]
+    E --> E1[Consider lnproxy or Bolt12 invoices]
 ```
 
 ---
