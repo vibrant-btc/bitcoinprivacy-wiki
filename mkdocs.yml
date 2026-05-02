@@ -160,6 +160,7 @@ nav:
   - Resources:
     - links/index.md
     - Bitcoin Fungibility: links/fungibility.md
+    - Self-Hosting am-i.exposed: links/selfhosting-am-i-exposed.md
   - Glossary:
     - Glossary: glossary.md
   - Donate:
