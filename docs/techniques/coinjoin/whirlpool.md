@@ -155,6 +155,128 @@ Tx0 involves two fee-related outputs:
 
 ---
 
+## Forward-Looking Anonymity Sets
+
+A Whirlpool round starts with 5 equal outputs, but your privacy is not limited to only those 5 outputs forever. Whirlpool is designed so that post-mix [UTXOs](../../glossary.md#utxo) can keep remixing. Each time you or one of your original mixing peers remixes, the crowd you are hiding in can grow.
+
+!!! tip "The Crowd Can Grow Even If You Do Nothing"
+
+    Imagine your first Whirlpool round creates 5 equal outputs. One of them is yours, but nobody watching the blockchain can tell which one.
+
+    If one of the other 4 outputs later remixes, that remix creates more equal outputs that are also connected to your original round. Your own UTXO did not move, but the number of possible paths an observer must consider increased.
+
+This is called a **forward-looking anonymity set**. It looks forward from your first mix and counts the equal-denomination outputs that could plausibly be yours as remixing continues.
+
+### Why This Matters
+
+A normal explanation of CoinJoin often says "you hide in a crowd of 5." That is true at the moment of a standard 5-person Whirlpool round, but it is incomplete.
+
+Because Whirlpool allows free remixes, the crowd can grow over time:
+
+- If your own UTXO remixes, your forward-looking anonymity set grows
+- If one of your original mixing peers remixes, your forward-looking anonymity set can also grow
+- If those later outputs keep remixing, the possible paths keep expanding
+
+From the outside, all equal-denomination Whirlpool outputs look the same. An observer cannot know which one is yours, so they must consider all plausible equal-output paths.
+
+### How the Count Grows
+
+In a simple 5-output Whirlpool round, the starting anonymity set is 5. If one of those 5 outputs later remixes into another normal 5-output Whirlpool round, the set grows from 5 to 9.
+
+Why 9 and not 10? Because the original output that remixed has now been spent. It is replaced by 5 new equal outputs, so the net gain is 4.
+
+??? note "Simple one-generation count"
+
+    | Original outputs that later remix | Forward-looking anonymity set |
+    |---|---|
+    | 0 | 5 |
+    | 1 | 9 |
+    | 2 | 13 |
+    | 3 | 17 |
+    | 4 | 21 |
+    | 5 | 25 |
+
+This assumes each original output enters a separate normal 5-output Whirlpool round and that we are only counting one generation of remixes. If those new outputs later remix again, the tree keeps expanding. For a larger [Surge Cycle](../../glossary.md#surge-cycle), the same idea applies: a remixed output is replaced by the new round's equal outputs, so the net growth is the number of equal outputs in that new round minus 1.
+
+??? note "Simple rule of thumb"
+
+    For a normal 5-output Whirlpool remix, each newly remixed branch adds **4** to the forward-looking anonymity set.
+
+    Another way to think about it is: every time one eligible Whirlpool output remixes into a normal 5-output round, the old output disappears and 5 new equal outputs appear.
+
+    $$5 - 1 = 4$$
+
+### Example: Anonset 5 Growing to 41
+
+The graph below shows a real section of the Bitcoin transaction graph visualized with the [am-i.exposed transaction graph explorer](https://am-i.exposed/graph/?network=mainnet#graph=AgAKAAAAAADb2iyUo0Ndbat7jjcmmtQPLzd1GXY-Eb6PvoHOQNaB_QAA__8A7eJPDK2EyeRdTBATZC9_wJklZBjIgEkiI9EQXnkvlH4BAQAAArdudTcgSWBXicrnnWBjW-H6SD0dLId6BeyT-5sZk4SkAQEAAANgBsd2JJT9Y95Rw1b_ONfHBdahC2E4xX-aAk6Tk3QghwEBAAAEaPg4N1Xg_dgTCL-Hi3WPcVCM1EJ373oDvYh3_jHy2eMCAQADAt1QNpilG584gSGZYzSKtOZmoqEJGbcTAeMN_YXhqIW_AgEAAgEyPfIfCwdW-YM2Q3qj0vuH4CtZ8ZRrcUp7Cd8E1CnewgIBAAICcELXRM-3_ofJsrzv6hOBcGSkUKKnOHy1tAzK_JN62AYCAQACAy1m8xT7BUTqP2iJdIZPErEJq0hhF9rw_5xHkIr4vjJnAgEAAgT1dLE9xOfaDM2lDkjN5_YbWOcT59LgDs58z0xt3DPXXwIBAAECAAoAAUSxAADBcAAAAAJEsKAAQrQAAAADRLCAAENHAAAAAESLAABCtc3CAARE12qrQ7QqqwAFRNcKq8KGAAAABkTXNVVCDAAAAAdE10qrQw8AAAAIRNdgAEN8qqsACUTW9VXDLgAAAAoAAgpBbm9uc2V0ICs0AAMKQW5vbnNldCArNAABCkFub25zZXQgKzQACQpBbm9uc2V0ICs0AAUKQW5vbnNldCArNAAGCkFub25zZXQgKzQABwpBbm9uc2V0ICs0AAgKQW5vbnNldCArNAAECkFub25zZXQgKzQAABRPcmlnaW5hbCBBbm9uc2V0ID0gNQABAETzIABCy1VVQxSqq0JCqqsSRmluYWwgQW5vbnNldCA9IDQxAAA). Each rectangle is a normal 5-input, 5-output Whirlpool transaction.
+
+![Forward-looking anonymity set graph showing a Whirlpool anonset growing from 5 to 41](../../images/forward-looking-anonset-graph.png){ loading=lazy }
+
+??? example "View the anonset calculation"
+
+    The original Whirlpool transaction starts with an anonymity set of **5**.
+
+    Three outputs from the original transaction later remix:
+
+    $$5 + (3 \times 4) = 17$$
+
+    Then the next layer expands again:
+
+    - Two of those remix transactions each have **1 output** that remixes again: $2 \times 4 = 8$
+    - The third remix transaction has **4 outputs** that remix again: $4 \times 4 = 16$
+
+    Final count:
+
+    $$17 + 8 + 16 = 41$$
+
+    Or, more simply, there are **9 total remix events** shown after the original transaction:
+
+    $$5 + (9 \times 4) = 41$$
+
+    And in reality there are hundreds of remixes that span out from this exact example (I have just shown a small segment of the transaction graph to help you understand) so you can imagine the massive anonset.
+
+### How Free Remixing Works
+
+Whirlpool remixes are free because the mining fees for a CoinJoin round are paid by new entrants, not by the remixers.
+
+A typical Whirlpool round includes:
+
+| Participant type | Role | Fee behavior |
+|---|---|---|
+| **Premixer** | New UTXO entering the pool | Pays the mining fee contribution |
+| **Peer premixer** | Another new UTXO entering the pool | Also pays the mining fee contribution |
+| **Remixers** | UTXOs that have already mixed before | Join the round for free |
+
+When you create a [Tx0](../../glossary.md#tx0), your premix outputs are made slightly larger than the pool denomination. That small extra amount helps pay the mining fee when those premix outputs enter their first CoinJoin round. Once a UTXO has completed its first mix and stays in the correct pool denomination, it can be selected for future remixes without paying again.
+
+??? info "Why Remixers Are Important"
+
+    Remixers are sometimes called "freeriders" because they do not pay additional fees for that round. But they are not useless passengers. They are part of what makes Whirlpool work.
+
+    Remixers give new entrants more privacy, and new entrants pay the mining fees that allow remixers to keep cycling. This creates a feedback loop: new liquidity helps old liquidity remix, and old liquidity gives new liquidity a larger crowd.
+
+### Staying Eligible to Remix
+
+To get free remixes, your wallet needs to be online and communicating with the Whirlpool coordinator. If your wallet is offline, your UTXOs cannot be selected as remixers.
+
+!!! tip "Patience Improves Whirlpool Privacy"
+
+    You do not need to rush out of Whirlpool immediately after the first mix. If you keep post-mix UTXOs in the postmix account, they can continue to benefit from remixes over time.
+
+    More time in the pool can mean a larger forward-looking anonymity set before you eventually spend.
+
+### Important Limits
+
+Forward-looking anonymity sets are useful, but they are not magic.
+
+- They only help if you avoid bad post-mix spending
+- They can be damaged by [consolidation](../../analysis/consolidation.md)
+- They do not protect you if you spend mixed and unmixed coins together
+
+The basic rule stays the same: let post-mix UTXOs remix, spend them carefully, and never merge them with doxxic change or unrelated UTXOs.
+
+---
+
 ## Whirlpool Fees
 
 Whirlpool charges a [coordinator fee](../../glossary.md#coordinator-fee) for each Tx0. Remixes cost nothing extra — no additional service or mining fees.
@@ -307,11 +429,11 @@ Ashigaru and Sparrow include additional protections against common [chain analys
 
 <div class="grid cards" markdown>
 
--   :material-shuffle:{ .lg .middle } __Do Multiple Rounds__
+-   :material-shuffle:{ .lg .middle } __Let Coins Remix__
 
     ---
 
-    One round gives you 5 possible interpretations. Multiple rounds multiply your anonymity set.
+    One round breaks deterministic links, but free remixes can grow your forward-looking anonymity set over time.
 
 -   :material-timer:{ .lg .middle } __Wait Between Rounds__
 
@@ -391,5 +513,6 @@ Ashigaru continues to be actively maintained by an anonymous team committed to B
 ## References
 
 - [Loïc Morel's Educational Content](https://pandul.fr/) — Comprehensive Bitcoin privacy tutorials and guides
+- [Track Me If You Can — How Bitcoin Forward-Looking Anonymity Sets Work](https://bitcoinmagazine.com/technical/how-bitcoin-anonymity-sets-work) — Explanation of Whirlpool forward-looking anonymity sets
 - [Introducing Whirlpool Surge Cycles](https://medium.com/samourai-wallet/introducing-whirlpool-surge-cycles-b5b484a1670f) — Original Surge Cycles announcement from Samourai Wallet
 - [Whirlpool Boltzmann Analysis](../../analysis/whirlpool.md) — Detailed entropy and link probability analysis of Whirlpool transactions
