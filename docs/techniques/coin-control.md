@@ -142,3 +142,4 @@ With coin control, **you choose which UTXOs to spend**. This gives you complete 
 | **Consolidating small UTXOs** | Only consolidate UTXOs that are already linked |
 | **Paying a merchant** | Use UTXOs that are not privacy-sensitive |
 | **Moving funds to cold storage** | Use coin control to avoid linking addresses |
+

@@ -223,6 +223,30 @@ Each step down this hierarchy gives you a bit less privacy, but every option is 
 
 ---
 
+??? info "StonewallX2 videos"
+
+    The videos below show StonewallX2 collaborative transactions in Samourai Wallet. StonewallX2 uses a collaborator to create a transaction that looks like a 2-party CoinJoin, while the collaborator receives their funds back.
+
+    **StonewallX2 over Soroban**
+
+    Soroban is the Tor-based communication layer used to exchange transaction data remotely between participants.
+
+    <video controls muted width="100%" preload="metadata" onloadedmetadata="this.volume = 0.5; this.muted = true">
+      <source src="https://cdn.satellite.earth/a8c2a9ca99c995c3c523d787833beb893e7615fd515afcbc2f72b315cfcbdf93.mp4" type="video/mp4">
+      Your browser does not support the video tag. You can watch the video directly at <a href="https://cdn.satellite.earth/a8c2a9ca99c995c3c523d787833beb893e7615fd515afcbc2f72b315cfcbdf93.mp4">this link</a>.
+    </video>
+
+    **StonewallX2 with in-person QR exchange**
+
+    This version uses manual QR code exchanges instead of Soroban. It is useful when participants are physically together.
+
+    <video controls muted width="100%" preload="metadata" onloadedmetadata="this.volume = 0.5; this.muted = true">
+      <source src="https://cdn.satellite.earth/de66c068656831cf64d8d11df370a9c4de3ddb53ee57b010a48c36038d44a5d8.mp4" type="video/mp4">
+      Your browser does not support the video tag. You can watch the video directly at <a href="https://cdn.satellite.earth/de66c068656831cf64d8d11df370a9c4de3ddb53ee57b010a48c36038d44a5d8.mp4">this link</a>.
+    </video>
+
+---
+
 ## Common Stonewall Mistakes
 
 === "Using Stonewall for Every Transaction"

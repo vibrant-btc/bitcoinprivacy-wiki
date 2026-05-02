@@ -137,6 +137,17 @@ The notification transaction has some privacy implications:
 
 ---
 
+??? info "Andreas Antonopoulos on reusable payment codes"
+
+    The video below features Andreas Antonopoulos explaining the idea behind reusable payment codes: one public identifier can be shared, while each payment still goes to a fresh on-chain address.
+
+    <video controls width="100%" preload="metadata" onloadedmetadata="this.volume = 0.5">
+      <source src="https://cdn.satellite.earth/bf9629fa7d9b43b2ac0745aa57c6c8505f0b2c9898c311e7b385503559b28b44.mp4" type="video/mp4">
+      Your browser does not support the video tag. You can watch the video directly at <a href="https://cdn.satellite.earth/bf9629fa7d9b43b2ac0745aa57c6c8505f0b2c9898c311e7b385503559b28b44.mp4">this link</a>.
+    </video>
+
+---
+
 ## References
 
 - [BIP47 Specification (GitHub)](https://github.com/bitcoin/bips/blob/master/bip-0047.mediawiki)
