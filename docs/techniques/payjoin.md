@@ -49,6 +49,14 @@ In a PayJoin transaction:
 === "Step 4: Broadcast"
 
     The fully signed transaction is broadcast to the Bitcoin network.
+??? info "Payjoin Explained Video"
+
+    The video below is an explanation of PayJoin and a demo of constructing a PayJoin transaction in the [Bull Bitcoin wallet](https://wallet.bullbitcoin.com).
+
+    <video controls width="100%" preload="metadata" onloadedmetadata="this.volume = 0.5">
+      <source src="https://r2a.primal.net/uploads2/9/06/f4/906f47269df60869a3467b70e84c31abb069d691cc71802950415066bbc07d04.mp4" type="video/mp4">
+      Your browser does not support the video tag. You can watch the video directly at <a href="https://r2a.primal.net/uploads2/9/06/f4/906f47269df60869a3467b70e84c31abb069d691cc71802950415066bbc07d04.mp4">this link</a>.
+    </video>
 
 ---
 
