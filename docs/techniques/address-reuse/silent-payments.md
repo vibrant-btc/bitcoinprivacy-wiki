@@ -131,6 +131,17 @@ You might notice a trend of incomplete silent payment support in wallets, this i
 
     As of now there is no mainstream electrum server that supports Silent Payments scanning with ephemeral client keys that can be easily selfhosted on any platform. This means that in the few wallets where silentpayments are supported you have to trust the wallet provider's backend infrastructure.
 
+??? info "Craig Raw on Silent Payments"
+
+    Craig Raw (Creator of Sparrow Wallet) on silent payments. From Optech Recap #387
+
+    <figure markdown="span" style="text-align: center;">
+    <video controls width="35%" preload="metadata"
+            onloadedmetadata="this.volume = 0.3">
+        <source src="https://r2a.primal.net/uploads2/8/dd/8c/8dd8c81fb2873313047d71156b223730c91b5dd8a46e1c90d6d135bd5b23ffbc.mp4" type="video/mp4">
+    </video>
+    </figure>
+
 ---
 
 ## References
