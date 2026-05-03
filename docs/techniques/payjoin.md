@@ -133,7 +133,7 @@ Soroban requires an authenticated channel between participants. It uses users' [
     - **Soroban** = Tor-based encrypted communications for Cahoots
     - **PayNym** = unique wallet identifier used to establish Soroban communications for Cahoots
 
-### How to Do a PayJoin in Ashigaru
+### How to Do a Stowaway PayJoin in Ashigaru
 
 1. **Establish PayNym Connection**: Before initiating Stowaway, ensure both PayNyms follow each other — it's required to establish the encrypted Soroban channel.
 
@@ -150,6 +150,15 @@ Soroban requires an authenticated channel between participants. It uses users' [
 !!! tip "Stowaway Blurs Input Ownership"
 
     Stowaway blurs input ownership and destination; observers cannot reliably assign roles, which strengthens privacy.
+
+??? info "Samourai Stowaway Demo"
+
+    The video below is a visual demonstration of a stowaway transaction being constructed in Samourai Wallet via in person QR code exchanges.
+
+    <video controls muted width="100%" preload="metadata" onloadedmetadata="this.volume = 0.5; this.muted = true">
+      <source src="https://blob.satellite.earth/7ade19b1b106cfa7b0b19ee7f4b2ff9dfaa1d4bf1c6b8cdd3f37d09b0956ffd4" type="video/mp4">
+      Your browser does not support the video tag. You can watch the video directly at <a href="https://blob.satellite.earth/7ade19b1b106cfa7b0b19ee7f4b2ff9dfaa1d4bf1c6b8cdd3f37d09b0956ffd4">this link</a>.
+    </video>
 
 ---
 
