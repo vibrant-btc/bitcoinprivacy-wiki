@@ -12,10 +12,11 @@ Bitcoin's goal is to be peer-to-peer electronic cash, but its public ledger crea
 
     A few years ago, Samourai Wallet developer TDevD appeared on the Dirtcoin Diaries podcast and gave a presentation called **Bitcoin Fungibility: The Absolute State of It**.
 
-    <video controls width="100%" preload="metadata" onloadedmetadata="this.volume = 0.5">
-      <source src="../../videos/bitcoin-fungibility.mp4" type="video/mp4">
-      Your browser does not support the video tag. You can watch the video directly at <a href="../videos/bitcoin-fungibility.mp4">this link</a>.
+    <video controls width="100%" preload="metadata" onloadedmetadata="this.volume = 0.3">
+      <source src="https://blob.satellite.earth/649fc84a78317d95d8174a4b5769459773e5daba22bbff39542eba123529d2ad" type="video/mp4">
+      Your browser does not support the video tag. You can watch the video directly at <a href="https://blob.satellite.earth/649fc84a78317d95d8174a4b5769459773e5daba22bbff39542eba123529d2ad">this link</a>.
     </video>
+
 
 ---
 
