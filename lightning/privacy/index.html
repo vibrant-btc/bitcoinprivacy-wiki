@@ -1,0 +1,4277 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Explore Lightning Network privacy challenges including node identity, channel UTXO leaks, mobile LSP wallets, invoices, private channels, route probing, and payment correlation.">
+      
+      
+      
+        <link rel="canonical" href="https://bitcoinprivacy.wiki/lightning/privacy/">
+      
+      
+        <link rel="prev" href="../basics/">
+      
+      
+        <link rel="next" href="../routing-analysis/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Lightning Privacy - BitcoinPrivacy.Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lightning Privacy - BitcoinPrivacy.Wiki">
+<meta property="og:description" content="Explore Lightning Network privacy challenges including node identity, channel UTXO leaks, mobile LSP wallets, invoices, private channels, route probing, and payment correlation.">
+<meta property="og:image" content="https://bitcoinprivacy.wiki/assets/images/social/lightning/privacy.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://bitcoinprivacy.wiki/lightning/privacy/">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="Lightning Privacy - BitcoinPrivacy.Wiki">
+<meta property="twitter:description" content="Explore Lightning Network privacy challenges including node identity, channel UTXO leaks, mobile LSP wallets, invoices, private channels, route probing, and payment correlation.">
+<meta property="twitter:image" content="https://bitcoinprivacy.wiki/assets/images/social/lightning/privacy.png">
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: none; }
+            .glightbox-clean .gslide-media { -webkit-box-shadow: none; box-shadow: none; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lightning-privacy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="BitcoinPrivacy.Wiki" class="md-header__button md-logo" aria-label="BitcoinPrivacy.Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.244 15.525.362 9.105 1.962 2.67 8.475-1.243 14.9.358c6.43 1.605 10.342 8.115 8.738 14.548zm-6.35-4.613c.24-1.59-.974-2.45-2.64-3.03l.54-2.153-1.315-.33-.525 2.107c-.345-.087-.705-.167-1.064-.25l.526-2.127-1.32-.33-.54 2.165q-.428-.1-.84-.2l-1.815-.45-.35 1.407s.975.225.955.236c.535.136.63.486.615.766l-1.477 5.92c-.075.166-.24.406-.614.314.015.02-.96-.24-.96-.24l-.66 1.51 1.71.426.93.242-.54 2.19 1.32.327.54-2.17c.36.1.705.19 1.05.273l-.51 2.154 1.32.33.545-2.19c2.24.427 3.93.257 4.64-1.774.57-1.637-.03-2.58-1.217-3.196.854-.193 1.5-.76 1.68-1.93h.01zm-3.01 4.22c-.404 1.64-3.157.75-4.05.53l.72-2.9c.896.23 3.757.67 3.33 2.37m.41-4.24c-.37 1.49-2.662.735-3.405.55l.654-2.64c.744.18 3.137.524 2.75 2.084z"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BitcoinPrivacy.Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lightning Privacy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="blue" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard="" data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"></path></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vibrant-btc/bitcoinprivacy-wiki" title="Go to repository" class="md-source" data-md-component="source" target="_blank" rel="noopener">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    bitcoinprivacy-wiki
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/what-is-privacy/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../techniques/decision-tree/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Privacy Techniques
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../basics/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Lightning Privacy
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../boltzmann/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Boltzmann Entropy
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../links/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Resources
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../glossary/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Glossary
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../donate/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Donate
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BitcoinPrivacy.Wiki" class="md-nav__button md-logo" aria-label="BitcoinPrivacy.Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.244 15.525.362 9.105 1.962 2.67 8.475-1.243 14.9.358c6.43 1.605 10.342 8.115 8.738 14.548zm-6.35-4.613c.24-1.59-.974-2.45-2.64-3.03l.54-2.153-1.315-.33-.525 2.107c-.345-.087-.705-.167-1.064-.25l.526-2.127-1.32-.33-.54 2.165q-.428-.1-.84-.2l-1.815-.45-.35 1.407s.975.225.955.236c.535.136.63.486.615.766l-1.477 5.92c-.075.166-.24.406-.614.314.015.02-.96-.24-.96-.24l-.66 1.51 1.71.426.93.242-.54 2.19 1.32.327.54-2.17c.36.1.705.19 1.05.273l-.51 2.154 1.32.33.545-2.19c2.24.427 3.93.257 4.64-1.774.57-1.637-.03-2.58-1.217-3.196.854-.193 1.5-.76 1.68-1.93h.01zm-3.01 4.22c-.404 1.64-3.157.75-4.05.53l.72-2.9c.896.23 3.757.67 3.33 2.37m.41-4.24c-.37 1.49-2.662.735-3.405.55l.654-2.64c.744.18 3.137.524 2.75 2.084z"></path></svg>
+
+    </a>
+    BitcoinPrivacy.Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vibrant-btc/bitcoinprivacy-wiki" title="Go to repository" class="md-source" data-md-component="source" target="_blank" rel="noopener">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    bitcoinprivacy-wiki
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/what-is-privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What is Bitcoin Privacy?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/threat-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Modeling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/utxos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Understanding UTXOs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/chain-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How Chain Analysis Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/heuristics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Heuristics Explained
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/acquiring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acquiring Bitcoin Privately
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/wallets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Choosing a Wallet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Your Own Node
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/first-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your First Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/recovering-from-privacy-mistakes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recovering from Privacy Mistakes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your Privacy Checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Techniques
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Privacy Techniques
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/decision-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Which Privacy Tool Should I Use?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/public-receiving/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Public Receiving
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/transaction-broadcast-privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Private Transaction Boradcasting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../techniques/address-reuse/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Address Reuse
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Address Reuse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/coin-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coin Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/address-reuse/bip47/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIP47 PayNyms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/address-reuse/silent-payments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Silent Payments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIP47 vs Silent Payments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../techniques/coinjoin/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CoinJoin
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CoinJoin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_2" id="__nav_3_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Implementations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/coinjoin/whirlpool/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Whirlpool
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/coinjoin/joinmarket/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JoinMarket
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/coinjoin/wasabi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WabiSabi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_3" id="__nav_3_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post Mix Spending
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Post Mix Spending
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/post-mix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post-Mix Best Practices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/payjoin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PayJoin &amp; Stowaway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/stonewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stonewall
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../techniques/ricochet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ricochet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lightning Privacy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lightning Privacy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lightning Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lightning Privacy
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lightning Privacy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#defining-privacy-in-lightning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defining Privacy in Lightning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lightning-privacy-who-sees-what" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lightning Privacy: Who Sees What?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-level-privacy-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network-Level Privacy Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network-Level Privacy Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#public-ip-addresses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public IP Addresses
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tor-onion-addresses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tor Onion Addresses
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#node-identity-leaks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node Identity Leaks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Node Identity Leaks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node-alias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node Alias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apps-and-services-can-link-your-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apps and Services Can Link Your Node
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-layer-data-leakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-Layer Data Leakage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cross-Layer Data Leakage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funding-transactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funding Transactions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-biggest-privacy-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Biggest Privacy Risk
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-channels-and-utxo-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Channels and UTXO Links
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Public Channels and UTXO Links">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#best-case-and-worst-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Case and Worst Case
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opening-multiple-channels-from-one-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opening Multiple Channels From One Source
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#private-channels-are-not-fully-private" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Private Channels Are Not Fully Private
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Private Channels Are Not Fully Private">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#private-routing-hints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Private Routing Hints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#your-peer-can-reveal-the-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your Peer Can Reveal the Channel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#closing-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Closing Channels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#invoices-and-receiver-privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Invoices and Receiver Privacy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Invoices and Receiver Privacy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invoice-memos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Invoice Memos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#public-invoices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Invoices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mobile-wallets-and-lsp-privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mobile Wallets and LSP Privacy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mobile Wallets and LSP Privacy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phoenix-and-acinq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phoenix and ACINQ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-acinq-can-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What ACINQ Can Learn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trust-minimized-not-trustless" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trust-Minimized, Not Trustless
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sender-privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sender Privacy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sender Privacy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#one-hop-payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One-Hop Payments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#two-hop-lsp-payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-Hop LSP Payments
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#payment-correlation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Payment Correlation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Payment Correlation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#onion-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onion Routing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timing-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timing Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#balance-probing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Balance Probing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multipath-payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multipath Payments
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-and-improving-privacy-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future and Improving Privacy Tools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-lightning-privacy-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Lightning Privacy Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-comes-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Comes Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routing Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../blinded-paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blinded Paths
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bolt12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BOLT12 Offers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lnproxy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    lnproxy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../boltzmann/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boltzmann Entropy
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Boltzmann Entropy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../boltzmann/what-is-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What Is Entropy?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../boltzmann/valid-interpretations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Valid Interpretations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../boltzmann/link-probability-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Link Probability Matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../analysis/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Analysis Walkthrough
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Privacy Analysis Walkthrough
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_5_2">
+        
+          
+          <label class="md-nav__link" for="__nav_5_5_2" id="__nav_5_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Examples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analysis/batch-payment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Batch Payment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analysis/consolidation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UTXO Consolidation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analysis/stonewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stonewall
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analysis/whirlpool/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Whirlpool CoinJoin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analysis/ricochet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ricochet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../links/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../links/fungibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bitcoin Fungibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../links/selfhosting-am-i-exposed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Hosting am-i.exposed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Glossary
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../donate/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Donate
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Donate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#defining-privacy-in-lightning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defining Privacy in Lightning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lightning-privacy-who-sees-what" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lightning Privacy: Who Sees What?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-level-privacy-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network-Level Privacy Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network-Level Privacy Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#public-ip-addresses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public IP Addresses
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tor-onion-addresses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tor Onion Addresses
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#node-identity-leaks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node Identity Leaks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Node Identity Leaks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node-alias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node Alias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apps-and-services-can-link-your-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apps and Services Can Link Your Node
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-layer-data-leakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-Layer Data Leakage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cross-Layer Data Leakage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funding-transactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funding Transactions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-biggest-privacy-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Biggest Privacy Risk
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-channels-and-utxo-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Channels and UTXO Links
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Public Channels and UTXO Links">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#best-case-and-worst-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Case and Worst Case
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opening-multiple-channels-from-one-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opening Multiple Channels From One Source
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#private-channels-are-not-fully-private" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Private Channels Are Not Fully Private
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Private Channels Are Not Fully Private">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#private-routing-hints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Private Routing Hints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#your-peer-can-reveal-the-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your Peer Can Reveal the Channel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#closing-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Closing Channels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#invoices-and-receiver-privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Invoices and Receiver Privacy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Invoices and Receiver Privacy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#invoice-memos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Invoice Memos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#public-invoices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Invoices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mobile-wallets-and-lsp-privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mobile Wallets and LSP Privacy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mobile Wallets and LSP Privacy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phoenix-and-acinq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phoenix and ACINQ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-acinq-can-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What ACINQ Can Learn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trust-minimized-not-trustless" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trust-Minimized, Not Trustless
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sender-privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sender Privacy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sender Privacy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#one-hop-payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One-Hop Payments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#two-hop-lsp-payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-Hop LSP Payments
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#payment-correlation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Payment Correlation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Payment Correlation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#onion-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onion Routing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timing-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timing Analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#balance-probing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Balance Probing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multipath-payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multipath Payments
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-and-improving-privacy-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Future and Improving Privacy Tools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-lightning-privacy-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Lightning Privacy Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-takeaways" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Takeaways
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-comes-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Comes Next
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/vibrant-btc/bitcoinprivacy-wiki/edit/main/docs/lightning/privacy.md" title="Edit this page" class="md-content__button md-icon" rel="edit noopener" target="_blank">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+    </a>
+  
+  
+
+
+<h1 id="lightning-privacy">Lightning Privacy<a class="headerlink" href="#lightning-privacy" title="Permanent link">¶</a></h1>
+<p>The <a href="../../glossary/#lightning-network">Lightning Network</a> provides real privacy benefits compared with normal <a href="../../glossary/#onchain">onchain</a> payments: individual Lightning payments are not written to the blockchain. However, Lightning is not automatically private. It has its own privacy leaks around <a href="../../glossary/#node-id">node IDs</a>, <a href="../../glossary/#channel">channels</a>, <a href="../../glossary/#invoice">invoices</a>, <a href="../../glossary/#lsp">LSPs</a>, routing, and the <a href="../../glossary/#utxo">UTXOs</a> used to open channels.</p>
+<div class="admonition warning">
+<p class="admonition-title">Lightning Is Not Magic Privacy</p>
+<p>Lightning hides many payments from the public blockchain, but it can still leak information to your channel partners, routing nodes, wallet provider, <a href="../../glossary/#lsp">Lightning Service Provider</a>, or the person you pay.</p>
+<p>Think of Lightning as a different privacy model, not a perfect privacy upgrade.</p>
+</div>
+<hr>
+<h2 id="defining-privacy-in-lightning">Defining Privacy in Lightning<a class="headerlink" href="#defining-privacy-in-lightning" title="Permanent link">¶</a></h2>
+<p>Before going any further, let us define what "privacy" means in this context. In computer systems, privacy is often about <strong>confidentiality</strong>: making sure information only reaches the people who need to know it.</p>
+<p>Another useful concept is the <strong><a href="../../glossary/#anonymity-set">anonymity set</a></strong>. This is the crowd you are hiding in. The theme of this page is simple:</p>
+<blockquote>
+<p>How can an attacker use Lightning information to reduce your anonymity set or link your activity to your identity?</p>
+</blockquote>
+<p>Lightning privacy is usually about reducing links between:</p>
+<ul>
+<li>Your real-world identity ↔ your <a href="../../glossary/#node-id">node ID</a></li>
+<li>Your node ID ↔ your <a href="../../glossary/#tor">IP address</a></li>
+<li>Your node ID ↔ your public <a href="../../glossary/#channel">channels</a></li>
+<li>Your channels ↔ your on-chain <a href="../../glossary/#utxo">UTXOs</a></li>
+<li>Your <a href="../../glossary/#invoice">invoices</a> ↔ your node ID</li>
+<li>Your payments ↔ sender, receiver, amount, and timing</li>
+</ul>
+<hr>
+<h2 id="lightning-privacy-who-sees-what">Lightning Privacy: Who Sees What?<a class="headerlink" href="#lightning-privacy-who-sees-what" title="Permanent link">¶</a></h2>
+<p>Different observers see different things.</p>
+<table>
+<thead>
+<tr>
+<th>Observer</th>
+<th>What they may learn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Your channel partner</td>
+<td>Your shared channel, some balance changes, whether you are online</td>
+</tr>
+<tr>
+<td>A public routing node</td>
+<td>Previous hop, next hop, amount forwarded, timing</td>
+</tr>
+<tr>
+<td>Your <a href="../../glossary/#lsp">LSP</a></td>
+<td>Often your channel activity, liquidity needs, and sometimes final payment destination</td>
+</tr>
+<tr>
+<td>The payment receiver</td>
+<td>The invoice they gave you, whether it was paid, and sometimes sender clues</td>
+</tr>
+<tr>
+<td>Public network observers</td>
+<td>Public node aliases, public channels, channel capacities, and gossip data</td>
+</tr>
+<tr>
+<td>Chain analysts</td>
+<td>Channel opens, channel closes, force closes, and UTXO links</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Use the Right Mental Model</p>
+<p>On-chain privacy is about the public transaction graph. Lightning privacy is about metadata: who connects to whom, who routes through whom, which node issued an invoice, what channel was opened, and what timing or amount patterns reveal.</p>
+</div>
+<hr>
+<h2 id="network-level-privacy-issues">Network-Level Privacy Issues<a class="headerlink" href="#network-level-privacy-issues" title="Permanent link">¶</a></h2>
+<p>Lightning nodes must communicate over the internet. If your node announces a public address, that address can reveal information about you.</p>
+<h3 id="public-ip-addresses">Public IP Addresses<a class="headerlink" href="#public-ip-addresses" title="Permanent link">¶</a></h3>
+<p>A public IP address can reveal your approximate location and internet service provider. If your Lightning node is reachable over a public IP address, observers may connect that node to your home network, VPS provider.</p>
+<p>This matters because a Lightning <a href="../../glossary/#node-id">node ID</a> can become a public identity. If that identity is tied to your IP address, your channels, public capacity, and on-chain channel history become easier to connect to you.</p>
+<h3 id="tor-onion-addresses">Tor Onion Addresses<a class="headerlink" href="#tor-onion-addresses" title="Permanent link">¶</a></h3>
+<p>Using <a href="../../glossary/#tor">Tor</a> hides your normal IP address from peers. Some home node packages make Tor the default because it avoids port forwarding and protects the user's home IP.</p>
+<p>Tor has trade-offs:</p>
+<ul>
+<li>It is slower than clearnet.</li>
+<li>Peers will find Tor nodes less reliable.</li>
+<li>Your payments will fail more often.</li>
+</ul>
+<p>For many non-routing users, Tor is still a strong default.</p>
+<hr>
+<h2 id="node-identity-leaks">Node Identity Leaks<a class="headerlink" href="#node-identity-leaks" title="Permanent link">¶</a></h2>
+<h3 id="node-alias">Node Alias<a class="headerlink" href="#node-alias" title="Permanent link">¶</a></h3>
+<p>A <a href="../../glossary/#node-alias">node alias</a> is the human-readable name your Lightning node announces to the network. If you run a public business node, you may want a recognizable alias. If you are a private user, you usually do not.</p>
+<div class="admonition warning">
+<p class="admonition-title">Do Not Dox Your Node</p>
+<p>Do not use your real name, social media handle, business identity, or long-term pseudonym as your node alias unless you intentionally want the world to connect that identity to your Lightning node.</p>
+<p>A node alias can become like putting a label on a cluster of financial activity.</p>
+</div>
+<h3 id="apps-and-services-can-link-your-node">Apps and Services Can Link Your Node<a class="headerlink" href="#apps-and-services-can-link-your-node" title="Permanent link">¶</a></h3>
+<p>Some Lightning apps and services may associate your <a href="../../glossary/#node-id">node ID</a> with an account, username, chat identity, shop, or public profile. Once that happens, your public Lightning information becomes easier to connect to your identity.</p>
+<p>Be especially careful with:</p>
+<ul>
+<li>Apps that use your Lightning node identity</li>
+<li>Services that know your real identity and pay to your node</li>
+<li>Public invoices posted in chats, forums, or social media</li>
+</ul>
+<hr>
+<h2 id="cross-layer-data-leakage">Cross-Layer Data Leakage<a class="headerlink" href="#cross-layer-data-leakage" title="Permanent link">¶</a></h2>
+<p>The Lightning Network is a second layer built on Bitcoin. It still uses Bitcoin transactions to open and close channels. This creates <strong>cross-layer leaks</strong>: information from Lightning can reveal things about on-chain UTXOs, and on-chain behavior can reveal things about Lightning.</p>
+<h3 id="funding-transactions">Funding Transactions<a class="headerlink" href="#funding-transactions" title="Permanent link">¶</a></h3>
+<p>A <a href="../../glossary/#funding-transaction">funding transaction</a> locks bitcoin into a 2-of-2 <a href="../../glossary/#multisig-multi-signature">multisig</a> output to open a Lightning <a href="../../glossary/#channel">channel</a>.</p>
+<p>When a public channel is created, the node sends a <a href="../../glossary/#channel-announcement">channel announcement</a> to the network. That announcement proves that the channel exists. It includes a <a href="../../glossary/#short-channel-id">short channel ID</a>, which points to the on-chain transaction output used for the channel.</p>
+<p>A short channel ID looks like this:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&lt;blockheight&gt;x&lt;transaction index&gt;x&lt;output&gt;
+</span></code></pre></div>
+<p>This makes it possible to connect a public Lightning channel to an on-chain <a href="../../glossary/#utxo">UTXO</a>.</p>
+<h3 id="the-biggest-privacy-risk">The Biggest Privacy Risk<a class="headerlink" href="#the-biggest-privacy-risk" title="Permanent link">¶</a></h3>
+<p>The biggest risk comes when the bitcoin used to open the channel is already linked to your identity, usually through <a href="../../glossary/#kyc-know-your-customer">KYC</a>.</p>
+<p>If you withdraw from a KYC exchange and use that UTXO to open a public Lightning channel, the exchange may know that you likely opened that channel. Anyone watching the public channel graph can then study that node's public channels, capacity, and activity.</p>
+<div class="admonition danger">
+<p class="admonition-title">KYC UTXO → Lightning Node</p>
+<p>Opening public channels with identity-linked coins can connect your real-world identity to your Lightning node.</p>
+<p>This does not require breaking Lightning. It is just normal on-chain analysis plus public Lightning gossip.</p>
+</div>
+<hr>
+<h2 id="public-channels-and-utxo-links">Public Channels and UTXO Links<a class="headerlink" href="#public-channels-and-utxo-links" title="Permanent link">¶</a></h2>
+<p>With public channels, the <a href="../../glossary/#short-channel-id">short channel ID</a> points to the channel's on-chain funding output. Observers may not always know which peer funded the channel, but they can often make strong guesses.</p>
+<h3 id="best-case-and-worst-case">Best Case and Worst Case<a class="headerlink" href="#best-case-and-worst-case" title="Permanent link">¶</a></h3>
+<p>In a simple public channel, the funding UTXO belongs to one of the two channel peers. From the outside, that may look like a 50/50 guess.</p>
+<p>But the guess can become much stronger when:</p>
+<ul>
+<li>One peer is a large public routing node or <a href="../../glossary/#lsp">LSP</a></li>
+<li>The funding UTXO came from a known KYC withdrawal</li>
+<li>Change from one channel open is used to open another channel</li>
+<li>Several channels are opened close together from related UTXOs</li>
+<li>A node repeatedly uses the same wallet pattern</li>
+</ul>
+<h3 id="opening-multiple-channels-from-one-source">Opening Multiple Channels From One Source<a class="headerlink" href="#opening-multiple-channels-from-one-source" title="Permanent link">¶</a></h3>
+<p>If one transaction opens a channel and sends change back to the same wallet, and that change later opens another channel, analysts may link those channels to the same owner.</p>
+<p>This is similar to normal <a href="../../glossary/#change-detection">change detection</a>: the change output becomes a trail.</p>
+<div class="admonition tip">
+<p class="admonition-title">Better Public Channel Hygiene</p>
+<p>If you open public channels, avoid using identity-linked UTXOs. Avoid creating obvious change trails from one channel open into another. Use careful <a href="../../techniques/coin-control/">coin control</a> and keep channel-opening funds separated by purpose.</p>
+</div>
+<hr>
+<h2 id="private-channels-are-not-fully-private">Private Channels Are Not Fully Private<a class="headerlink" href="#private-channels-are-not-fully-private" title="Permanent link">¶</a></h2>
+<p>A <a href="../../glossary/#private-channel">private channel</a> is not announced to the whole network. That sounds private, but it does not mean nobody can learn about it.</p>
+<p>Private channels can leak through:</p>
+<ul>
+<li>Invoices with private routing hints</li>
+<li>Probing attacks</li>
+<li>Force closes</li>
+</ul>
+<h3 id="private-routing-hints">Private Routing Hints<a class="headerlink" href="#private-routing-hints" title="Permanent link">¶</a></h3>
+<p>If you receive through a private channel, your <a href="../../glossary/#invoice">invoice</a> may include routing hints. These hints tell the sender how to reach you. In some cases, they reveal a <a href="../../glossary/#short-channel-id">short channel ID</a>, which can point back to the on-chain funding UTXO.</p>
+<p>That means the person receiving your invoice may learn information about your private channel.</p>
+<h3 id="your-peer-can-reveal-the-channel">Your Peer Can Reveal the Channel<a class="headerlink" href="#your-peer-can-reveal-the-channel" title="Permanent link">¶</a></h3>
+<p>Even if you never share an invoice, your channel partner might. A private channel is shared between two parties. The other party can leak details in their own invoices or through other behavior.</p>
+<div class="admonition warning">
+<p class="admonition-title">Private Means Unannounced, Not Secret Forever</p>
+<p>A private Lightning channel is better understood as <strong>unannounced</strong>. It is not guaranteed to stay secret forever.</p>
+<p>If a channel matters for your privacy, assume the channel partner may eventually reveal it accidentally or intentionally.</p>
+</div>
+<hr>
+<h2 id="closing-channels">Closing Channels<a class="headerlink" href="#closing-channels" title="Permanent link">¶</a></h2>
+<p>Closing a channel creates another on-chain transaction.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Cooperative Close</label><label for="__tabbed_1_2">Force Close</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>A cooperative close happens when both channel partners agree to close. Older P2WSH cooperative closes can still be recognized as spending a Lightning-style 2-of-2 multisig output. <a href="../../glossary/#taproot-channels">Taproot channels</a> improve this because a cooperative close can look like a normal Taproot spend.</p>
+</div>
+<div class="tabbed-block">
+<p>A <a href="../../glossary/#force-close">force close</a> happens when one side closes unilaterally. Force closes are more obvious because they use Lightning-specific scripts and delays. They can reveal that a previous output was a Lightning channel, including for channels that were not publicly announced.</p>
+</div>
+</div>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Force Closes Leak More</p>
+<p>A force close should be treated as an emergency mechanism. It can be expensive, slow, and more revealing on-chain than a cooperative close.</p>
+</div>
+<p>After closing a channel, be careful with the returned UTXO. Spending it carelessly can connect your Lightning history to other funds.</p>
+<hr>
+<h2 id="invoices-and-receiver-privacy">Invoices and Receiver Privacy<a class="headerlink" href="#invoices-and-receiver-privacy" title="Permanent link">¶</a></h2>
+<p>Receivers often have weaker privacy than senders on Lightning. The reason is simple: to receive, you usually give someone an <a href="../../glossary/#invoice">invoice</a>.</p>
+<p>A normal invoice can reveal:</p>
+<ul>
+<li>Your <a href="../../glossary/#node-id">node ID</a></li>
+<li>The payment amount</li>
+<li>A <a href="../../glossary/#payment-hash">payment hash</a></li>
+<li>An expiry time</li>
+<li>A description or memo</li>
+<li>Routing hints for private channels</li>
+</ul>
+<h3 id="invoice-memos">Invoice Memos<a class="headerlink" href="#invoice-memos" title="Permanent link">¶</a></h3>
+<p>Invoice descriptions can reveal more than people expect. If you put sensitive information in an invoice memo, you are handing that information to the payer and possibly to their wallet provider or custodian.</p>
+<div class="admonition warning">
+<p class="admonition-title">An Invoice Memo Is Not Private</p>
+<p>Do not write sensitive information in invoice memos. Treat invoice descriptions like something that may be logged, screenshotted, forwarded, or stored by a custodial wallet.</p>
+</div>
+<h3 id="public-invoices">Public Invoices<a class="headerlink" href="#public-invoices" title="Permanent link">¶</a></h3>
+<p>Do not post normal Lightning invoices publicly if you want to keep your node private. Anyone with the invoice can inspect it and may learn your node ID or routing hints.</p>
+<p>For public receiving, prefer tools designed for reusable receiving, such as <a href="../bolt12/">BOLT12 offers</a> where supported, or use separate identities and wallets for public activity.</p>
+<hr>
+<h2 id="mobile-wallets-and-lsp-privacy">Mobile Wallets and LSP Privacy<a class="headerlink" href="#mobile-wallets-and-lsp-privacy" title="Permanent link">¶</a></h2>
+<p>Many mobile Lightning wallets use a <a href="../../glossary/#lsp">Lightning Service Provider</a>. An LSP helps with channels, liquidity, routing, and mobile reliability. This makes Lightning easier to use, but it also creates a privacy trade-off.</p>
+<h3 id="phoenix-and-acinq">Phoenix and ACINQ<a class="headerlink" href="#phoenix-and-acinq" title="Permanent link">¶</a></h3>
+<p><a href="../../glossary/#phoenix">Phoenix</a> is a common mobile Lightning wallet made by <a href="../../glossary/#acinq">ACINQ</a>. Phoenix is non-custodial, meaning you control the keys, but it is not privacy-equivalent to running your own Lightning node.</p>
+<p>Phoenix channels connect to ACINQ's node. Phoenix also delegates payment route calculation to ACINQ. According to Phoenix's own FAQ, ACINQ currently knows the final destination and amount of payments made through Phoenix.</p>
+<div class="admonition warning">
+<p class="admonition-title">Phoenix Privacy Trade-Off</p>
+<p>Phoenix is convenient and non-custodial, but ACINQ can currently learn the final recipient and amount of your outgoing payments.</p>
+<p>This is similar to the privacy level of many hosted or custodial wallets for payment metadata, even though Phoenix does not custody your funds.</p>
+</div>
+<h3 id="what-acinq-can-learn">What ACINQ Can Learn<a class="headerlink" href="#what-acinq-can-learn" title="Permanent link">¶</a></h3>
+<p>In the current Phoenix model, ACINQ may learn:</p>
+<ul>
+<li>Your app's channels with ACINQ</li>
+<li>Your liquidity needs</li>
+<li>Your outgoing payment destination</li>
+<li>Your outgoing payment amount</li>
+<li>Some timing information</li>
+<li>On-chain deposits and channel-related activity</li>
+</ul>
+<p>This does not mean ACINQ can steal your funds in normal operation. It means ACINQ has visibility into payment metadata.</p>
+<h3 id="trust-minimized-not-trustless">Trust-Minimized, Not Trustless<a class="headerlink" href="#trust-minimized-not-trustless" title="Permanent link">¶</a></h3>
+<p>Phoenix is best described as <strong>trust-minimized</strong>, not trustless. For example:</p>
+<ul>
+<li>If an incoming payment causes a channel change, there <em>is</em> trust required until the funding transaction confirms.</li>
+<li>If you make an on-chain deposit, Phoenix directly funds the transaction.</li>
+</ul>
+<p>Using your own Electrum server reduces dependency on third-party blockchain lookups, but it does not remove ACINQ's role as Phoenix's LSP.</p>
+<hr>
+<h2 id="sender-privacy">Sender Privacy<a class="headerlink" href="#sender-privacy" title="Permanent link">¶</a></h2>
+<p>Lightning sender privacy is often better than receiver privacy because payments use onion routing. Each routing node normally sees only:</p>
+<ul>
+<li>The previous hop</li>
+<li>The next hop</li>
+<li>The amount it forwards</li>
+<li>Timing information</li>
+</ul>
+<p>It should not know the full route.</p>
+<p>However, sender privacy can still fail in simple topologies.</p>
+<h3 id="one-hop-payments">One-Hop Payments<a class="headerlink" href="#one-hop-payments" title="Permanent link">¶</a></h3>
+<p>If you have only one channel and you pay your direct channel partner, they may reasonably guess that you are the sender.</p>
+<p>If no other node could have routed through you, there is not much ambiguity.</p>
+<h3 id="two-hop-lsp-payments">Two-Hop LSP Payments<a class="headerlink" href="#two-hop-lsp-payments" title="Permanent link">¶</a></h3>
+<p>Many mobile users have only one channel: a channel to their <a href="../../glossary/#lsp">LSP</a>. If two users of the same LSP pay each other, the LSP likely is able to see both sides of the payment.</p>
+<p>Example:</p>
+<pre class="mermaid"><code>graph LR
+    A[Alice mobile wallet] --&gt; B[LSP]
+    B --&gt; C[Jane mobile wallet]</code></pre>
+<p>If Alice and Jane both only connect to the same LSP, the LSP may infer that Alice paid Jane and for how much.</p>
+<div class="admonition tip">
+<p class="admonition-title">More Channels Can Mean More Ambiguity</p>
+<p>A user with only one channel has a smaller anonymity set. A user with several well-chosen channels can be harder to identify as the source or destination of a payment.</p>
+</div>
+<hr>
+<h2 id="payment-correlation">Payment Correlation<a class="headerlink" href="#payment-correlation" title="Permanent link">¶</a></h2>
+<p>While Lightning takes payments off-chain, the way payments move through the network can still leak information.</p>
+<h3 id="onion-routing">Onion Routing<a class="headerlink" href="#onion-routing" title="Permanent link">¶</a></h3>
+<p>Lightning uses onion routing. This means each hop only unwraps the part of the payment instructions meant for it.</p>
+<p>This is helpful, but it is not enough in all cases. A large payment has fewer possible routes than a small payment. If only one path has enough <a href="../../glossary/#liquidity">liquidity</a>, the route may become obvious.</p>
+<p><strong>The bigger the payment, the smaller the anonymity set.</strong></p>
+<h3 id="timing-analysis">Timing Analysis<a class="headerlink" href="#timing-analysis" title="Permanent link">¶</a></h3>
+<p>Timing can also leak information. If a payment completes very quickly after reaching a certain node, that node may infer it was close to the destination.</p>
+<p>This is covered in more detail in <a href="../routing-analysis/">Routing Analysis</a>.</p>
+<hr>
+<h2 id="balance-probing">Balance Probing<a class="headerlink" href="#balance-probing" title="Permanent link">¶</a></h2>
+<p><a href="../../glossary/#liquidity">Liquidity</a> inside a channel is not public, but attackers can estimate it by sending fake payments that intentionally fail.</p>
+<p>This is called <a href="../routing-analysis/#probing-attacks">probing</a>. The attacker tries different amounts and watches which errors come back. Over time, they can estimate how much liquidity is on each side of a channel.</p>
+<p>This can be used to:</p>
+<ul>
+<li>Estimate a node's balance distribution</li>
+<li>Watch merchant activity</li>
+<li>Track liquidity changes before and after payments</li>
+<li>Infer payment amounts in targeted attacks</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Probing Is Easier to Understand Than It Sounds</p>
+<p>Imagine a channel has 1 BTC total capacity. An attacker tries to route 0.9 BTC through it. If that fails, they try 0.5 BTC. If that works, they know the channel has at least 0.5 BTC available in that direction.</p>
+</div>
+<p>Network-wide probing is expensive, but targeted probing against a specific merchant, LSP, or node can be more realistic.</p>
+<hr>
+<h2 id="multipath-payments">Multipath Payments<a class="headerlink" href="#multipath-payments" title="Permanent link">¶</a></h2>
+<p><a href="../../glossary/#mpp">MPP</a> splits one payment into multiple smaller pieces. This can help payments succeed because each piece needs less liquidity than the full amount.</p>
+<p>MPP can also help privacy because observers may see smaller pieces instead of one large payment. However, basic MPP still uses the same payment hash for each part, so a well-positioned observer may correlate the pieces.</p>
+<p><a href="../../glossary/#amp">AMP</a> improves this by using different payment hashes for different pieces, making correlation harder.</p>
+<div class="admonition tip">
+<p class="admonition-title">Smaller Pieces Can Help</p>
+<p>Splitting a large payment into smaller parts can increase the number of possible routes. More possible routes means more ambiguity.</p>
+</div>
+<hr>
+<h2 id="future-and-improving-privacy-tools">Future and Improving Privacy Tools<a class="headerlink" href="#future-and-improving-privacy-tools" title="Permanent link">¶</a></h2>
+<p>Several Lightning improvements aim to reduce privacy leaks.</p>
+<div class="grid cards">
+<ul>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.83 9 15 12.16V12a3 3 0 0 0-3-3zm-4.3.8 1.55 1.55c-.05.21-.08.42-.08.65a3 3 0 0 0 3 3c.22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53a5 5 0 0 1-5-5c0-.79.2-1.53.53-2.2M2 4.27l2.28 2.28.45.45C3.08 8.3 1.78 10 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.43.42L19.73 22 21 20.73 3.27 3M12 7a5 5 0 0 1 5 5c0 .64-.13 1.26-.36 1.82l2.93 2.93c1.5-1.25 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-4 .7l2.17 2.15C10.74 7.13 11.35 7 12 7"></path></svg></span> <strong>Blinded Paths</strong></p>
+<hr>
+<p><a href="../blinded-paths/">Blinded paths</a> let the receiver hide the final part of the route. This improves receiver privacy because the sender does not need to know the receiver's node ID.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13c.6 0 1.1.2 1.4.6.4.4.6.9.6 1.4l-8 3-7-2V7h1.9l7.3 2.7c.5.2.8.6.8 1.1 0 .3-.1.6-.3.8s-.5.4-.9.4H14l-1.7-.7-.3.9 2 .8zM2 7h4v11H2z"></path></svg></span> <strong>BOLT12 Offers</strong></p>
+<hr>
+<p><a href="../bolt12/">BOLT12 offers</a> are reusable Lightning payment requests that can use blinded paths and onion messaging. They are better for public receiving than repeatedly sharing normal invoices.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 10H5L3 8l2-2h6V3l1-1 1 1v1h6l2 2-2 2h-6v2h6l2 2-2 2h-6v6a2 2 0 0 1 2 2H9a2 2 0 0 1 2-2z"></path></svg></span> <strong>Trampoline Routing</strong></p>
+<hr>
+<p><a href="../../glossary/#trampoline-routing">Trampoline routing</a> lets a lightweight wallet ask a trampoline node to help build routes. It can help mobile wallets, but it also changes who learns routing information.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 1c-1.11 0-2 .89-2 2v11c0 1.11.89 2 2 2h11c1.11 0 2-.89 2-2v-3h-2v3H3V3h11v2h2V3c0-1.11-.89-2-2-2M9 7c-1.11 0-2 .89-2 2v3h2V9h11v11H9v-2H7v2c0 1.11.89 2 2 2h11c1.11 0 2-.89 2-2V9c0-1.11-.89-2-2-2z"></path></svg></span> <strong>PTLCs</strong></p>
+<hr>
+<p><a href="../../glossary/#ptlc">PTLCs</a> can reduce payment hash correlation by giving each hop a different payment point.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14 4 2.29 2.29-2.88 2.88 1.42 1.42 2.88-2.88L20 10V4M10 4H4v6l2.29-2.29 4.71 4.7V20h2v-8.41l-5.29-5.3"></path></svg></span> <strong>MPP and AMP</strong></p>
+<hr>
+<p><a href="../../glossary/#mpp">MPP</a> and <a href="../../glossary/#amp">AMP</a> split payments into parts. Smaller parts can create more route ambiguity, especially when hashes are not reused.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.67 13.67c-.47.46-1.04.83-1.67 1.06V23H8v-2H5v-3h3v-3.28c-1.74-.62-3-2.26-3-4.22C5 8 7 6 9.5 6h.1c-.47.95-.68 2-.57 3.08-.59.2-1.03.76-1.03 1.42 0 .83.67 1.5 1.5 1.5.23 0 .45-.06.65-.15.64.84 1.52 1.47 2.52 1.82m8.06 5.77-2.76 1.16-.78-1.84-2.76 1.17-1.17-2.77L16.03 16l-1.27-3c-1.85.08-3.65-.95-4.41-2.75-.96-2.29.12-4.93 2.41-5.9.24-.1.5-.17.74-.23C12.84 2.87 11.5 2 10 2 7.79 2 6 3.79 6 6v.24c-.3.26-.6.58-.85.91C5.06 6.78 5 6.4 5 6c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.42-.6 2.67-1.55 3.57.42.43 1.05.56 1.63.31.77-.32 1.12-1.2.8-1.96a1 1 0 0 0-.14-.26C15.9 7.13 16 6.58 16 6c0-.63-.1-1.24-.28-1.81 1.28.36 2.38 1.25 2.93 2.57.76 1.8.24 3.81-1.15 5.05zM13 8.6c.37-.41.65-.89.82-1.42-.54.27-.85.82-.82 1.42"></path></svg></span> <strong>Taproot Channels</strong></p>
+<hr>
+<p><a href="../../glossary/#taproot-channels">Taproot channels</a> can make cooperative channel opens and closes look more like normal Taproot spends.</p>
+</li>
+</ul>
+</div>
+<hr>
+<h2 id="practical-lightning-privacy-checklist">Practical Lightning Privacy Checklist<a class="headerlink" href="#practical-lightning-privacy-checklist" title="Permanent link">¶</a></h2>
+<div class="grid cards">
+<ul>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.06 13c-1.86 0-3.42 1.33-3.82 3.1-.95-.41-1.82-.3-2.48-.01C10.35 14.31 8.79 13 6.94 13 4.77 13 3 14.79 3 17s1.77 4 3.94 4c2.06 0 3.74-1.62 3.9-3.68.34-.24 1.23-.69 2.32.02.18 2.05 1.84 3.66 3.9 3.66 2.17 0 3.94-1.79 3.94-4s-1.77-4-3.94-4M6.94 19.86c-1.56 0-2.81-1.28-2.81-2.86s1.26-2.86 2.81-2.86c1.56 0 2.81 1.28 2.81 2.86s-1.25 2.86-2.81 2.86m10.12 0c-1.56 0-2.81-1.28-2.81-2.86s1.25-2.86 2.81-2.86 2.82 1.28 2.82 2.86-1.27 2.86-2.82 2.86M22 10.5H2V12h20zm-6.47-7.87c-.22-.49-.78-.75-1.31-.58L12 2.79l-2.23-.74-.05-.01c-.53-.15-1.09.13-1.29.64L6 9h12l-2.44-6.32z"></path></svg></span> <strong>Use Tor Where Practical</strong></p>
+<hr>
+<p>Run your node or wallet connections over <a href="../../glossary/#tor">Tor</a> when possible.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m18.33 8.5 4.59-4.58L21.5 2.5l-19 19 1.42 1.42 4.58-4.59 3.08 3.08A2 2 0 0 0 13 22a2 2 0 0 0 1.41-.59l7-7A2 2 0 0 0 22 13a2 2 0 0 0-.59-1.42m-15.8 3.85 9.86-9.78-3.06-3.07A2 2 0 0 0 11 2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 .59 1.41M5.5 4A1.5 1.5 0 1 1 4 5.5 1.5 1.5 0 0 1 5.5 4"></path></svg></span> <strong>Avoid Identifying Aliases</strong></p>
+<hr>
+<p>Do not use your real identity as your <a href="../../glossary/#node-alias">node alias</a>.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 5.27 3.28 4 20 20.72 18.73 22l-4.83-4.83-2.61 2.61a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l2.62-2.6-1.62-1.61c-.01.24-.11.49-.29.68-.39.39-1.03.39-1.42 0A4.97 4.97 0 0 1 7.72 11zm10.71-1.05a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.33 3.33-1.41-1.42zm.7 4.95c.39-.39 1.03-.39 1.42 0a5 5 0 0 1 1.23 5.06l-1.78-1.77c-.05-.68-.34-1.35-.87-1.87a.973.973 0 0 1 0-1.42"></path></svg></span> <strong>Avoid KYC Channel Funding</strong></p>
+<hr>
+<p>Be careful opening public channels with <a href="../../glossary/#kyc-know-your-customer">KYC</a>-linked <a href="../../glossary/#utxo">UTXOs</a>.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 11h-2V5h2m0 10h-2v-2h2m7-11H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2"></path></svg></span> <strong>Treat Invoices as Sensitive</strong></p>
+<hr>
+<p>Do not post normal <a href="../../glossary/#invoice">invoices</a> publicly if your node identity matters.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 13c.7 0 1.37.13 2 .35V9l-6-6H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h8.35c-.22-.63-.35-1.3-.35-2 0-3.31 2.69-6 6-6m-5-8.5 5.5 5.5H14zM20.41 19l2.13 2.12-1.42 1.42L19 20.41l-2.12 2.13-1.41-1.42L17.59 19l-2.12-2.12 1.41-1.41L19 17.59l2.12-2.12 1.42 1.41z"></path></svg></span> <strong>Avoid Revealing Memos</strong></p>
+<hr>
+<p>Do not put sensitive information in invoice descriptions.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 1c-1.1 0-2 .9-2 2v4h2V4h10v16H7v-3H5v4c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zM6 9c-1.7 0-3 1.3-3 3s1.3 3 3 3c1.3 0 2.4-.8 2.8-2H11v2h2v-2h2v-2H8.8C8.4 9.8 7.3 9 6 9m0 2c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1"></path></svg></span> <strong>Understand Your LSP</strong></p>
+<hr>
+<p>Mobile wallets using an <a href="../../glossary/#lsp">LSP</a>, such as <a href="../../glossary/#phoenix">Phoenix</a>, may leak payment metadata to that provider.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"></path></svg></span> <strong>Use Your Own Infrastructure</strong></p>
+<hr>
+<p>Running your own node reduces third-party visibility.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14c-3.36 0-4.46 1.35-4.82 2.24C9.25 16.7 10 17.76 10 19a3 3 0 0 1-3 3 3 3 0 0 1-3-3c0-1.31.83-2.42 2-2.83V7.83A2.99 2.99 0 0 1 4 5a3 3 0 0 1 3-3 3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83v5.29c.88-.65 2.16-1.12 4-1.12 2.67 0 3.56-1.34 3.85-2.23A3.01 3.01 0 0 1 14 7a3 3 0 0 1 3-3 3 3 0 0 1 3 3c0 1.34-.88 2.5-2.09 2.86C17.65 11.29 16.68 14 13 14m-6 4a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1M7 4a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m10 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1"></path></svg></span> <strong>Prefer Better Receiving Tools</strong></p>
+<hr>
+<p>Use <a href="../bolt12/">BOLT12 offers</a> and <a href="../blinded-paths/">blinded paths</a> when available.</p>
+</li>
+</ul>
+</div>
+<hr>
+<h2 id="key-takeaways">Key Takeaways<a class="headerlink" href="#key-takeaways" title="Permanent link">¶</a></h2>
+<ol>
+<li>Lightning hides individual payments from the public blockchain, but it leaks other metadata.</li>
+<li>Public channels can reveal on-chain UTXOs through short channel IDs.</li>
+<li>Private channels are unannounced, not guaranteed-secret.</li>
+<li>Invoices can reveal node IDs, amounts, memos, and private routing hints.</li>
+<li>Mobile LSP wallets are convenient, but the LSP may learn important payment metadata.</li>
+<li>Phoenix is non-custodial but currently gives ACINQ visibility into outgoing payment destination and amount.</li>
+<li>Large payments, simple channel setups, and shared LSP routes reduce anonymity.</li>
+<li>Blinded paths, BOLT12, PTLCs, AMP, and Taproot channels can improve Lightning privacy over time.</li>
+</ol>
+<hr>
+<h2 id="what-comes-next">What Comes Next<a class="headerlink" href="#what-comes-next" title="Permanent link">¶</a></h2>
+<p>The following pages dive deeper into specific attack vectors and mitigations:</p>
+<ul>
+<li><a href="../routing-analysis/">Routing Analysis</a> - How routing nodes can compromise sender and receiver privacy</li>
+<li><a href="../blinded-paths/">Blinded Paths</a> - Receiver privacy through blinded routes and trampoline routing</li>
+<li><a href="../bolt12/">BOLT12</a> - Reusable payment codes and offers for better receiver privacy</li>
+<li><a href="../lnproxy/">lnproxy</a> - A practical proxy tool for hiding Lightning invoice destinations from sender-side observers</li>
+</ul>
+<hr>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">¶</a></h2>
+<ul>
+<li><a href="https://abytesjourney.com/lightning-privacy/" target="_blank" rel="noopener">Current State of Lightning Network Privacy</a> — Tony's overview of Lightning privacy trade-offs</li>
+<li><a href="https://phoenix.acinq.co/faq" target="_blank" rel="noopener">Phoenix FAQ</a> — ACINQ's explanation of Phoenix trust, payments, and recovery</li>
+<li><a href="https://phoenix.acinq.co/privacy" target="_blank" rel="noopener">Phoenix Privacy Policy</a> — ACINQ's explanation of Phoenix payment privacy</li>
+<li><a href="https://voltage.cloud/blog/lightning-network-privacy-explainer" target="_blank" rel="noopener">Voltage - Lightning Network Privacy Explainer</a></li>
+<li><a href="https://lightningprivacy.com/en/introduction" target="_blank" rel="noopener">Lightning Privacy - Introduction</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../basics/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lightning Basics">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Lightning Basics
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../routing-analysis/" class="md-footer__link md-footer__link--next" aria-label="Next: Routing Analysis">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Routing Analysis
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.action.edit", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.indexes", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../js/popup.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  
+<script id="init-glightbox">document.querySelectorAll('.glightbox').forEach(function(element) {
+    try {
+        var img = element.querySelector('img');
+        if (img && img.src) {
+            element.setAttribute('href', img.src);
+        } else {
+            console.log('No img element with src attribute found');
+        }
+    } catch (error) {
+        console.log('Error:', error);
+    }
+});
+const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

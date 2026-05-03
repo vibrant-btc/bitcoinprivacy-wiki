@@ -1,0 +1,4362 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learn about Whirlpool CoinJoin, its fixed denomination model, Surge Cycles, and how to manage post-mix UTXOs safely">
+      
+      
+      
+        <link rel="canonical" href="https://bitcoinprivacy.wiki/techniques/coinjoin/whirlpool/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../joinmarket/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Whirlpool - BitcoinPrivacy.Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+<meta property="og:type" content="website">
+<meta property="og:title" content="Whirlpool - BitcoinPrivacy.Wiki">
+<meta property="og:description" content="Learn about Whirlpool CoinJoin, its fixed denomination model, Surge Cycles, and how to manage post-mix UTXOs safely">
+<meta property="og:image" content="https://bitcoinprivacy.wiki/assets/images/social/techniques/coinjoin/whirlpool.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://bitcoinprivacy.wiki/techniques/coinjoin/whirlpool/">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="Whirlpool - BitcoinPrivacy.Wiki">
+<meta property="twitter:description" content="Learn about Whirlpool CoinJoin, its fixed denomination model, Surge Cycles, and how to manage post-mix UTXOs safely">
+<meta property="twitter:image" content="https://bitcoinprivacy.wiki/assets/images/social/techniques/coinjoin/whirlpool.png">
+<link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: none; }
+            .glightbox-clean .gslide-media { -webkit-box-shadow: none; box-shadow: none; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#whirlpool" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="BitcoinPrivacy.Wiki" class="md-header__button md-logo" aria-label="BitcoinPrivacy.Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.244 15.525.362 9.105 1.962 2.67 8.475-1.243 14.9.358c6.43 1.605 10.342 8.115 8.738 14.548zm-6.35-4.613c.24-1.59-.974-2.45-2.64-3.03l.54-2.153-1.315-.33-.525 2.107c-.345-.087-.705-.167-1.064-.25l.526-2.127-1.32-.33-.54 2.165q-.428-.1-.84-.2l-1.815-.45-.35 1.407s.975.225.955.236c.535.136.63.486.615.766l-1.477 5.92c-.075.166-.24.406-.614.314.015.02-.96-.24-.96-.24l-.66 1.51 1.71.426.93.242-.54 2.19 1.32.327.54-2.17c.36.1.705.19 1.05.273l-.51 2.154 1.32.33.545-2.19c2.24.427 3.93.257 4.64-1.774.57-1.637-.03-2.58-1.217-3.196.854-.193 1.5-.76 1.68-1.93h.01zm-3.01 4.22c-.404 1.64-3.157.75-4.05.53l.72-2.9c.896.23 3.757.67 3.33 2.37m.41-4.24c-.37 1.49-2.662.735-3.405.55l.654-2.64c.744.18 3.137.524 2.75 2.084z"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BitcoinPrivacy.Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Whirlpool
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="blue" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard="" data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"></path></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vibrant-btc/bitcoinprivacy-wiki" title="Go to repository" class="md-source" data-md-component="source" target="_blank" rel="noopener">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    bitcoinprivacy-wiki
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../getting-started/what-is-privacy/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../decision-tree/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Privacy Techniques
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../lightning/basics/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Lightning Privacy
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../boltzmann/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Boltzmann Entropy
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../links/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Resources
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../glossary/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Glossary
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../donate/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Donate
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="BitcoinPrivacy.Wiki" class="md-nav__button md-logo" aria-label="BitcoinPrivacy.Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.244 15.525.362 9.105 1.962 2.67 8.475-1.243 14.9.358c6.43 1.605 10.342 8.115 8.738 14.548zm-6.35-4.613c.24-1.59-.974-2.45-2.64-3.03l.54-2.153-1.315-.33-.525 2.107c-.345-.087-.705-.167-1.064-.25l.526-2.127-1.32-.33-.54 2.165q-.428-.1-.84-.2l-1.815-.45-.35 1.407s.975.225.955.236c.535.136.63.486.615.766l-1.477 5.92c-.075.166-.24.406-.614.314.015.02-.96-.24-.96-.24l-.66 1.51 1.71.426.93.242-.54 2.19 1.32.327.54-2.17c.36.1.705.19 1.05.273l-.51 2.154 1.32.33.545-2.19c2.24.427 3.93.257 4.64-1.774.57-1.637-.03-2.58-1.217-3.196.854-.193 1.5-.76 1.68-1.93h.01zm-3.01 4.22c-.404 1.64-3.157.75-4.05.53l.72-2.9c.896.23 3.757.67 3.33 2.37m.41-4.24c-.37 1.49-2.662.735-3.405.55l.654-2.64c.744.18 3.137.524 2.75 2.084z"></path></svg>
+
+    </a>
+    BitcoinPrivacy.Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vibrant-btc/bitcoinprivacy-wiki" title="Go to repository" class="md-source" data-md-component="source" target="_blank" rel="noopener">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    bitcoinprivacy-wiki
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/what-is-privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What is Bitcoin Privacy?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/threat-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Modeling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/utxos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Understanding UTXOs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/chain-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How Chain Analysis Works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/heuristics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Heuristics Explained
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/acquiring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acquiring Bitcoin Privately
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/wallets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Choosing a Wallet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Your Own Node
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/first-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your First Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/recovering-from-privacy-mistakes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recovering from Privacy Mistakes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your Privacy Checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Techniques
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Privacy Techniques
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../decision-tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Which Privacy Tool Should I Use?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../public-receiving/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Public Receiving
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../transaction-broadcast-privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Private Transaction Boradcasting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../address-reuse/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Address Reuse
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4" id="__nav_3_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Address Reuse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coin-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coin Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../address-reuse/bip47/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIP47 PayNyms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../address-reuse/silent-payments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Silent Payments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BIP47 vs Silent Payments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked="">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CoinJoin
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5" id="__nav_3_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CoinJoin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_2" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_2" id="__nav_3_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Implementations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Whirlpool
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Whirlpool
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#what-is-whirlpool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is Whirlpool?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whirlpool-transaction-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whirlpool Transaction Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-whirlpool-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Whirlpool Works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How Whirlpool Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-four-accounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Four Accounts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-mixing-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Mixing Process
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whirlpool-denominations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whirlpool Denominations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Whirlpool Denominations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#original-samourai-pools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Original Samourai Pools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-ashigaru-pools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current Ashigaru Pools
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-tx0-the-preparation-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding Tx0: The Preparation Step
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding Tx0: The Preparation Step">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-tx0-actually-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Tx0 Actually Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-real-tx0-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A Real Tx0 Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-doxxic-change-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Doxxic Change Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-fee-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Fee Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forward-looking-anonymity-sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forward-Looking Anonymity Sets
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Forward-Looking Anonymity Sets">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-the-count-grows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the Count Grows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-anonset-5-growing-to-41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Anonset 5 Growing to 41
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-free-remixing-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Free Remixing Works
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#staying-eligible-to-remix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Staying Eligible to Remix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Limits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whirlpool-fees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whirlpool Fees
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Whirlpool Fees">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#original-samourai-fees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Original Samourai Fees
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-ashigaru-fees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current Ashigaru Fees
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#surge-cycles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Surge Cycles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Surge Cycles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-surge-cycles-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Surge Cycles Work
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-surge-cycles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benefits of Surge Cycles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spending-the-doxxic-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spending the Doxxic Change
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-manage-postmix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Manage Postmix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whirlpool-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whirlpool Best Practices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whirlpool-and-ashigaru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whirlpool and Ashigaru
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-whirlpool-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Whirlpool Mistakes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../joinmarket/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JoinMarket
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wasabi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WabiSabi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5_3" id="__nav_3_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post Mix Spending
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Post Mix Spending
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../post-mix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post-Mix Best Practices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../payjoin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PayJoin &amp; Stowaway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stonewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stonewall
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ricochet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ricochet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lightning Privacy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lightning Privacy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lightning/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lightning Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lightning/privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lightning Privacy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lightning/routing-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routing Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lightning/blinded-paths/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blinded Paths
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lightning/bolt12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BOLT12 Offers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lightning/lnproxy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    lnproxy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../boltzmann/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boltzmann Entropy
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Boltzmann Entropy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../boltzmann/what-is-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What Is Entropy?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../boltzmann/valid-interpretations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Valid Interpretations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../boltzmann/link-probability-matrix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Link Probability Matrix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_5">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../analysis/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Analysis Walkthrough
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Privacy Analysis Walkthrough
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_5_2">
+        
+          
+          <label class="md-nav__link" for="__nav_5_5_2" id="__nav_5_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Examples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../analysis/batch-payment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Batch Payment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../analysis/consolidation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UTXO Consolidation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../analysis/stonewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stonewall
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../analysis/whirlpool/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Whirlpool CoinJoin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../analysis/ricochet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ricochet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../links/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../links/fungibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bitcoin Fungibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../links/selfhosting-am-i-exposed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Hosting am-i.exposed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Glossary
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8">
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../donate/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Donate
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Donate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#what-is-whirlpool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is Whirlpool?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whirlpool-transaction-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whirlpool Transaction Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-whirlpool-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Whirlpool Works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How Whirlpool Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-four-accounts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Four Accounts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-mixing-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Mixing Process
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whirlpool-denominations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whirlpool Denominations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Whirlpool Denominations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#original-samourai-pools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Original Samourai Pools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-ashigaru-pools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current Ashigaru Pools
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-tx0-the-preparation-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding Tx0: The Preparation Step
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding Tx0: The Preparation Step">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-tx0-actually-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Tx0 Actually Does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-real-tx0-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A Real Tx0 Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-doxxic-change-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Doxxic Change Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-fee-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Fee Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forward-looking-anonymity-sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forward-Looking Anonymity Sets
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Forward-Looking Anonymity Sets">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-the-count-grows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the Count Grows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-anonset-5-growing-to-41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Anonset 5 Growing to 41
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-free-remixing-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Free Remixing Works
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#staying-eligible-to-remix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Staying Eligible to Remix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important Limits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whirlpool-fees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whirlpool Fees
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Whirlpool Fees">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#original-samourai-fees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Original Samourai Fees
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-ashigaru-fees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current Ashigaru Fees
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#surge-cycles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Surge Cycles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Surge Cycles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-surge-cycles-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Surge Cycles Work
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-surge-cycles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Benefits of Surge Cycles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spending-the-doxxic-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spending the Doxxic Change
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-manage-postmix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Manage Postmix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whirlpool-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whirlpool Best Practices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whirlpool-and-ashigaru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Whirlpool and Ashigaru
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-whirlpool-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Whirlpool Mistakes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+  <nav class="md-path" aria-label="Navigation">
+    <ol class="md-path__list">
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../decision-tree/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Privacy Techniques
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    CoinJoin
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Implementations
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/vibrant-btc/bitcoinprivacy-wiki/edit/main/docs/techniques/coinjoin/whirlpool.md" title="Edit this page" class="md-content__button md-icon" rel="edit noopener" target="_blank">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+    </a>
+  
+  
+
+
+<h1 id="whirlpool">Whirlpool<a class="headerlink" href="#whirlpool" title="Permanent link">¶</a></h1>
+<p><a href="../../../glossary/#whirlpool">Whirlpool</a> is a <a href="../../../glossary/#coinjoin">CoinJoin</a> implementation originally developed by <a href="../../../glossary/#samourai-wallet">Samourai Wallet</a>. It uses a fixed-denomination model to create privacy on the Bitcoin blockchain.</p>
+<div class="admonition info">
+<p class="admonition-title">Other CoinJoin Implementations</p>
+<p>Whirlpool is one of several CoinJoin implementations. Others include <a href="../joinmarket/">JoinMarket</a> (decentralized, <a href="../../../glossary/#maker">maker</a>-<a href="../../../glossary/#taker">taker</a> model) and <a href="../wasabi/">Wasabi Wallet</a> (<a href="../../../glossary/#wabisabi">WabiSabi</a> protocol, 20+ participants). Each has different trade-offs in terms of privacy, convenience, and censorship resistance.</p>
+</div>
+<hr>
+<h2 id="what-is-whirlpool">What Is Whirlpool?<a class="headerlink" href="#what-is-whirlpool" title="Permanent link">¶</a></h2>
+<p>Whirlpool is a CoinJoin protocol where participants come together to mix their bitcoin. Each participant contributes one input of a specific denomination and receives one output of the same denomination.</p>
+<div class="admonition tip">
+<p class="admonition-title">How It Works</p>
+<p>Example: 5 users each contribute 0.1 BTC. The coordinator combines all 5 inputs and creates 5 outputs of 0.1 BTC each. An outside observer cannot tell which input funded which output.</p>
+</div>
+<hr>
+<h2 id="whirlpool-transaction-example">Whirlpool Transaction Example<a class="headerlink" href="#whirlpool-transaction-example" title="Permanent link">¶</a></h2>
+<p>The image below shows a Whirlpool CoinJoin transaction as visualised by <a href="https://am-i.exposed" target="_blank" rel="noopener">am-i.exposed</a>. Notice the beautiful equal outputs at a fixed denomination — the signature pattern of Whirlpool.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" data-title="Whirlpool CoinJoin transaction scanned by am-i.exposed" data-desc-position="bottom"><img alt="Whirlpool CoinJoin transaction scanned by am-i.exposed" loading="lazy" src="../../../images/whirlpool.png"></a></p>
+<hr>
+<h2 id="how-whirlpool-works">How Whirlpool Works<a class="headerlink" href="#how-whirlpool-works" title="Permanent link">¶</a></h2>
+<h3 id="the-four-accounts">The Four Accounts<a class="headerlink" href="#the-four-accounts" title="Permanent link">¶</a></h3>
+<p>Whirlpool wallets use 4 distinct accounts to support the coinjoin process:</p>
+<table>
+<thead>
+<tr>
+<th>Account</th>
+<th>Index</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Deposit</strong></td>
+<td><code>0'</code></td>
+<td>Where you receive unmixed bitcoin</td>
+</tr>
+<tr>
+<td><strong>Premix</strong></td>
+<td><code>2147483645'</code></td>
+<td><a href="../../../glossary/#utxo">UTXOs</a> waiting to enter a round</td>
+</tr>
+<tr>
+<td><strong>Postmix</strong></td>
+<td><code>2147483646'</code></td>
+<td>Mixed UTXOs after completing rounds</td>
+</tr>
+<tr>
+<td><strong>Bad Bank</strong></td>
+<td><code>2147483644'</code></td>
+<td><a href="../../../glossary/#doxxic-change">Doxxic change</a> from Tx0 transactions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-mixing-process">The Mixing Process<a class="headerlink" href="#the-mixing-process" title="Permanent link">¶</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><input id="__tabbed_1_4" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Step 1: Create the Tx0</label><label for="__tabbed_1_2">Step 2: Enter the Queue</label><label for="__tabbed_1_3">Step 3: Complete the Mix</label><label for="__tabbed_1_4">Step 4: Remix</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>When you initiate a mix, your wallet creates a <a href="../../../glossary/#tx0">Tx0</a> transaction. This takes your deposit UTXO(s) and splits them into equal-sized premix outputs. Any leftover bitcoin becomes <strong><a href="../../../glossary/#doxxic-change">doxxic change</a></strong>.</p>
+</div>
+<div class="tabbed-block">
+<p>Your premix UTXOs enter the queue. You choose a <a href="../../../glossary/#cycle-priority">cycle priority</a> (low, normal, or high) which determines how quickly your first mix will occur based on mining fee rates.</p>
+</div>
+<div class="tabbed-block">
+<p>When enough participants are ready, the CoinJoin round executes. You receive post-mix outputs of the same denomination, mixed with other participants.</p>
+</div>
+<div class="tabbed-block">
+<p>Post-mix UTXOs can automatically enter additional rounds (remixes) to increase your <a href="../../../glossary/#anonymity-set">anonymity set</a>. Each remix costs no additional service or mining fees.</p>
+</div>
+</div>
+</div>
+<hr>
+<h2 id="whirlpool-denominations">Whirlpool Denominations<a class="headerlink" href="#whirlpool-denominations" title="Permanent link">¶</a></h2>
+<p>Whirlpool uses fixed denominations to make the CoinJoin outputs indistinguishable from each other.</p>
+<h3 id="original-samourai-pools">Original Samourai Pools<a class="headerlink" href="#original-samourai-pools" title="Permanent link">¶</a></h3>
+<p>When Whirlpool was first launched by Samourai Wallet, these were the available pool sizes:</p>
+<table>
+<thead>
+<tr>
+<th>Denomination</th>
+<th>Sats</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0.0005 BTC</strong></td>
+<td>50,000</td>
+<td>Small amounts, testing</td>
+</tr>
+<tr>
+<td><strong>0.001 BTC</strong></td>
+<td>100,000</td>
+<td>Small payments</td>
+</tr>
+<tr>
+<td><strong>0.01 BTC</strong></td>
+<td>1,000,000</td>
+<td>Medium amounts</td>
+</tr>
+<tr>
+<td><strong>0.05 BTC</strong></td>
+<td>5,000,000</td>
+<td>Larger amounts</td>
+</tr>
+<tr>
+<td><strong>0.5 BTC</strong></td>
+<td>50,000,000</td>
+<td>Large holdings</td>
+</tr>
+</tbody>
+</table>
+<h3 id="current-ashigaru-pools">Current Ashigaru Pools<a class="headerlink" href="#current-ashigaru-pools" title="Permanent link">¶</a></h3>
+<p>Today, <a href="https://ashigaru.rs" target="_blank" rel="noopener">Ashigaru</a> offers two active pools:</p>
+<table>
+<thead>
+<tr>
+<th>Denomination</th>
+<th>Entry Fee</th>
+<th>Sats</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0.025 BTC</strong></td>
+<td>0.00125 BTC</td>
+<td>2,500,000</td>
+</tr>
+<tr>
+<td><strong>0.25 BTC</strong></td>
+<td>0.0125 BTC</td>
+<td>25,000,000</td>
+</tr>
+</tbody>
+</table>
+<p>The original Samourai pool sizes may return in the future, but for now only these two are available.</p>
+<div class="admonition warning">
+<p class="admonition-title">Fixed Denominations Matter</p>
+<p>The fixed denominations are what make Whirlpool effective. If outputs were different sizes, they could be linked to specific inputs.</p>
+</div>
+<hr>
+<h2 id="understanding-tx0-the-preparation-step">Understanding Tx0: The Preparation Step<a class="headerlink" href="#understanding-tx0-the-preparation-step" title="Permanent link">¶</a></h2>
+<p>Before your coins can enter a Whirlpool round, they need to be prepared. This is what the Tx0 transaction does.</p>
+<h3 id="what-tx0-actually-does">What Tx0 Actually Does<a class="headerlink" href="#what-tx0-actually-does" title="Permanent link">¶</a></h3>
+<p>Tx0 is the preparation step. Before your coins can enter a Whirlpool round, they need to be split into pieces that match the pool's denomination. Your wallet takes your deposit UTXO and chops it into equal-sized premix outputs.</p>
+<p>Each premix output is slightly larger than the pool denomination — the extra sats cover the mining fee that will be paid when this premix UTXO eventually enters the actual CoinJoin round.</p>
+<h3 id="a-real-tx0-example">A Real Tx0 Example<a class="headerlink" href="#a-real-tx0-example" title="Permanent link">¶</a></h3>
+<p>The image below shows a real Tx0 transaction from the Samourai Wallet era:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" data-title="Tx0 transaction scanned by am-i.exposed" data-desc-position="bottom"><img alt="Tx0 transaction scanned by am-i.exposed" loading="lazy" src="../../../images/tx0.png"></a></p>
+<ul>
+<li><strong>Transaction ID:</strong> <a href="https://am-i.exposed/#tx=cc27f73a536bed8edb60f580f43b5cb75a17e940fc40fce7f6e710353b0a18da" target="_blank" rel="noopener"><code>cc27f73a...</code></a></li>
+<li><strong>Block:</strong> #707,908</li>
+<li><strong>Date:</strong> November 2, 2021</li>
+</ul>
+<details class="note">
+<summary>View the Tx0 Output Breakdown</summary>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Amount (BTC)</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7 outputs</td>
+<td>0.05002117 each</td>
+<td>Premix UTXOs (going to the premix account)</td>
+</tr>
+<tr>
+<td>1 OP_RETURN</td>
+<td>0</td>
+<td><a href="../../../glossary/#coordinator-fee">Coordinator fee</a></td>
+</tr>
+<tr>
+<td>1 output</td>
+<td>0.00175000</td>
+<td>Whirlpool pool entry fee</td>
+</tr>
+<tr>
+<td>1 output</td>
+<td>0.02599109</td>
+<td>Doxxic change (going to the Bad Bank account)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Input:</strong> 0.37792239 BTC (from the deposit account)</p>
+<p>In this example, the user wanted to join the 0.05 BTC pool. Their wallet took their single deposit of 0.37792239 BTC and split it into 7 equal premix outputs of 0.05002117 BTC each. The extra 2,117 sats per output cover the mining fee for the future CoinJoin round.</p>
+</details>
+<h3 id="the-doxxic-change-problem">The Doxxic Change Problem<a class="headerlink" href="#the-doxxic-change-problem" title="Permanent link">¶</a></h3>
+<p>After creating premix outputs, there is often leftover bitcoin. This leftover is called <a href="../../../glossary/#doxxic-change">doxxic change</a> — and it's a privacy risk.</p>
+<p>This change has <strong>not</strong> been mixed. It is still linked to the user's original deposit. If you were to spend this change together with your mixed coins, you would instantly connect your clean (mixed) coins to your dirty (unmixed) history, wiping out all the privacy benefits you just paid for.</p>
+<p>That's why Whirlpool sends doxxic change to a separate account called the "Bad Bank." This keeps toxic (unmixed) UTXOs physically separated from clean (mixed) ones in your wallet, making it much harder to accidentally combine them.</p>
+<h3 id="the-fee-structure">The Fee Structure<a class="headerlink" href="#the-fee-structure" title="Permanent link">¶</a></h3>
+<p>Tx0 involves two fee-related outputs:</p>
+<ol>
+<li>
+<p><strong><a href="../../../glossary/#coordinator-fee">Coordinator fee</a> (OP_RETURN):</strong> This is the service fee paid to the Whirlpool coordinator for running the mixing service. It's written as an <a href="../../../glossary/#op_return">OP_RETURN</a> output — a way to embed data in the blockchain that doesn't carry any bitcoin value.</p>
+</li>
+<li>
+<p><strong>Pool entry fee:</strong> This is the one-time fee you pay to enter the pool. Once you've paid it, all your future remixes are completely free — no extra service fees, no extra mining fees.</p>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Bigger Tx0 = Better Fee Deal</p>
+<p>The bigger your Tx0 input, the better the fee deal. Since you only pay the entry fee once per Tx0, getting more premix outputs from a single transaction means the fee gets spread across more coins. If you create 7 premix outputs from one entry fee payment, the effective fee per output is much smaller than if you had only created one or two.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">This Example Is from the Samourai Era</p>
+<p>This transaction is from November 2021, when Samourai Wallet was still actively maintained. Today, Whirlpool is performed through <a href="https://ashigaru.rs" target="_blank" rel="noopener">Ashigaru</a>, which continues the same protocol. The Samourai founders were arrested in April 2024, but the Whirlpool technology lives on through Ashigaru.</p>
+</div>
+<hr>
+<h2 id="forward-looking-anonymity-sets">Forward-Looking Anonymity Sets<a class="headerlink" href="#forward-looking-anonymity-sets" title="Permanent link">¶</a></h2>
+<p>A Whirlpool round starts with 5 equal outputs, but your privacy is not limited to only those 5 outputs forever. Whirlpool is designed so that post-mix <a href="../../../glossary/#utxo">UTXOs</a> can keep remixing. Each time you or one of your original mixing peers remixes, the crowd you are hiding in can grow.</p>
+<div class="admonition tip">
+<p class="admonition-title">The Crowd Can Grow Even If You Do Nothing</p>
+<p>Imagine your first Whirlpool round creates 5 equal outputs. One of them is yours, but nobody watching the blockchain can tell which one.</p>
+<p>If one of the other 4 outputs later remixes, that remix creates more equal outputs that are also connected to your original round. Your own UTXO did not move, but the number of possible paths an observer must consider increased.</p>
+</div>
+<p>This is called a <strong>forward-looking anonymity set</strong>. It looks forward from your first mix and counts the equal-denomination outputs that could plausibly be yours as remixing continues.</p>
+<h3 id="why-this-matters">Why This Matters<a class="headerlink" href="#why-this-matters" title="Permanent link">¶</a></h3>
+<p>A normal explanation of CoinJoin often says "you hide in a crowd of 5." That is true at the moment of a standard 5-person Whirlpool round, but it is incomplete.</p>
+<p>Because Whirlpool allows free remixes, the crowd can grow over time:</p>
+<ul>
+<li>If your own UTXO remixes, your forward-looking anonymity set grows</li>
+<li>If one of your original mixing peers remixes, your forward-looking anonymity set can also grow</li>
+<li>If those later outputs keep remixing, the possible paths keep expanding</li>
+</ul>
+<p>From the outside, all equal-denomination Whirlpool outputs look the same. An observer cannot know which one is yours, so they must consider all plausible equal-output paths.</p>
+<h3 id="how-the-count-grows">How the Count Grows<a class="headerlink" href="#how-the-count-grows" title="Permanent link">¶</a></h3>
+<p>In a simple 5-output Whirlpool round, the starting anonymity set is 5. If one of those 5 outputs later remixes into another normal 5-output Whirlpool round, the set grows from 5 to 9.</p>
+<p>Why 9 and not 10? Because the original output that remixed has now been spent. It is replaced by 5 new equal outputs, so the net gain is 4.</p>
+<details class="note">
+<summary>Simple one-generation count</summary>
+<table>
+<thead>
+<tr>
+<th>Original outputs that later remix</th>
+<th>Forward-looking anonymity set</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>5</td>
+</tr>
+<tr>
+<td>1</td>
+<td>9</td>
+</tr>
+<tr>
+<td>2</td>
+<td>13</td>
+</tr>
+<tr>
+<td>3</td>
+<td>17</td>
+</tr>
+<tr>
+<td>4</td>
+<td>21</td>
+</tr>
+<tr>
+<td>5</td>
+<td>25</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p>This assumes each original output enters a separate normal 5-output Whirlpool round and that we are only counting one generation of remixes. If those new outputs later remix again, the tree keeps expanding. For a larger <a href="../../../glossary/#surge-cycle">Surge Cycle</a>, the same idea applies: a remixed output is replaced by the new round's equal outputs, so the net growth is the number of equal outputs in that new round minus 1.</p>
+<details class="note">
+<summary>Simple rule of thumb</summary>
+<p>For a normal 5-output Whirlpool remix, each newly remixed branch adds <strong>4</strong> to the forward-looking anonymity set.</p>
+<p>Another way to think about it is: every time one eligible Whirlpool output remixes into a normal 5-output round, the old output disappears and 5 new equal outputs appear.</p>
+<div class="arithmatex">\[5 - 1 = 4\]</div>
+</details>
+<h3 id="example-anonset-5-growing-to-41">Example: Anonset 5 Growing to 41<a class="headerlink" href="#example-anonset-5-growing-to-41" title="Permanent link">¶</a></h3>
+<p>The graph below shows a real section of the Bitcoin transaction graph visualized with the <a href="https://am-i.exposed/graph/?network=mainnet#graph=AgAKAAAAAADb2iyUo0Ndbat7jjcmmtQPLzd1GXY-Eb6PvoHOQNaB_QAA__8A7eJPDK2EyeRdTBATZC9_wJklZBjIgEkiI9EQXnkvlH4BAQAAArdudTcgSWBXicrnnWBjW-H6SD0dLId6BeyT-5sZk4SkAQEAAANgBsd2JJT9Y95Rw1b_ONfHBdahC2E4xX-aAk6Tk3QghwEBAAAEaPg4N1Xg_dgTCL-Hi3WPcVCM1EJ373oDvYh3_jHy2eMCAQADAt1QNpilG584gSGZYzSKtOZmoqEJGbcTAeMN_YXhqIW_AgEAAgEyPfIfCwdW-YM2Q3qj0vuH4CtZ8ZRrcUp7Cd8E1CnewgIBAAICcELXRM-3_ofJsrzv6hOBcGSkUKKnOHy1tAzK_JN62AYCAQACAy1m8xT7BUTqP2iJdIZPErEJq0hhF9rw_5xHkIr4vjJnAgEAAgT1dLE9xOfaDM2lDkjN5_YbWOcT59LgDs58z0xt3DPXXwIBAAECAAoAAUSxAADBcAAAAAJEsKAAQrQAAAADRLCAAENHAAAAAESLAABCtc3CAARE12qrQ7QqqwAFRNcKq8KGAAAABkTXNVVCDAAAAAdE10qrQw8AAAAIRNdgAEN8qqsACUTW9VXDLgAAAAoAAgpBbm9uc2V0ICs0AAMKQW5vbnNldCArNAABCkFub25zZXQgKzQACQpBbm9uc2V0ICs0AAUKQW5vbnNldCArNAAGCkFub25zZXQgKzQABwpBbm9uc2V0ICs0AAgKQW5vbnNldCArNAAECkFub25zZXQgKzQAABRPcmlnaW5hbCBBbm9uc2V0ID0gNQABAETzIABCy1VVQxSqq0JCqqsSRmluYWwgQW5vbnNldCA9IDQxAAA" target="_blank" rel="noopener">am-i.exposed transaction graph explorer</a>. Each rectangle is a normal 5-input, 5-output Whirlpool transaction.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" data-title="Forward-looking anonymity set graph showing a Whirlpool anonset growing from 5 to 41" data-desc-position="bottom"><img alt="Forward-looking anonymity set graph showing a Whirlpool anonset growing from 5 to 41" loading="lazy" src="../../../images/forward-looking-anonset-graph.png"></a></p>
+<details class="example">
+<summary>View the anonset calculation</summary>
+<p>The original Whirlpool transaction starts with an anonymity set of <strong>5</strong>.</p>
+<p>Three outputs from the original transaction later remix:</p>
+<div class="arithmatex">\[5 + (3 \times 4) = 17\]</div>
+<p>Then the next layer expands again:</p>
+<ul>
+<li>Two of those remix transactions each have <strong>1 output</strong> that remixes again: <span class="arithmatex">\(2 \times 4 = 8\)</span></li>
+<li>The third remix transaction has <strong>4 outputs</strong> that remix again: <span class="arithmatex">\(4 \times 4 = 16\)</span></li>
+</ul>
+<p>Final count:</p>
+<div class="arithmatex">\[17 + 8 + 16 = 41\]</div>
+<p>Or, more simply, there are <strong>9 total remix events</strong> shown after the original transaction:</p>
+<div class="arithmatex">\[5 + (9 \times 4) = 41\]</div>
+<p>And in reality there are hundreds of remixes that span out from this exact example (I have just shown a small segment of the transaction graph to help you understand) so you can imagine the massive anonset.</p>
+</details>
+<h3 id="how-free-remixing-works">How Free Remixing Works<a class="headerlink" href="#how-free-remixing-works" title="Permanent link">¶</a></h3>
+<p>Whirlpool remixes are free because the mining fees for a CoinJoin round are paid by new entrants, not by the remixers.</p>
+<p>A typical Whirlpool round includes:</p>
+<table>
+<thead>
+<tr>
+<th>Participant type</th>
+<th>Role</th>
+<th>Fee behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Premixer</strong></td>
+<td>New UTXO entering the pool</td>
+<td>Pays the mining fee contribution</td>
+</tr>
+<tr>
+<td><strong>Peer premixer</strong></td>
+<td>Another new UTXO entering the pool</td>
+<td>Also pays the mining fee contribution</td>
+</tr>
+<tr>
+<td><strong>Remixers</strong></td>
+<td>UTXOs that have already mixed before</td>
+<td>Join the round for free</td>
+</tr>
+</tbody>
+</table>
+<p>When you create a <a href="../../../glossary/#tx0">Tx0</a>, your premix outputs are made slightly larger than the pool denomination. That small extra amount helps pay the mining fee when those premix outputs enter their first CoinJoin round. Once a UTXO has completed its first mix and stays in the correct pool denomination, it can be selected for future remixes without paying again.</p>
+<details class="info">
+<summary>Why Remixers Are Important</summary>
+<p>Remixers are sometimes called "freeriders" because they do not pay additional fees for that round. But they are not useless passengers. They are part of what makes Whirlpool work.</p>
+<p>Remixers give new entrants more privacy, and new entrants pay the mining fees that allow remixers to keep cycling. This creates a feedback loop: new liquidity helps old liquidity remix, and old liquidity gives new liquidity a larger crowd.</p>
+</details>
+<h3 id="staying-eligible-to-remix">Staying Eligible to Remix<a class="headerlink" href="#staying-eligible-to-remix" title="Permanent link">¶</a></h3>
+<p>To get free remixes, your wallet needs to be online and communicating with the Whirlpool coordinator. If your wallet is offline, your UTXOs cannot be selected as remixers.</p>
+<div class="admonition tip">
+<p class="admonition-title">Patience Improves Whirlpool Privacy</p>
+<p>You do not need to rush out of Whirlpool immediately after the first mix. If you keep post-mix UTXOs in the postmix account, they can continue to benefit from remixes over time.</p>
+<p>More time in the pool can mean a larger forward-looking anonymity set before you eventually spend.</p>
+</div>
+<h3 id="important-limits">Important Limits<a class="headerlink" href="#important-limits" title="Permanent link">¶</a></h3>
+<p>Forward-looking anonymity sets are useful, but they are not magic.</p>
+<ul>
+<li>They only help if you avoid bad post-mix spending</li>
+<li>They can be damaged by <a href="../../../analysis/consolidation/">consolidation</a></li>
+<li>They do not protect you if you spend mixed and unmixed coins together</li>
+</ul>
+<p>The basic rule stays the same: let post-mix UTXOs remix, spend them carefully, and never merge them with doxxic change or unrelated UTXOs.</p>
+<hr>
+<h2 id="whirlpool-fees">Whirlpool Fees<a class="headerlink" href="#whirlpool-fees" title="Permanent link">¶</a></h2>
+<p>Whirlpool charges a <a href="../../../glossary/#coordinator-fee">coordinator fee</a> for each Tx0. Remixes cost nothing extra — no additional service or mining fees.</p>
+<h3 id="original-samourai-fees">Original Samourai Fees<a class="headerlink" href="#original-samourai-fees" title="Permanent link">¶</a></h3>
+<p>These were the fees when Samourai Wallet offered all five pool sizes:</p>
+<table>
+<thead>
+<tr>
+<th>Denomination</th>
+<th>Fee</th>
+<th>Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.0005 BTC</td>
+<td>0.000005 BTC</td>
+<td>1%</td>
+</tr>
+<tr>
+<td>0.001 BTC</td>
+<td>0.00001 BTC</td>
+<td>1%</td>
+</tr>
+<tr>
+<td>0.01 BTC</td>
+<td>0.0001 BTC</td>
+<td>1%</td>
+</tr>
+<tr>
+<td>0.05 BTC</td>
+<td>0.0005 BTC</td>
+<td>1%</td>
+</tr>
+<tr>
+<td>0.5 BTC</td>
+<td>0.005 BTC</td>
+<td>1%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="current-ashigaru-fees">Current Ashigaru Fees<a class="headerlink" href="#current-ashigaru-fees" title="Permanent link">¶</a></h3>
+<p>On Ashigaru, only two pools are currently active:</p>
+<table>
+<thead>
+<tr>
+<th>Denomination</th>
+<th>Entry Fee</th>
+<th>Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.025 BTC</td>
+<td>0.00125 BTC</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>0.25 BTC</td>
+<td>0.0125 BTC</td>
+<td>5%</td>
+</tr>
+</tbody>
+</table>
+<p>The fee is a one-time payment when you enter the pool. All remixes after that are free.</p>
+<hr>
+<h2 id="surge-cycles">Surge Cycles<a class="headerlink" href="#surge-cycles" title="Permanent link">¶</a></h2>
+<p>Whirlpool also supports rounds with more than 5 participants. These are called "<a href="../../../glossary/#surge-cycle">Surge Cycles</a>" and can include 6, 7, 8, 9, or 10 people instead of the original 5.</p>
+<h3 id="how-surge-cycles-work">How Surge Cycles Work<a class="headerlink" href="#how-surge-cycles-work" title="Permanent link">¶</a></h3>
+<p>Surge Cycles were introduced to make better use of mining fees. Here's how they happen:</p>
+<p>When you enter Whirlpool, you choose a <a href="../../../glossary/#cycle-priority">cycle priority</a> — low, normal, or high. This determines the mining fee rate your premix UTXOs can support. The Whirlpool coordinator also sets a "trigger fee rate" based on current network conditions.</p>
+<p>If mining fees on the Bitcoin network suddenly drop after your premix UTXOs have already committed to a higher fee rate, there's a surplus of mining fees available. Instead of wasting this surplus, the coordinator adds more <a href="../../../glossary/#remixer">remixers</a> to the round, making the transaction larger and using up the extra fees efficiently.</p>
+<h3 id="benefits-of-surge-cycles">Benefits of Surge Cycles<a class="headerlink" href="#benefits-of-surge-cycles" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>Better fee efficiency:</strong> Your premix UTXOs get more privacy for the same mining fee</li>
+<li><strong>Higher anonymity sets:</strong> More participants means more possible interpretations</li>
+<li><strong>Faster remixing:</strong> Remixers get mixed more frequently</li>
+<li><strong>No client update needed:</strong> Surge Cycles are handled entirely by the coordinator</li>
+</ul>
+<p>The privacy model stays the same: every output looks identical, so nobody can tell which input belongs to which output.</p>
+<details class="info">
+<summary>Read the Original Surge Cycles Announcement</summary>
+<p>Surge Cycles were introduced by Samourai Wallet in June 2023. Read the full announcement: <a href="https://medium.com/samourai-wallet/introducing-whirlpool-surge-cycles-b5b484a1670f" target="_blank" rel="noopener">Introducing Whirlpool Surge Cycles</a></p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">See Whirlpool Entropy Analysis</p>
+<p>Want to see the math behind Whirlpool's privacy? The <a href="../../../analysis/whirlpool/">Boltzmann entropy analysis</a> page breaks down exactly how many valid interpretations a Whirlpool transaction has, what the link probability matrix looks like, and why the 34.2% figure matters. It's a deep dive into the mathematical foundation of Whirlpool's privacy guarantees.</p>
+</div>
+<hr>
+<h2 id="spending-the-doxxic-change">Spending the Doxxic Change<a class="headerlink" href="#spending-the-doxxic-change" title="Permanent link">¶</a></h2>
+<p>Remember: Whirlpool's model equalizes coins in the Tx0 before entering pools, which makes tracking harder. This is the most effective coinjoin model, but it has a drawback: a change output that does not go through the coinjoin process, we call this <strong><a href="../../../glossary/#doxxic-change">doxxic change</a></strong>.</p>
+<p>This change output is created for each Tx0. It is isolated in a specific account named <code>Doxxic Change</code> or <code>Bad Bank</code> depending on the software to avoid using it with your other <a href="../../../glossary/#utxo">UTXOs</a>. This point is critical: these UTXOs have not been mixed — their traceability links remain intact and can compromise your privacy by tying you to your coinjoin activity. Handle them carefully and never use them with other UTXOs, mixed or not. <strong>Combining a toxic UTXO with a mixed UTXO destroys all privacy gains from coinjoins.</strong></p>
+<p>Currently, Ashigaru does not provide direct access to the <code>Doxxic Change</code> account, at least it wasn't found at the time of writing. This feature will likely be added in a future update. In the meantime, the only way to retrieve these funds is to import your seed into Sparrow Wallet. Sparrow usually auto-detects a Whirlpool wallet and gives access to all four accounts, including <code>Bad Bank</code>. You can then spend those UTXOs like regular bitcoin from Sparrow.</p>
+<p>Here are several possible strategies to handle coinjoin change UTXOs without compromising your privacy:</p>
+<div class="grid cards">
+<ul>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.83 13.41-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4m-9.41 5.17L5.41 4 4 5.41l5.17 5.17z"></path></svg></span> <strong>Mix Them in Smaller Pools</strong></p>
+<hr>
+<p>If a toxic UTXO is large enough for a smaller pool, this is often the best option. Do not merge multiple toxic UTXOs to reach the threshold — that would link your entries.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"></path></svg></span> <strong>Mark Them as Unspendable</strong></p>
+<hr>
+<p>Another cautious approach is to keep them in their separate account and not touch them to avoid accidental spending. If BTC appreciates, new pools may become available for their size.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.06 1.93C7.17 1.92 5.33 3.74 6.17 6H3a2 2 0 0 0-2 2v2a1 1 0 0 0 1 1h9V8h2v3h9a1 1 0 0 0 1-1V8a2 2 0 0 0-2-2h-3.17C19 2.73 14.6.42 12.57 3.24L12 4l-.57-.78c-.63-.89-1.5-1.28-2.37-1.29M9 4c.89 0 1.34 1.08.71 1.71S8 5.89 8 5a1 1 0 0 1 1-1m6 0c.89 0 1.34 1.08.71 1.71S14 5.89 14 5a1 1 0 0 1 1-1M2 12v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-8h-9v8h-2v-8z"></path></svg></span> <strong>Donate Them</strong></p>
+<hr>
+<p>You can donate toxic UTXOs to Bitcoin developers, open-source projects, or nonprofits that accept BTC. This disposes of them usefully while supporting the ecosystem.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 3h20c1.05 0 2 .95 2 2v14c0 1.05-.95 2-2 2H2c-1.05 0-2-.95-2-2V5c0-1.05.95-2 2-2m12 3v1h8V6zm0 2v1h8V8zm0 2v1h7v-1zm-6 3.91C6 13.91 2 15 2 17v1h12v-1c0-2-4-3.09-6-3.09M8 6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3"></path></svg></span> <strong>Buy Gift Cards or Prepaid Cards</strong></p>
+<hr>
+<p>Platforms like <a href="https://www.bitrefill.com/" target="_blank" rel="noopener">Bitrefill</a> allow exchanging bitcoin for gift cards or reloadable Visa cards. This can be a simple, discreet way to spend toxic UTXOs. But be aware that these UTXOs are still linked to their previous history so be careful which ones you spend.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21 9-4-4v3h-7v2h7v3M7 11l-4 4 4 4v-3h7v-2H7z"></path></svg></span> <strong>Swap Them for Monero</strong></p>
+<hr>
+<p>Samourai Wallet previously offered atomic BTC/XMR swaps, now discontinued. This service exists in <a href="https://eigenwallet.org/" target="_blank" rel="noopener">Eigen Wallet</a>. You can isolate these UTXOs, convert to XMR, then back to BTC if desired. This method can be costly and depends on available liquidity. Also consider whether you want to potentially risk a UTXO that may be associated with you being given to a third party who can do whatever they want with it.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 15H6l7-14v8h5l-7 14z"></path></svg></span> <strong>Open a Lightning Channel</strong></p>
+<hr>
+<p>Transferring toxic UTXOs to LN to benefit from lower transaction fees can be useful. However, this may leak information depending on your LN usage, so proceed carefully.</p>
+</li>
+</ul>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Handle Doxxic Change Carefully</p>
+<p>Carefully consider what you want to do with your doxxic change, always proceed carefully.</p>
+</div>
+<hr>
+<h2 id="how-to-manage-postmix">How to Manage Postmix<a class="headerlink" href="#how-to-manage-postmix" title="Permanent link">¶</a></h2>
+<p>After several coinjoin cycles, the best strategy is to keep <a href="../../../glossary/#utxo">UTXOs</a> in the <code>Postmix</code> account, letting them remix indefinitely until you actually need to spend them.</p>
+<p>Some users prefer moving mixed BTC to a hardware wallet. This is possible, but it requires discipline to avoid compromising privacy gains from coinjoins.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><input id="__tabbed_2_4" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Never Merge Mixed and Unmixed UTXOs</label><label for="__tabbed_2_2">Be Careful with Consolidation</label><label for="__tabbed_2_3">Avoid Minority Script Types</label><label for="__tabbed_2_4">Never Reuse Addresses</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>The most common mistake is merging UTXOs. Never combine mixed UTXOs with unmixed UTXOs in the same transaction, or you risk creating links via the <a href="../../../glossary/#cioh">CIOH</a>. This means rigorous UTXO management is key — clear and precise labeling is essential. In general, UTXO merging is risky and often leads to privacy loss when done poorly.</p>
+</div>
+<div class="tabbed-block">
+<p>Be careful with consolidation of mixed UTXOs with each other, too. Limited consolidation may be acceptable if UTXOs have large anonsets, but it inevitably reduces your privacy. Avoid large or rushed consolidations before sufficient remixes, as they can create deducible links between your coins before and after mixing. When in doubt, do not consolidate postmix UTXOs. Instead, transfer them one by one to your hardware wallet, generating a fresh receiving address each time. Label every transferred UTXO carefully.</p>
+</div>
+<div class="tabbed-block">
+<p>It is strongly discouraged to move postmix UTXOs into wallets using minority <a href="../../../glossary/#script-type">script types</a>. For example, if you participated in Whirlpool from a multisig <code>P2WSH</code> wallet, few users share that script type. Sending postmix UTXOs back to the same script greatly reduces your <a href="../../../glossary/#anonymity-set">anonymity set</a>. Beyond script type, other <a href="../../../glossary/#wallet-fingerprint">wallet fingerprints</a> can harm your privacy. The safest option is to spend from the Ashigaru app.</p>
+</div>
+<div class="tabbed-block">
+<p>Finally, as with any Bitcoin usage, never reuse a receiving address. Each payment should go to a fresh, unused address.</p>
+</div>
+</div>
+</div>
+<p>The simplest and safest method remains: keep mixed UTXOs resting in <code>Postmix</code>, let them remix naturally, and spend only when needed from Ashigaru.</p>
+<p>Ashigaru and Sparrow include additional protections against common <a href="../../../glossary/#chain-analysis">chain analysis</a> pitfalls, helping you preserve transaction privacy.</p>
+<div class="admonition warning">
+<p class="admonition-title">Postmix Best Practices</p>
+<p>Avoid merging mixed and unmixed UTXOs; prefer spending from Postmix directly; don't reuse addresses; and be cautious with script types and consolidations.</p>
+</div>
+<hr>
+<h2 id="whirlpool-best-practices">Whirlpool Best Practices<a class="headerlink" href="#whirlpool-best-practices" title="Permanent link">¶</a></h2>
+<div class="grid cards">
+<ul>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.83 13.41-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4m-9.41 5.17L5.41 4 4 5.41l5.17 5.17z"></path></svg></span> <strong>Let Coins Remix</strong></p>
+<hr>
+<p>One round breaks deterministic links, but free remixes can grow your forward-looking anonymity set over time.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19.03 7.39 1.42-1.42c-.45-.51-.9-.97-1.41-1.41L17.62 6c-1.55-1.26-3.5-2-5.62-2a9 9 0 0 0 0 18c5 0 9-4.03 9-9 0-2.12-.74-4.07-1.97-5.61M13 14h-2V7h2zm2-13H9v2h6z"></path></svg></span> <strong>Wait Between Rounds</strong></p>
+<hr>
+<p>Do not do all your rounds in quick succession. Wait hours or days between rounds.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20.84 22.73-1.67-1.67C17.7 22.85 15.5 24 13 24c-3.26 0-6.19-2-7.4-5l-3.03-7.63a1 1 0 0 1 1.24-1.32l.79.26c.56.19 1.02.61 1.24 1.16L7.25 15H8V9.89L1.11 3l1.28-1.27 19.72 19.73zM14 1.25a1.25 1.25 0 0 0-2.5 0V8.3l2.5 2.5zM21 16V5.75a1.25 1.25 0 0 0-2.5 0V12h-1V2.75a1.25 1.25 0 0 0-2.5 0v9.05l5.83 5.83c.11-.52.17-1.07.17-1.63M10.5 3.25a1.25 1.25 0 0 0-2.5 0V4.8l2.5 2.5z"></path></svg></span> <strong>Never Spend Post-Mix Together</strong></p>
+<hr>
+<p>Each post-mix output should be spent independently. Never combine them.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.06 13c-1.86 0-3.42 1.33-3.82 3.1-.95-.41-1.82-.3-2.48-.01C10.35 14.31 8.79 13 6.94 13 4.77 13 3 14.79 3 17s1.77 4 3.94 4c2.06 0 3.74-1.62 3.9-3.68.34-.24 1.23-.69 2.32.02.18 2.05 1.84 3.66 3.9 3.66 2.17 0 3.94-1.79 3.94-4s-1.77-4-3.94-4M6.94 19.86c-1.56 0-2.81-1.28-2.81-2.86s1.26-2.86 2.81-2.86c1.56 0 2.81 1.28 2.81 2.86s-1.25 2.86-2.81 2.86m10.12 0c-1.56 0-2.81-1.28-2.81-2.86s1.25-2.86 2.81-2.86 2.82 1.28 2.82 2.86-1.27 2.86-2.82 2.86M22 10.5H2V12h20zm-6.47-7.87c-.22-.49-.78-.75-1.31-.58L12 2.79l-2.23-.74-.05-.01c-.53-.15-1.09.13-1.29.64L6 9h12l-2.44-6.32z"></path></svg></span> <strong>Use Tor</strong></p>
+<hr>
+<p>Always route Whirlpool through Tor. Samourai Wallet supports this natively.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11c.67 0 1.27-.34 1.63-.85L22 12z"></path></svg></span> <strong>Label Your Outputs</strong></p>
+<hr>
+<p>Keep track of which UTXOs are post-mix. Never mix them with premix.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m10 17-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9m-6-8L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5z"></path></svg></span> <strong>Use Ashigaru Terminal</strong></p>
+<hr>
+<p>Ashigaru Terminal has built-in Whirlpool support, you can learn more <a href="https://planb.academy/en/tutorials/privacy/on-chain/ashigaru-terminal-9a0d46d3-33b9-4c64-84c5-bfa25b3a0add" target="_blank" rel="noopener">here</a>.</p>
+</li>
+</ul>
+</div>
+<hr>
+<h2 id="whirlpool-and-ashigaru">Whirlpool and Ashigaru<a class="headerlink" href="#whirlpool-and-ashigaru" title="Permanent link">¶</a></h2>
+<p><a href="https://ashigaru.rs" target="_blank" rel="noopener">Ashigaru</a> is now the primary wallet for Whirlpool. It provides all the features originally offered by Samourai Wallet when combined with Ashigaru Terminal:</p>
+<ul>
+<li><strong>Deposit</strong>: Where you deposit Bitcoin before initiating a Tx0</li>
+<li><strong>Premix</strong>: Where you hold bitcoin before mixing</li>
+<li><strong>Post-mix</strong>: Where you receive mixed bitcoin</li>
+<li><strong>Bad Bank</strong>: A pool of post-mix UTXOs that have been through many rounds</li>
+</ul>
+<p>Ashigaru continues to be actively maintained by an anonymous team committed to Bitcoin privacy and user sovereignty.</p>
+<div class="admonition info">
+<p class="admonition-title">Whirlpool Is Now Done via Ashigaru</p>
+<p><a href="https://ashigaru.rs" target="_blank" rel="noopener">Ashigaru</a> is a Bitcoin wallet that continues the Samourai Wallet project in a new form. In April 2024, the founders of Samourai Wallet were arrested by American authorities and their servers were seized. While the original Samourai app remained usable for a time, it is no longer maintained.</p>
+<p>Ashigaru is a free, open-source fork maintained by an anonymous team to preserve Samourai's functionality and original philosophy: defending the privacy and sovereignty of Bitcoin users. All Whirlpool CoinJoin features are now accessed through Ashigaru.</p>
+<p>Excellent guides on using Ashigaru Whirlpool from <a href="https://github.com/LoicPandul" target="_blank" rel="noopener">Loïc Morel</a> can be found on <a href="https://planb.academy/en/tutorials/privacy" target="_blank" rel="noopener">planb academy</a>.</p>
+</div>
+<hr>
+<h2 id="common-whirlpool-mistakes">Common Whirlpool Mistakes<a class="headerlink" href="#common-whirlpool-mistakes" title="Permanent link">¶</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:4"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><input id="__tabbed_3_3" name="__tabbed_3" type="radio"><input id="__tabbed_3_4" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Spending Post-Mix UTXOs Together</label><label for="__tabbed_3_2">Doing Only One Round</label><label for="__tabbed_3_3">Mixing KYC and Non-KYC</label><label for="__tabbed_3_4">Consolidating Pre-Mix UTXOs</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>This is the single most damaging mistake. It completely destroys the forward looking anonset you could achieve.</p>
+</div>
+<div class="tabbed-block">
+<p>One round is enough to break deterministic links, multiple rounds are free and increase the forward looking anonset.</p>
+</div>
+<div class="tabbed-block">
+<p>Do not mix KYC bitcoin with non-KYC bitcoin in Whirlpool. Keep them separate.</p>
+</div>
+<div class="tabbed-block">
+<p>Combining multiple pre-mix UTXOs in a single transaction links those UTXOs, even though they are CoinJoined after there is a record on the permanent blockchain stating that those UTXOs likely had the same owner.</p>
+</div>
+</div>
+</div>
+<hr>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">¶</a></h2>
+<ul>
+<li><a href="https://pandul.fr/" target="_blank" rel="noopener">Loïc Morel's Educational Content</a> — Comprehensive Bitcoin privacy tutorials and guides</li>
+<li><a href="https://bitcoinmagazine.com/technical/how-bitcoin-anonymity-sets-work" target="_blank" rel="noopener">Track Me If You Can — How Bitcoin Forward-Looking Anonymity Sets Work</a> — Explanation of Whirlpool forward-looking anonymity sets</li>
+<li><a href="https://medium.com/samourai-wallet/introducing-whirlpool-surge-cycles-b5b484a1670f" target="_blank" rel="noopener">Introducing Whirlpool Surge Cycles</a> — Original Surge Cycles announcement from Samourai Wallet</li>
+<li><a href="../../../analysis/whirlpool/">Whirlpool Boltzmann Analysis</a> — Detailed entropy and link probability analysis of Whirlpool transactions</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: CoinJoin Intro">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                CoinJoin Intro
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../joinmarket/" class="md-footer__link md-footer__link--next" aria-label="Next: JoinMarket">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                JoinMarket
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.action.edit", "navigation.expand", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.indexes", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../js/popup.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  
+<script id="init-glightbox">document.querySelectorAll('.glightbox').forEach(function(element) {
+    try {
+        var img = element.querySelector('img');
+        if (img && img.src) {
+            element.setAttribute('href', img.src);
+        } else {
+            console.log('No img element with src attribute found');
+        }
+    } catch (error) {
+        console.log('Error:', error);
+    }
+});
+const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
